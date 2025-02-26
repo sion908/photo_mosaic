@@ -1,0 +1,6 @@
+candle_mosaic.db
+.SD_Store
+.venv/
+*.png
+*.jpg
+*.jpeg
