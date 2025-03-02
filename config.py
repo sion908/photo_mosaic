@@ -11,6 +11,7 @@ BASE_DIR = Path(__file__).parent
 # データ保存関連
 UPLOAD_DIR = BASE_DIR / "uploads"
 PROCESSED_DIR = UPLOAD_DIR / "processed"
+SELF_UPLOAD_DIR = BASE_DIR / "self_uploads"
 DB_PATH = BASE_DIR / "mosaic_app.db"
 
 # 画像関連
@@ -62,6 +63,7 @@ def ensure_directories():
     for directory in [
         UPLOAD_DIR,
         PROCESSED_DIR,
+        SELF_UPLOAD_DIR,
         MOSAIC_OUTPUT_PATH.parent,
         SCHOOL_LOGO_PATH.parent,
         LOG_DIR,
