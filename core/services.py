@@ -2,9 +2,7 @@
 サービス層 - コアビジネスロジック
 """
 import os
-import random
 import time
-import uuid
 from typing import List, Optional, Tuple
 
 import numpy as np
@@ -238,7 +236,7 @@ class MosaicService:
             raise
 
     async def render_mosaic(self) -> str:
-        """現在のグリッド情報を使ってモザイク画像を生成"""
+        """現在のグリッド情報を使ってモザイク画像を生成（明度調整を適用）"""
         try:
             self.logger.info("モザイク画像生成開始")
 
@@ -269,47 +267,140 @@ class MosaicService:
             # 新しいキャンバスを作成（出力サイズで直接作成）
             mosaic = PILImage.new("RGB", (final_width, final_height))
 
-            images_placed = 0
-            errors = 0
-
-            # 各セルに画像を配置
+            # 使用可能な画像のリストを作成
+            available_images = []
+            
+            # まず、グリッドにすでに配置されている画像を取得
             for cell in self.grid.cells:
-                # セルの位置を計算（小数点以下の位置にも対応）
-                x1 = int(cell.x * cell_width)
-                y1 = int(cell.y * cell_height)
-                x2 = int((cell.x + 1) * cell_width)
-                y2 = int((cell.y + 1) * cell_height)
-                
-                # 実際のセルサイズ（小数点以下の位置調整後）
-                actual_cell_width = x2 - x1
-                actual_cell_height = y2 - y1
-
                 if cell.image_id:
-                    # セルに画像がある場合はそれを取得して配置
                     try:
                         image_filename = await self.image_repo.get_filename(cell.image_id)
-                        if not image_filename:
-                            self.logger.warning(f"画像ID {cell.image_id} のファイル名が見つかりません")
-                            continue
-
-                        img_path = self.file_storage.get_processed_path(f"{cell.image_id}_{image_filename}")
-                        try:
-                            cell_img = PILImage.open(img_path)
-                            # セルのサイズにリサイズ
-                            cell_img = cell_img.resize((actual_cell_width, actual_cell_height))
-                            mosaic.paste(cell_img, (x1, y1))
-                            images_placed += 1
-                        except Exception as e:
-                            self.logger.error(f"画像配置エラー {img_path}: {str(e)}")
-                            errors += 1
+                        if image_filename:
+                            img_path = self.file_storage.get_processed_path(f"{cell.image_id}_{image_filename}")
+                            if os.path.exists(img_path):
+                                available_images.append((cell.image_id, img_path))
                     except Exception as e:
-                        self.logger.error(f"セル処理エラー x={cell.x}, y={cell.y}: {str(e)}")
-                        errors += 1
-                else:
-                    # 画像がない場合は明るさに応じたグレーで埋める
-                    brightness = int(cell.brightness)
-                    cell_img = PILImage.new("RGB", (actual_cell_width, actual_cell_height), (brightness, brightness, brightness))
-                    mosaic.paste(cell_img, (x1, y1))
+                        self.logger.error(f"画像情報取得エラー ID={cell.image_id}: {str(e)}")
+            
+            # 利用可能な画像がない場合、データベースから画像を取得
+            if not available_images:
+                self.logger.info("グリッドに配置済みの画像がありません。データベースから全画像を取得します。")
+                all_images = await self.image_repo.get_all()
+                for img in all_images:
+                    try:
+                        img_path = self.file_storage.get_processed_path(f"{img.id}_{img.filename}")
+                        if os.path.exists(img_path):
+                            available_images.append((img.id, img_path))
+                    except Exception as e:
+                        self.logger.error(f"画像情報取得エラー ID={img.id}: {str(e)}")
+            
+            # 利用可能な画像がある場合のみ処理を続行
+            if available_images:
+                self.logger.info(f"利用可能な画像: {len(available_images)}枚")
+                images_placed = 0
+                errors = 0
+
+                # 画像をキャッシュ
+                image_cache = {}
+                
+                # ベース画像を再読込（明度分析用）
+                try:
+                    base_image = PILImage.open(self.base_image_path)
+                    # ターゲットサイズにリサイズ
+                    base_image = base_image.resize((grid_width, grid_height))
+                    # グレースケールに変換
+                    base_gray = base_image.convert("L")
+                    self.logger.debug("ベース画像を明度分析用に読み込みました")
+                except Exception as e:
+                    self.logger.error(f"ベース画像読み込みエラー: {str(e)}")
+                    # エラーの場合はダミーのグレースケール画像を作成
+                    base_gray = PILImage.new("L", (grid_width, grid_height), 128)
+                
+                # 各セルに画像を配置
+                for cell in self.grid.cells:
+                    # セルの位置を計算（小数点以下の位置にも対応）
+                    x1 = int(cell.x * cell_width)
+                    y1 = int(cell.y * cell_height)
+                    x2 = int((cell.x + 1) * cell_width)
+                    y2 = int((cell.y + 1) * cell_height)
+                    
+                    # 実際のセルサイズ（小数点以下の位置調整後）
+                    actual_cell_width = x2 - x1
+                    actual_cell_height = y2 - y1
+                    
+                    # ターゲットの明度を取得（0-255）
+                    target_brightness = base_gray.getpixel((cell.x, cell.y))
+                    # 明度に基づく調整率を計算（0.3-1.7の範囲で変化）
+                    # 128が中間値（調整なし=1.0）
+                    brightness_factor = 0.3 + (target_brightness / 128.0)
+
+                    try:
+                        # セルに画像が指定されている場合はそれを使用
+                        if cell.image_id:
+                            image_filename = await self.image_repo.get_filename(cell.image_id)
+                            img_path = self.file_storage.get_processed_path(f"{cell.image_id}_{image_filename}")
+                        else:
+                            # 画像が指定されていない場合は、利用可能な画像からランダムに選択
+                            # 画像の繰り返しを均等にするため、インデックスを使用
+                            img_idx = (cell.x * grid_height + cell.y) % len(available_images)
+                            _, img_path = available_images[img_idx]
+                        
+                        # 画像キャッシュをチェック
+                        if img_path in image_cache:
+                            cell_img = image_cache[img_path].copy()
+                        else:
+                            cell_img = PILImage.open(img_path)
+                            image_cache[img_path] = cell_img.copy()
+                        
+                        # セルのサイズにリサイズ
+                        cell_img = cell_img.resize((actual_cell_width, actual_cell_height))
+                        
+                        # 明度調整を適用
+                        from PIL import ImageEnhance
+                        enhancer = ImageEnhance.Brightness(cell_img)
+                        cell_img = enhancer.enhance(brightness_factor)
+                        
+                        mosaic.paste(cell_img, (x1, y1))
+                        images_placed += 1
+                    except Exception as e:
+                        self.logger.error(f"画像配置エラー x={cell.x}, y={cell.y}: {str(e)}")
+                        # エラーの場合でも、灰色で埋めるのではなく、別の画像を試す
+                        try:
+                            fallback_idx = images_placed % len(available_images)  # 別のインデックス計算法
+                            _, fallback_path = available_images[fallback_idx]
+                            
+                            if fallback_path in image_cache:
+                                cell_img = image_cache[fallback_path].copy()
+                            else:
+                                cell_img = PILImage.open(fallback_path)
+                                image_cache[fallback_path] = cell_img.copy()
+                                
+                            cell_img = cell_img.resize((actual_cell_width, actual_cell_height))
+                            
+                            # 明度調整を適用
+                            from PIL import ImageEnhance
+                            enhancer = ImageEnhance.Brightness(cell_img)
+                            cell_img = enhancer.enhance(brightness_factor)
+                            
+                            mosaic.paste(cell_img, (x1, y1))
+                        except Exception as fallback_err:
+                            self.logger.error(f"フォールバック画像配置エラー: {str(fallback_err)}")
+                            errors += 1
+                            
+                            # 最終手段：明度に応じたグレーのセルを配置
+                            cell_img = PILImage.new("RGB", (actual_cell_width, actual_cell_height), (target_brightness, target_brightness, target_brightness))
+                            mosaic.paste(cell_img, (x1, y1))
+            else:
+                # 利用可能な画像がない場合（まれなケース）
+                self.logger.warning("利用可能な画像がありません。校章画像を使用します。")
+                try:
+                    logo_img = PILImage.open(self.base_image_path)
+                    logo_img = logo_img.resize((final_width, final_height))
+                    mosaic = logo_img
+                except Exception as e:
+                    self.logger.error(f"校章画像読み込みエラー: {str(e)}")
+                    # 何も表示できない場合は灰色のキャンバスを作成
+                    mosaic = PILImage.new("RGB", (final_width, final_height), (128, 128, 128))
 
             # 保存
             output_path = str(config.MOSAIC_OUTPUT_PATH)
@@ -319,13 +410,6 @@ class MosaicService:
             # WebSocket経由で更新通知 (URLパスを生成)
             url_path = "/static/output/current_mosaic.jpg"
             self.channel_publisher.publish_update(url_path)
-
-            # デバッグ出力
-            self.logger.debug(f"モザイク画像の最終サイズ: {final_width}x{final_height}")
-            self.logger.debug(f"セルサイズ: {self.cell_size}")
-            self.logger.debug(f"グリッドのサイズ: {self.grid.width}x{self.grid.height}")
-            self.logger.debug(f"セルの数: {len(self.grid.cells)}")
-            self.logger.debug(f"画像がセットされたセルの数: {sum(1 for cell in self.grid.cells if cell.image_id is not None)}")
 
             return url_path
         except Exception as e:
