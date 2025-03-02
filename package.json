@@ -1,0 +1,15 @@
+{
+  "name": "photo_mosaic",
+  "version": "1.0.0",
+  "description": "閉校イベントでのキャンドルナイトにおいて、参加者が制作したキャンドルの写真を収集し、校章をベースとしたモザイクアートをリアルタイムで生成・表示するWebアプリケーションです。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ai": "code-context -e py jinja -o output.txt"
+  },
+  "author": "sion908 <sionn908@gmail.com> (https://sion908.github.io/sion908/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@sion908/code-context": "^1.0.0"
+  }
+}

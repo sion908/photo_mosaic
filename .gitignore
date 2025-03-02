@@ -4,3 +4,12 @@ candle_mosaic.db
 *.png
 *.jpg
 *.jpeg
+
+*.db
+uploads/
+
+node_modules/
+
+__pycache__/
+
+.DS_Store

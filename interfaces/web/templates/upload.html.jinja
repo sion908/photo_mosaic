@@ -1,0 +1,184 @@
+<!-- templates/upload.html.jinja - アップロード用インターフェース -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>閉校イベント - キャンドルモザイク作成</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .upload-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .file-input {
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .file-input:hover {
+            border-color: #999;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        #preview {
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+        #preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 5px;
+        }
+        .result-message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        .instructions {
+            margin-top: 30px;
+            background: #e9f7fe;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #0288d1;
+        }
+    </style>
+</head>
+<body>
+    <h1>閉校イベント - キャンドルモザイク作成</h1>
+
+    <div class="upload-container">
+        <div class="upload-form">
+            <h2>キャンドルの写真をアップロード</h2>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="file-input">
+                    <input type="file" id="imageInput" name="image" accept="image/*" required>
+                </div>
+                <div id="preview">
+                    <img id="imagePreview" src="" alt="画像プレビュー">
+                </div>
+                <button type="submit" class="submit-btn">送信</button>
+            </form>
+        </div>
+
+        <div id="resultMessage" class="result-message" style="display: none;"></div>
+    </div>
+
+    <div class="instructions">
+        <h3>使い方</h3>
+        <ol>
+            <li>キャンドルの写真を撮影してください</li>
+            <li>上の「ファイルを選択」ボタンをクリックし、写真を選んでください</li>
+            <li>プレビューを確認し、「送信」ボタンを押してください</li>
+            <li>あなたの写真が校章モザイクの一部になります！</li>
+        </ol>
+        <p>※大型スクリーンでは、すべての参加者の写真を使って校章が作られていきます。</p>
+    </div>
+
+    <script>
+        // 画像プレビュー表示
+        document.getElementById('imageInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const preview = document.getElementById('preview');
+                    const imagePreview = document.getElementById('imagePreview');
+                    imagePreview.src = event.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // フォーム送信
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const resultMessage = document.getElementById('resultMessage');
+            const submitBtn = document.querySelector('.submit-btn');
+
+            // 送信中は操作不可に
+            submitBtn.disabled = true;
+            submitBtn.textContent = '送信中...';
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    resultMessage.className = 'result-message success';
+                    resultMessage.textContent = 'アップロード成功！モザイクが更新されました。';
+                } else {
+                    resultMessage.className = 'result-message error';
+                    resultMessage.textContent = 'エラー: ' + (result.error || '不明なエラーが発生しました');
+                }
+            } catch (error) {
+                resultMessage.className = 'result-message error';
+                resultMessage.textContent = 'エラー: サーバーとの通信に失敗しました';
+                console.error(error);
+            } finally {
+                resultMessage.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = '送信';
+
+                // フォームをリセット
+                this.reset();
+                document.getElementById('preview').style.display = 'none';
+
+                // 3秒後にメッセージを消す
+                setTimeout(() => {
+                    resultMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+services:
+
+  app:
+    build: .
+    volumes:
+      - ./:/workspace
+    ports:
+      - 8000:8000
+    command: /bin/bash
+    environment:
+      LOG_LEVEL: 'DEBUG'
+    tty: true

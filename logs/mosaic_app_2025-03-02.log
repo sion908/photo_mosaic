@@ -1,0 +1,2034 @@
+[2025-03-02 09:38:58,498] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:38:58,505] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:38:58,505] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:38:58,505] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:38:58,558] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:38:58,558] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:38:58,558] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:39:06,489] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:39:06,491] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:39:06,491] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:39:06,491] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:39:06,527] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:39:06,528] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:39:06,528] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:39:28,808] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:39:28,810] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:39:28,810] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:39:28,810] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:39:28,848] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:39:28,848] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:39:28,849] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:39:44,830] [INFO] [mosaic_app.api.websockets:20] - WebSocket接続リクエスト: 127.0.0.1:55995
+[2025-03-02 09:39:44,830] [INFO] [mosaic_app.api.websockets:25] - WebSocket接続確立: 127.0.0.1:55995
+[2025-03-02 09:39:46,690] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 09:39:46,694] [WARNING] [mosaic_app.api.websockets:58] - WebSocket接続クローズ失敗: connection is disconnected
+[2025-03-02 09:39:46,696] [INFO] [mosaic_app.api.websockets:20] - WebSocket接続リクエスト: 127.0.0.1:56007
+[2025-03-02 09:39:46,696] [INFO] [mosaic_app.api.websockets:25] - WebSocket接続確立: 127.0.0.1:56007
+[2025-03-02 09:39:52,075] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:39:52,076] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/Users/user/Documents/myself/photo_mosaic/uploads, processed=/Users/user/Documents/myself/photo_mosaic/uploads/processed
+[2025-03-02 09:39:52,076] [INFO] [mosaic_app.services.MosaicService:40] - MosaicServiceを初期化: セルサイズ=(10, 10), ベース画像=/Users/user/Documents/myself/photo_mosaic/static/base/school_logo.png
+[2025-03-02 09:39:52,076] [INFO] [mosaic_app.services.MosaicService:46] - グリッド初期化開始: /Users/user/Documents/myself/photo_mosaic/static/base/school_logo.png
+[2025-03-02 09:39:52,086] [INFO] [mosaic_app.services.MosaicService:69] - グリッド初期化完了: 288セル作成
+[2025-03-02 09:39:52,086] [INFO] [mosaic_app.api.routes:66] - 画像アップロードリクエスト受信
+[2025-03-02 09:39:52,087] [ERROR] [mosaic_app.api.routes:115] - アップロード処理エラー: 'UploadFile' object has no attribute 'size'
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/routes.py", line 76, in upload_image
+    logger.info(f"ファイル受信: {uploaded_file.filename}, サイズ: {uploaded_file.size} bytes")
+AttributeError: 'UploadFile' object has no attribute 'size'
+[2025-03-02 09:41:30,593] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 09:41:30,593] [WARNING] [mosaic_app.api.websockets:58] - WebSocket接続クローズ失敗: connection is disconnected
+[2025-03-02 09:41:30,845] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:41:30,847] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:41:30,847] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:41:30,847] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:41:30,889] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:41:30,889] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:41:30,889] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:43:24,158] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:43:24,163] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:43:24,163] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:43:24,163] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:43:24,343] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:43:24,344] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:43:24,344] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:43:24,344] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:43:24,387] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:43:24,387] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:43:24,387] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:43:40,305] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:43:40,305] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/Users/user/Documents/myself/photo_mosaic/uploads, processed=/Users/user/Documents/myself/photo_mosaic/uploads/processed
+[2025-03-02 09:43:40,306] [INFO] [mosaic_app.services.MosaicService:40] - MosaicServiceを初期化: セルサイズ=(10, 10), ベース画像=/Users/user/Documents/myself/photo_mosaic/static/base/school_logo.png
+[2025-03-02 09:43:40,306] [INFO] [mosaic_app.services.MosaicService:46] - グリッド初期化開始: /Users/user/Documents/myself/photo_mosaic/static/base/school_logo.png
+[2025-03-02 09:43:40,316] [INFO] [mosaic_app.services.MosaicService:69] - グリッド初期化完了: 288セル作成
+[2025-03-02 09:43:40,316] [INFO] [mosaic_app.api.routes:66] - 画像アップロードリクエスト受信
+[2025-03-02 09:43:40,317] [ERROR] [mosaic_app.api.routes:115] - アップロード処理エラー: 'UploadFile' object has no attribute 'size'
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/routes.py", line 76, in upload_image
+    logger.info(f"ファイル受信: {uploaded_file.filename}, サイズ: {uploaded_file.size} bytes")
+AttributeError: 'UploadFile' object has no attribute 'size'
+[2025-03-02 09:45:56,358] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:45:56,363] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:45:56,363] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:45:56,363] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:45:56,417] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:45:56,417] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:45:56,417] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:45:58,313] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:45:58,315] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:45:58,315] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:45:58,315] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:45:58,354] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:45:58,354] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:45:58,354] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:46:22,186] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:46:22,188] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:46:22,188] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:46:22,188] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:46:22,231] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:46:22,231] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:46:22,231] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:46:29,560] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:46:29,562] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:46:29,562] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:46:29,562] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:46:29,601] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:46:29,601] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:46:29,601] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:46:39,979] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:46:39,979] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/Users/user/Documents/myself/photo_mosaic/uploads, processed=/Users/user/Documents/myself/photo_mosaic/uploads/processed
+[2025-03-02 09:46:39,979] [INFO] [mosaic_app.services.MosaicService:40] - MosaicServiceを初期化: セルサイズ=(10, 10), ベース画像=/Users/user/Documents/myself/photo_mosaic/static/base/school_logo.png
+[2025-03-02 09:46:39,979] [INFO] [mosaic_app.services.MosaicService:46] - グリッド初期化開始: /Users/user/Documents/myself/photo_mosaic/static/base/school_logo.png
+[2025-03-02 09:46:39,988] [INFO] [mosaic_app.services.MosaicService:69] - グリッド初期化完了: 288セル作成
+[2025-03-02 09:46:39,988] [INFO] [mosaic_app.api.routes:66] - 画像アップロードリクエスト受信
+[2025-03-02 09:46:39,989] [INFO] [mosaic_app.api.routes:77] - ファイル受信: ibaraneko.jpeg
+[2025-03-02 09:46:39,989] [INFO] [mosaic_app.api.routes:91] - ファイルサイズ: 26362 bytes
+[2025-03-02 09:46:39,989] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=96e9f7196cb24eb29285636bef365e57, filename=ibaraneko.jpeg, サイズ=26362 bytes
+[2025-03-02 09:46:39,989] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /Users/user/Documents/myself/photo_mosaic/uploads/96e9f7196cb24eb29285636bef365e57_ibaraneko.jpeg
+[2025-03-02 09:46:39,991] [INFO] [mosaic_app.infrastructure.ImageProcessor:32] - 画像処理開始: /Users/user/Documents/myself/photo_mosaic/uploads/96e9f7196cb24eb29285636bef365e57_ibaraneko.jpeg, ターゲットサイズ: (10, 10)
+[2025-03-02 09:46:39,995] [INFO] [mosaic_app.infrastructure.ImageProcessor:59] - 処理済み画像を保存: /Users/user/Documents/myself/photo_mosaic/uploads/processed/96e9f7196cb24eb29285636bef365e57_ibaraneko.jpeg
+[2025-03-02 09:46:39,996] [ERROR] [mosaic_app.api.routes:109] - 画像処理エラー: name 'time' is not defined
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/routes.py", line 104, in upload_image
+    processed_path, update_result = await mosaic_service.process_uploaded_image(
+  File "/Users/user/Documents/myself/photo_mosaic/core/services.py", line 196, in process_uploaded_image
+    update_result = await self.add_image(processed_path, image_id)
+  File "/Users/user/Documents/myself/photo_mosaic/core/services.py", line 108, in add_image
+    cell_to_update.last_updated = time.time()  # 置き換え時間を記録
+NameError: name 'time' is not defined
+[2025-03-02 09:47:09,428] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:47:09,431] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:47:09,431] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:47:09,431] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:47:09,483] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:47:09,483] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:47:09,483] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:47:56,984] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:47:56,987] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:47:56,987] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:47:56,987] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:47:57,038] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:47:57,038] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:47:57,038] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:48:18,704] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:48:18,708] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:48:18,709] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:48:18,709] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:48:18,762] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:48:18,762] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:48:18,762] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:48:25,178] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:48:25,179] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:48:25,179] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:48:25,179] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:48:25,217] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 09:48:25,218] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:48:25,218] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:48:34,512] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/Users/user/Documents/myself/photo_mosaic/uploads, processed=/Users/user/Documents/myself/photo_mosaic/uploads/processed
+[2025-03-02 09:48:34,512] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:48:34,512] [INFO] [mosaic_app.services.MosaicService:41] - MosaicServiceを初期化: セルサイズ=(10, 10), ベース画像=/Users/user/Documents/myself/photo_mosaic/static/base/school_logo.png
+[2025-03-02 09:48:34,512] [INFO] [mosaic_app.services.MosaicService:47] - グリッド初期化開始: /Users/user/Documents/myself/photo_mosaic/static/base/school_logo.png
+[2025-03-02 09:48:34,524] [INFO] [mosaic_app.services.MosaicService:82] - グリッド初期化完了: 288セル作成
+[2025-03-02 09:48:34,524] [INFO] [mosaic_app.api.routes:66] - 画像アップロードリクエスト受信
+[2025-03-02 09:48:34,524] [INFO] [mosaic_app.api.routes:77] - ファイル受信: ibaraneko.jpeg
+[2025-03-02 09:48:34,524] [INFO] [mosaic_app.api.routes:91] - ファイルサイズ: 26362 bytes
+[2025-03-02 09:48:34,524] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=f0f3fcc4ed08444ba25dec3512933fcc, filename=ibaraneko.jpeg, サイズ=26362 bytes
+[2025-03-02 09:48:34,525] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /Users/user/Documents/myself/photo_mosaic/uploads/f0f3fcc4ed08444ba25dec3512933fcc_ibaraneko.jpeg
+[2025-03-02 09:48:34,526] [INFO] [mosaic_app.infrastructure.ImageProcessor:32] - 画像処理開始: /Users/user/Documents/myself/photo_mosaic/uploads/f0f3fcc4ed08444ba25dec3512933fcc_ibaraneko.jpeg, ターゲットサイズ: (10, 10)
+[2025-03-02 09:48:34,530] [INFO] [mosaic_app.infrastructure.ImageProcessor:59] - 処理済み画像を保存: /Users/user/Documents/myself/photo_mosaic/uploads/processed/f0f3fcc4ed08444ba25dec3512933fcc_ibaraneko.jpeg
+[2025-03-02 09:48:34,530] [INFO] [mosaic_app.services.MosaicService:100] - 画像追加開始: /Users/user/Documents/myself/photo_mosaic/uploads/processed/f0f3fcc4ed08444ba25dec3512933fcc_ibaraneko.jpeg, id=f0f3fcc4ed08444ba25dec3512933fcc
+[2025-03-02 09:48:34,531] [INFO] [mosaic_app.services.MosaicService:137] - セル更新: x=2, y=11, id=f0f3fcc4ed08444ba25dec3512933fcc
+[2025-03-02 09:48:34,531] [INFO] [mosaic_app.services.MosaicService:153] - モザイク画像生成開始
+[2025-03-02 09:48:34,533] [INFO] [mosaic_app.services.MosaicService:202] - モザイク画像を保存: /Users/user/Documents/myself/photo_mosaic/static/output/current_mosaic.jpg (配置画像: 1, エラー: 0)
+[2025-03-02 09:48:34,533] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 09:48:34,533] [INFO] [mosaic_app.api.routes:107] - 画像処理完了: /Users/user/Documents/myself/photo_mosaic/uploads/processed/f0f3fcc4ed08444ba25dec3512933fcc_ibaraneko.jpeg, セル位置: x=2, y=11
+[2025-03-02 09:48:38,335] [INFO] [mosaic_app.api.websockets:20] - WebSocket接続リクエスト: 127.0.0.1:58328
+[2025-03-02 09:48:38,335] [INFO] [mosaic_app.api.websockets:25] - WebSocket接続確立: 127.0.0.1:58328
+[2025-03-02 10:04:56,280] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/Users/user/Documents/myself/photo_mosaic/uploads, processed=/Users/user/Documents/myself/photo_mosaic/uploads/processed
+[2025-03-02 10:04:56,281] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 10:04:56,281] [INFO] [mosaic_app.api.routes:66] - 画像アップロードリクエスト受信
+[2025-03-02 10:04:56,282] [INFO] [mosaic_app.api.routes:77] - ファイル受信: avator.jpeg
+[2025-03-02 10:04:56,282] [INFO] [mosaic_app.api.routes:91] - ファイルサイズ: 353128 bytes
+[2025-03-02 10:04:56,282] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=3063c38ab46d433690a1a0166b4821df, filename=avator.jpeg, サイズ=353128 bytes
+[2025-03-02 10:04:56,282] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /Users/user/Documents/myself/photo_mosaic/uploads/3063c38ab46d433690a1a0166b4821df_avator.jpeg
+[2025-03-02 10:04:56,283] [INFO] [mosaic_app.infrastructure.ImageProcessor:32] - 画像処理開始: /Users/user/Documents/myself/photo_mosaic/uploads/3063c38ab46d433690a1a0166b4821df_avator.jpeg, ターゲットサイズ: (10, 10)
+[2025-03-02 10:04:56,294] [INFO] [mosaic_app.infrastructure.ImageProcessor:59] - 処理済み画像を保存: /Users/user/Documents/myself/photo_mosaic/uploads/processed/3063c38ab46d433690a1a0166b4821df_avator.jpeg
+[2025-03-02 10:04:56,294] [INFO] [mosaic_app.services.MosaicService:100] - 画像追加開始: /Users/user/Documents/myself/photo_mosaic/uploads/processed/3063c38ab46d433690a1a0166b4821df_avator.jpeg, id=3063c38ab46d433690a1a0166b4821df
+[2025-03-02 10:04:56,294] [INFO] [mosaic_app.services.MosaicService:137] - セル更新: x=10, y=5, id=3063c38ab46d433690a1a0166b4821df
+[2025-03-02 10:04:56,294] [INFO] [mosaic_app.services.MosaicService:153] - モザイク画像生成開始
+[2025-03-02 10:04:56,296] [INFO] [mosaic_app.services.MosaicService:202] - モザイク画像を保存: /Users/user/Documents/myself/photo_mosaic/static/output/current_mosaic.jpg (配置画像: 2, エラー: 0)
+[2025-03-02 10:04:56,296] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 10:04:56,296] [INFO] [mosaic_app.api.routes:107] - 画像処理完了: /Users/user/Documents/myself/photo_mosaic/uploads/processed/3063c38ab46d433690a1a0166b4821df_avator.jpeg, セル位置: x=10, y=5
+[2025-03-02 10:30:39,886] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 10:30:39,890] [WARNING] [mosaic_app.api.websockets:58] - WebSocket接続クローズ失敗: connection is disconnected
+[2025-03-02 10:30:40,274] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 10:30:40,279] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:30:40,279] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:30:40,279] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:30:40,344] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:30:40,344] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:30:40,344] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:32:05,059] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 10:32:05,063] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:32:05,063] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:32:05,063] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:32:05,114] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:32:05,114] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:32:05,114] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:32:07,708] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 10:32:07,709] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:32:07,709] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:32:07,709] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:32:07,751] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:32:07,751] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:32:07,751] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:32:16,192] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 10:32:16,194] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:32:16,195] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:32:16,196] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:32:16,238] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:32:16,238] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:32:16,238] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:32:17,104] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 10:32:17,105] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:32:17,105] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:32:17,105] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:32:17,143] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:32:17,143] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:32:17,143] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:32:53,219] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 10:32:53,221] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:32:53,221] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:32:53,221] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:32:53,264] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:32:53,264] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:32:53,264] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:34:55,226] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 10:34:55,230] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:34:55,230] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:34:55,230] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:34:55,281] [INFO] [mosaic_app.adapters.DatabaseManager:19] - データベース初期化: /Users/user/Documents/myself/photo_mosaic/mosaic_app.db
+[2025-03-02 10:34:55,281] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 10:34:55,281] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 10:37:41,682] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 10:38:12,476] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 10:38:56,094] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 10:40:42,745] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 10:40:52,454] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:04:50,353] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:04:50,370] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:04:50,370] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:04:50,371] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:04:50,589] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:04:50,617] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:04:50,617] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:04:50,617] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:04:50,677] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:04:50,678] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:04:50,678] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:05:13,721] [INFO] [mosaic_app.api.websockets:20] - WebSocket接続リクエスト: 192.168.65.1:18805
+[2025-03-02 02:05:13,722] [INFO] [mosaic_app.api.websockets:25] - WebSocket接続確立: 192.168.65.1:18805
+[2025-03-02 02:05:15,049] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/.cache/virtualenvs/photo-mosaic-xS3fZVNL-py3.11/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/.cache/virtualenvs/photo-mosaic-xS3fZVNL-py3.11/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 02:05:15,053] [WARNING] [mosaic_app.api.websockets:58] - WebSocket接続クローズ失敗: connection is disconnected
+[2025-03-02 02:05:15,059] [INFO] [mosaic_app.api.websockets:20] - WebSocket接続リクエスト: 192.168.65.1:30385
+[2025-03-02 02:05:15,060] [INFO] [mosaic_app.api.websockets:25] - WebSocket接続確立: 192.168.65.1:30385
+[2025-03-02 02:05:19,978] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:05:19,979] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:05:19,982] [INFO] [mosaic_app.app:61] - Creating new MosaicService instance
+[2025-03-02 02:05:19,982] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 02:05:19,982] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 02:05:20,010] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 02:05:20,010] [INFO] [mosaic_app.api.routes:66] - 画像アップロードリクエスト受信
+[2025-03-02 02:05:20,017] [INFO] [mosaic_app.api.routes:77] - ファイル受信: Desktop - 1.png
+[2025-03-02 02:05:20,017] [INFO] [mosaic_app.api.routes:91] - ファイルサイズ: 1926940 bytes
+[2025-03-02 02:05:20,017] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=5503469edae04686b2ead9f6771209e2, filename=Desktop - 1.png, サイズ=1926940 bytes
+[2025-03-02 02:05:20,019] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /workspace/uploads/5503469edae04686b2ead9f6771209e2_Desktop - 1.png
+[2025-03-02 02:05:20,021] [INFO] [mosaic_app.infrastructure.ImageProcessor:32] - 画像処理開始: /workspace/uploads/5503469edae04686b2ead9f6771209e2_Desktop - 1.png, ターゲットサイズ: (50, 50)
+[2025-03-02 02:05:20,056] [INFO] [mosaic_app.infrastructure.ImageProcessor:59] - 処理済み画像を保存: /workspace/uploads/processed/5503469edae04686b2ead9f6771209e2_Desktop - 1.png
+[2025-03-02 02:05:20,056] [INFO] [mosaic_app.services.MosaicService:150] - 画像追加開始: /workspace/uploads/processed/5503469edae04686b2ead9f6771209e2_Desktop - 1.png, id=5503469edae04686b2ead9f6771209e2
+[2025-03-02 02:05:20,057] [INFO] [mosaic_app.services.MosaicService:187] - セル更新: x=2, y=2, id=5503469edae04686b2ead9f6771209e2
+[2025-03-02 02:05:20,057] [INFO] [mosaic_app.services.MosaicService:203] - モザイク画像生成開始
+[2025-03-02 02:05:20,059] [INFO] [mosaic_app.services.MosaicService:252] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 1, エラー: 0)
+[2025-03-02 02:05:20,059] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 02:05:20,060] [INFO] [mosaic_app.api.routes:107] - 画像処理完了: /workspace/uploads/processed/5503469edae04686b2ead9f6771209e2_Desktop - 1.png, セル位置: x=2, y=2
+[2025-03-02 02:06:09,928] [WARNING] [mosaic_app.infrastructure.BasicAuthMiddleware:128] - 認証ヘッダーなし: /admin
+[2025-03-02 02:06:41,967] [WARNING] [mosaic_app.infrastructure.BasicAuthMiddleware:128] - 認証ヘッダーなし: /admin
+[2025-03-02 02:08:01,358] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/.cache/virtualenvs/photo-mosaic-xS3fZVNL-py3.11/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/.cache/virtualenvs/photo-mosaic-xS3fZVNL-py3.11/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 02:08:01,361] [WARNING] [mosaic_app.api.websockets:58] - WebSocket接続クローズ失敗: connection is disconnected
+[2025-03-02 02:08:01,708] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:08:01,715] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:08:01,715] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:08:01,716] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:08:01,788] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:08:01,788] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:08:01,788] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:08:03,942] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:08:03,968] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:08:03,969] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:08:03,969] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:08:04,006] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:08:04,007] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:08:04,007] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:17:08,858] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:17:08,873] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:17:08,873] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:17:08,873] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:17:09,259] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:17:09,266] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:17:09,266] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:17:09,267] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:17:09,420] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:17:09,420] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:17:09,420] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:17:14,240] [WARNING] [mosaic_app.infrastructure.BasicAuthMiddleware:128] - 認証ヘッダーなし: /admin
+[2025-03-02 02:17:34,379] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:17:34,379] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:17:34,380] [INFO] [mosaic_app.app:61] - Creating new MosaicService instance
+[2025-03-02 02:17:34,380] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 02:17:34,381] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 02:17:34,421] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 02:17:49,230] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:17:49,231] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:17:58,809] [WARNING] [mosaic_app.infrastructure.BasicAuthMiddleware:128] - 認証ヘッダーなし: /admin
+[2025-03-02 02:18:04,537] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:18:04,537] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:18:26,370] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:18:26,371] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:18:27,820] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:18:27,823] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:18:29,169] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:18:29,171] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:18:30,110] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:18:30,110] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:01,177] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:33:01,329] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:33:01,329] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:33:01,329] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:33:01,505] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:33:01,641] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:33:01,642] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:33:01,642] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:33:01,726] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:33:01,727] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:33:01,727] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:33:06,732] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:06,732] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:06,733] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 02:33:06,734] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 02:33:06,734] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 02:33:06,749] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 02:33:14,121] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:14,121] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:14,584] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:14,585] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:14,769] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:14,770] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:14,978] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:14,979] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:15,172] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:15,172] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:15,355] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:15,355] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:15,543] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:15,543] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:15,718] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:15,719] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:15,946] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:15,947] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:16,146] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:16,147] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:16,704] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:16,705] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:25,286] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:33:25,411] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:33:25,411] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:33:25,411] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:33:25,579] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:33:25,688] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:33:25,688] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:33:25,689] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:33:25,755] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:33:25,756] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:33:25,756] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:33:32,576] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:33:32,578] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:33:32,579] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 02:33:32,580] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 02:33:32,580] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 02:33:32,595] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 02:34:37,279] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:34:37,423] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:34:37,424] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:34:37,424] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:34:37,609] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:34:37,733] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:34:37,733] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:34:37,733] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:34:37,811] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:34:37,812] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:34:37,812] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:34:45,523] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:34:45,523] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:34:45,524] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 02:34:45,524] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 02:34:45,524] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 02:34:45,537] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 02:35:33,872] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:35:33,988] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:35:33,988] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:35:33,988] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:35:34,156] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:35:34,295] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:35:34,295] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:35:34,295] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:35:34,368] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:35:34,368] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:35:34,369] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:35:43,828] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:35:43,947] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:35:43,948] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:35:43,948] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:35:44,115] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:35:44,245] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:35:44,245] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:35:44,245] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:35:44,318] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:35:44,318] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:35:44,318] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:36:30,509] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:36:30,645] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:36:30,645] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:36:30,645] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:36:30,702] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:36:30,702] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:36:30,702] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:36:35,835] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:36:35,958] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:36:35,958] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:36:35,959] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:36:36,041] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:36:36,042] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:36:36,042] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:36:36,402] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:36:36,528] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:36:36,528] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:36:36,528] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:36:36,579] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:36:36,579] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:36:36,580] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:36:39,163] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:36:39,287] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:36:39,287] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:36:39,287] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:36:39,450] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:36:39,570] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:36:39,570] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:36:39,570] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:36:39,638] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:36:39,639] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:36:39,639] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:37:02,985] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:37:03,112] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:37:03,112] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:37:03,112] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:37:03,168] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:37:03,168] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:37:03,168] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:37:07,360] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:37:07,481] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:37:07,481] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:37:07,481] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:37:07,649] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:37:07,781] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:37:07,781] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:37:07,781] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:37:07,853] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:37:07,854] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:37:07,854] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:37:35,171] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:37:35,295] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:37:35,296] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:37:35,296] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:37:35,350] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:37:35,350] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:37:35,350] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:37:41,387] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:37:41,514] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:37:41,515] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:37:41,515] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:37:41,683] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:37:41,811] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:37:41,811] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:37:41,811] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:37:41,879] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:37:41,879] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:37:41,879] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:39:03,024] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:39:03,157] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:39:03,157] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:39:03,157] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:39:03,345] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:39:03,477] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:39:03,477] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:39:03,477] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:39:03,576] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:39:03,577] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:39:03,577] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:39:14,168] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:39:14,169] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:39:14,170] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 02:39:14,171] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 02:39:14,171] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 02:39:14,184] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 02:39:28,021] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:39:28,022] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:39:28,023] [INFO] [mosaic_app.api.routes:67] - 画像アップロードリクエスト受信
+[2025-03-02 02:39:28,024] [INFO] [mosaic_app.api.routes:78] - ファイル受信: avator.jpeg
+[2025-03-02 02:39:28,025] [INFO] [mosaic_app.api.routes:92] - ファイルサイズ: 353128 bytes
+[2025-03-02 02:39:28,025] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=6d42d414d09447958e09d006265c9311, filename=avator.jpeg, サイズ=353128 bytes
+[2025-03-02 02:39:28,028] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /workspace/uploads/6d42d414d09447958e09d006265c9311_avator.jpeg
+[2025-03-02 02:39:28,032] [ERROR] [mosaic_app.adapters.ImageRepository:88] - 画像保存エラー: no such table: images
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 80, in save
+    cursor.execute(
+sqlite3.OperationalError: no such table: images
+[2025-03-02 02:39:28,033] [ERROR] [mosaic_app.api.routes:120] - アップロード処理エラー: no such table: images
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/routes.py", line 101, in upload_image
+    await image_repo.save(image)
+  File "/workspace/adapters/database.py", line 80, in save
+    cursor.execute(
+sqlite3.OperationalError: no such table: images
+[2025-03-02 02:43:08,186] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:43:08,330] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:43:08,330] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:43:08,330] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:43:08,512] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:43:08,642] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:43:08,642] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:43:08,642] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:43:08,718] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:43:08,718] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:43:08,718] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:51:00,275] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:51:00,426] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:51:00,426] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:51:00,426] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:51:00,486] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:51:00,486] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:51:00,486] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:51:03,353] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:51:03,484] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:51:03,484] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:51:03,485] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:51:03,656] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:51:03,788] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:51:03,789] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:51:03,789] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:51:03,857] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:51:03,857] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:51:03,858] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:52:34,338] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:52:34,461] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:52:34,461] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:52:34,461] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:52:47,138] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:52:47,279] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:52:47,279] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:52:47,279] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:53:31,174] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:53:31,308] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:53:31,308] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:53:31,308] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:53:37,413] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:53:37,415] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:53:37,416] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 02:53:37,416] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 02:53:37,416] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 02:53:37,429] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 02:54:17,246] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:54:17,248] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:54:19,981] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:54:19,982] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:54:48,428] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:54:48,430] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:54:48,430] [INFO] [mosaic_app.api.routes:67] - 画像アップロードリクエスト受信
+[2025-03-02 02:54:48,435] [INFO] [mosaic_app.api.routes:78] - ファイル受信: Desktop - 1.png
+[2025-03-02 02:54:48,435] [INFO] [mosaic_app.api.routes:92] - ファイルサイズ: 1926940 bytes
+[2025-03-02 02:54:48,435] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=0e558c3522a645f7ba5823594bc434b2, filename=Desktop - 1.png, サイズ=1926940 bytes
+[2025-03-02 02:54:48,437] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /workspace/uploads/0e558c3522a645f7ba5823594bc434b2_Desktop - 1.png
+[2025-03-02 02:54:48,437] [ERROR] [mosaic_app.adapters.ImageRepository:88] - 画像保存エラー: no such table: images
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 80, in save
+    cursor.execute(
+sqlite3.OperationalError: no such table: images
+[2025-03-02 02:54:48,438] [ERROR] [mosaic_app.api.routes:120] - アップロード処理エラー: no such table: images
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/routes.py", line 101, in upload_image
+    await image_repo.save(image)
+  File "/workspace/adapters/database.py", line 80, in save
+    cursor.execute(
+sqlite3.OperationalError: no such table: images
+[2025-03-02 02:58:22,018] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:58:22,018] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:58:22,018] [INFO] [mosaic_app.adapters.DatabaseManager:25] - データベーススキーマの初期化開始
+[2025-03-02 02:58:22,020] [INFO] [mosaic_app.adapters.DatabaseManager:53] - データベース初期化完了
+[2025-03-02 02:58:32,631] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 02:58:32,780] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 02:58:32,780] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 02:58:32,780] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 02:58:37,122] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 02:58:37,123] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 02:58:37,124] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 02:58:37,124] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 02:58:37,125] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 02:58:37,140] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 03:12:22,838] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 03:12:22,845] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 06:19:36,538] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 06:19:36,542] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:47:10,887] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:47:11,030] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:47:11,030] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:47:11,030] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:47:26,096] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:47:26,233] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:47:26,233] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:47:26,234] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:47:28,409] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:47:28,410] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:47:28,412] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 07:47:28,412] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 07:47:28,413] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:47:28,428] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 07:48:14,365] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:48:14,366] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:48:47,518] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:48:47,644] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:48:47,644] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:48:47,644] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:48:47,881] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:48:48,027] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:48:48,028] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:48:48,028] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:48:54,090] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:48:54,221] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:48:54,221] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:48:54,221] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:48:56,670] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:48:56,671] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:48:56,672] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 07:48:56,672] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 07:48:56,672] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:48:56,689] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 07:49:20,564] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:49:24,294] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:49:24,427] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:49:24,427] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:49:24,427] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:49:27,993] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:49:27,994] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:49:27,995] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 07:49:27,996] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 07:49:27,996] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:49:28,011] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 07:49:56,380] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:49:56,516] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:49:56,516] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:49:56,516] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:49:59,800] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:49:59,931] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:49:59,931] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:49:59,931] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:50:01,678] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:50:01,679] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:50:01,680] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 07:50:01,681] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 07:50:01,681] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:50:01,695] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 07:50:29,637] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:50:35,942] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:50:36,069] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:50:36,069] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:50:36,069] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:50:49,339] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:50:49,480] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:50:49,480] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:50:49,480] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:50:57,085] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:50:57,221] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:50:57,221] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:50:57,221] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:50:59,383] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:50:59,517] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:50:59,517] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:50:59,517] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:51:07,515] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:51:07,653] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:51:07,653] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:51:07,653] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:51:14,635] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:51:14,774] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:51:14,774] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:51:14,774] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:51:18,329] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:51:18,330] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:51:18,331] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 07:51:18,332] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 07:51:18,332] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:51:18,349] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 07:51:49,343] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:51:49,475] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:51:49,475] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:51:49,475] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:51:52,518] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:51:52,520] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:51:52,521] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 07:51:52,521] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 07:51:52,521] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:51:52,537] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 07:52:10,578] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:52:10,706] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:52:10,706] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:52:10,707] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:52:20,344] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:52:20,490] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:52:20,490] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:52:20,490] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:52:21,532] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:52:21,666] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:52:21,666] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:52:21,666] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:52:24,076] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:52:24,078] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:52:24,079] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 07:52:24,079] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 07:52:24,080] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:52:24,096] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 07:54:26,070] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:54:26,204] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:54:26,204] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:54:26,204] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:54:30,518] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:54:30,519] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:54:30,520] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 07:54:30,521] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 07:54:30,521] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:54:30,538] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 07:57:27,368] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:57:27,521] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:57:27,521] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:57:27,522] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:57:28,530] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:57:28,691] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:57:28,691] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:57:28,691] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:57:34,364] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:57:34,526] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:57:34,526] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:57:34,526] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:57:44,792] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:57:44,929] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:57:44,929] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:57:44,930] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:57:50,600] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:57:50,784] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:57:50,784] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:57:50,784] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:57:50,983] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:57:51,119] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:57:51,119] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:57:51,119] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:57:57,474] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:57:57,475] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:57:57,476] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 07:57:57,477] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 07:57:57,477] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:57:57,489] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 07:57:57,490] [INFO] [mosaic_app.infrastructure.auth:69] - 認証成功: admin
+[2025-03-02 07:57:57,490] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 07:57:57,491] [INFO] [mosaic_app.adapters.SettingsRepository:323] - 設定が見つかりません。デフォルト設定を使用します。
+[2025-03-02 07:57:57,491] [INFO] [mosaic_app.api.admin_routes:43] - デフォルト設定を作成します
+[2025-03-02 07:57:57,492] [INFO] [mosaic_app.adapters.SettingsRepository:186] - 設定保存: セルサイズ=(50, 50), ロゴパス=/workspace/static/base/school_logo.png
+[2025-03-02 07:57:57,494] [INFO] [mosaic_app.adapters.SettingsRepository:270] - 設定保存完了
+[2025-03-02 07:57:57,494] [INFO] [mosaic_app.api.admin_routes:49] - デフォルト設定を作成しました
+[2025-03-02 07:59:16,826] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:59:16,952] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:59:16,952] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:59:16,952] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:59:31,492] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 07:59:31,630] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 07:59:31,630] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 07:59:31,630] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 07:59:47,814] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:59:47,817] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:59:47,818] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 07:59:47,818] [INFO] [mosaic_app.services.MosaicService:47] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png
+[2025-03-02 07:59:47,818] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:59:47,833] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 9セル作成
+[2025-03-02 07:59:47,833] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 07:59:47,833] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 07:59:47,834] [INFO] [mosaic_app.adapters.SettingsRepository:186] - 設定保存: セルサイズ=(100, 100), ロゴパス=/workspace/static/base/school_logo.png
+[2025-03-02 07:59:47,836] [INFO] [mosaic_app.adapters.SettingsRepository:270] - 設定保存完了
+[2025-03-02 07:59:47,836] [INFO] [mosaic_app.api.admin_routes:114] - 設定を更新しました: MosaicSettings(id=1, cell_size=(100, 100), logo_path='/workspace/static/base/school_logo.png', title='校章モザイクアート', subtitle='みんなの思い出でつくる、私たちの学校', regenerate_existing=True)
+[2025-03-02 07:59:47,836] [INFO] [mosaic_app.services.MosaicService:67] - 設定更新: セルサイズ=(100, 100), ロゴパス=/workspace/static/base/school_logo.png
+[2025-03-02 07:59:47,836] [INFO] [mosaic_app.adapters.SettingsRepository:186] - 設定保存: セルサイズ=(100, 100), ロゴパス=/workspace/static/base/school_logo.png
+[2025-03-02 07:59:47,837] [INFO] [mosaic_app.adapters.SettingsRepository:270] - 設定保存完了
+[2025-03-02 07:59:47,837] [INFO] [mosaic_app.services.MosaicService:86] - グリッドを再初期化します
+[2025-03-02 07:59:47,837] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:59:47,838] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 1セル作成
+[2025-03-02 07:59:47,838] [INFO] [mosaic_app.api.admin_routes:121] - モザイク再生成を開始します
+[2025-03-02 07:59:47,838] [INFO] [mosaic_app.services.MosaicService:289] - モザイク再生成開始
+[2025-03-02 07:59:47,838] [INFO] [mosaic_app.services.MosaicService:97] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 07:59:47,838] [INFO] [mosaic_app.services.MosaicService:132] - グリッド初期化完了: 1セル作成
+[2025-03-02 07:59:47,839] [INFO] [mosaic_app.services.MosaicService:296] - 再生成対象画像数: 0
+[2025-03-02 07:59:47,839] [INFO] [mosaic_app.services.MosaicService:203] - モザイク画像生成開始
+[2025-03-02 07:59:47,840] [INFO] [mosaic_app.services.MosaicService:252] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 0, エラー: 0)
+[2025-03-02 07:59:47,840] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 07:59:47,840] [INFO] [mosaic_app.services.MosaicService:324] - モザイク再生成完了
+[2025-03-02 07:59:47,842] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 07:59:47,842] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 07:59:47,843] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 07:59:47,843] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 08:06:10,343] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:06:10,491] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:06:10,491] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:06:10,491] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:06:20,076] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:06:20,209] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:06:20,209] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:06:20,209] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:06:28,728] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:06:28,901] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:06:28,901] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:06:28,901] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:07:31,563] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:07:31,695] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:07:31,695] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:07:31,695] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:08:23,386] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:08:23,526] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:08:23,526] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:08:23,526] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:08:51,354] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:08:51,479] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:08:51,479] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:08:51,480] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:08:52,302] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:08:52,434] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:08:52,434] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:08:52,434] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:12:18,440] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:12:18,629] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:12:18,630] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:12:18,630] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:12:20,494] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:12:20,625] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:12:20,625] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:12:20,625] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:13:16,058] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:13:16,192] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:13:16,192] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:13:16,192] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:13:40,721] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:13:40,857] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:13:40,857] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:13:40,858] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:13:57,741] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:13:57,862] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:13:57,862] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:13:57,862] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:13:59,281] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:13:59,407] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:13:59,407] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:13:59,407] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:14:39,036] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:14:39,186] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:14:39,186] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:14:39,186] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:14:43,497] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:14:43,640] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:14:43,641] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:14:43,641] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:14:52,434] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:14:52,435] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:14:52,436] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 08:14:52,436] [INFO] [mosaic_app.services.MosaicService:49] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 08:14:52,437] [INFO] [mosaic_app.services.MosaicService:109] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 08:14:52,452] [INFO] [mosaic_app.services.MosaicService:144] - グリッド初期化完了: 9セル作成
+[2025-03-02 08:14:52,453] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:14:52,453] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 08:14:52,454] [ERROR] [mosaic_app.adapters.SettingsRepository:343] - 設定取得エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:14:52,455] [ERROR] [mosaic_app.adapters.SettingsRepository:345] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:14:52,455] [ERROR] [mosaic_app.api.admin_routes:37] - 設定取得中にエラーが発生しました: MosaicSettings.__init__() missing 1 required positional argument: 'output_size'
+[2025-03-02 08:14:52,456] [ERROR] [mosaic_app.api.admin_routes:38] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 34, in admin_panel
+    current_settings = await settings_repo.get_settings()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/adapters/database.py", line 347, in get_settings
+    return MosaicSettings.create_default()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/core/models.py", line 71, in create_default
+    return cls(
+           ^^^^
+TypeError: MosaicSettings.__init__() missing 1 required positional argument: 'output_size'
+
+[2025-03-02 08:14:52,456] [INFO] [mosaic_app.api.admin_routes:43] - デフォルト設定を作成します
+[2025-03-02 08:14:52,456] [ERROR] [mosaic_app.api.admin_routes:80] - アドミンパネル表示エラー: MosaicSettings.__init__() missing 1 required positional argument: 'output_size'
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 44, in admin_panel
+    current_settings = MosaicSettings.create_default()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/core/models.py", line 71, in create_default
+    return cls(
+           ^^^^
+TypeError: MosaicSettings.__init__() missing 1 required positional argument: 'output_size'
+[2025-03-02 08:14:52,457] [ERROR] [mosaic_app.api.admin_routes:81] - Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 44, in admin_panel
+    current_settings = MosaicSettings.create_default()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/core/models.py", line 71, in create_default
+    return cls(
+           ^^^^
+TypeError: MosaicSettings.__init__() missing 1 required positional argument: 'output_size'
+
+[2025-03-02 08:17:56,063] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:17:56,251] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:17:56,251] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:17:56,251] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:18:23,622] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:18:23,761] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:18:23,761] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:18:23,761] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:18:53,349] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:18:53,501] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:18:53,501] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:18:53,501] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:19:46,204] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:19:46,348] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:19:46,348] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:19:46,348] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:20:34,196] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:20:34,197] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:20:34,198] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 08:20:34,199] [INFO] [mosaic_app.services.MosaicService:49] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 08:20:34,199] [INFO] [mosaic_app.services.MosaicService:109] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 08:20:34,216] [INFO] [mosaic_app.services.MosaicService:144] - グリッド初期化完了: 9セル作成
+[2025-03-02 08:20:34,216] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:20:34,216] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 08:20:34,217] [ERROR] [mosaic_app.adapters.SettingsRepository:343] - 設定取得エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:20:34,218] [ERROR] [mosaic_app.adapters.SettingsRepository:345] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:20:41,125] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:20:41,126] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:20:41,127] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:20:41,127] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:20:41,128] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(50, 50), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 08:20:41,130] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:20:41,131] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:20:41,131] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:20:41,133] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:20:41,133] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:22:47,307] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:22:47,471] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:22:47,471] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:22:47,471] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:23:15,540] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:23:15,680] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:23:15,681] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:23:15,681] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:23:17,530] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:23:17,729] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:23:17,729] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:23:17,729] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:23:21,017] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:23:21,137] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:23:21,137] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:23:21,137] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:23:57,326] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:23:57,457] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:23:57,457] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:23:57,457] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:24:10,139] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:24:10,141] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:24:10,142] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 08:24:10,143] [INFO] [mosaic_app.services.MosaicService:49] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 08:24:10,143] [INFO] [mosaic_app.services.MosaicService:109] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 08:24:10,159] [INFO] [mosaic_app.services.MosaicService:144] - グリッド初期化完了: 9セル作成
+[2025-03-02 08:24:10,159] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:24:10,160] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:24:10,161] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(50, 50), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 08:24:10,161] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:24:10,162] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:24:10,162] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:10,163] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:24:10,163] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:18,908] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:24:18,910] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:24:18,911] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:24:18,911] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 08:24:18,913] [ERROR] [mosaic_app.adapters.SettingsRepository:345] - 設定取得エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:18,913] [ERROR] [mosaic_app.adapters.SettingsRepository:347] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:24:21,220] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:24:21,220] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:24:21,221] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:24:21,221] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:24:21,222] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(50, 50), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 08:24:21,223] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:24:21,224] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:24:21,224] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:21,225] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:24:21,226] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:30,644] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:24:30,790] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:24:30,790] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:24:30,790] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:24:30,986] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:24:31,129] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:24:31,129] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:24:31,129] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:24:34,332] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:24:34,334] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:24:34,335] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 08:24:34,335] [INFO] [mosaic_app.services.MosaicService:49] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 08:24:34,336] [INFO] [mosaic_app.services.MosaicService:109] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 08:24:34,353] [INFO] [mosaic_app.services.MosaicService:144] - グリッド初期化完了: 9セル作成
+[2025-03-02 08:24:34,353] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:24:34,353] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:24:34,354] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(50, 50), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 08:24:34,355] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:24:34,355] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:24:34,355] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:34,356] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:24:34,356] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:25:08,043] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:25:08,177] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:25:08,177] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:25:08,177] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:25:08,418] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:25:08,541] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:25:08,542] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:25:08,542] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:25:25,485] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:25:25,488] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:25:25,489] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 08:25:25,489] [INFO] [mosaic_app.services.MosaicService:49] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 08:25:25,490] [INFO] [mosaic_app.services.MosaicService:109] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 08:25:25,502] [INFO] [mosaic_app.services.MosaicService:144] - グリッド初期化完了: 9セル作成
+[2025-03-02 08:25:25,503] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:25:25,503] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:25:25,503] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(50, 50), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:25:25,504] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:25:25,504] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:25:25,504] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:25:25,505] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:25:25,506] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:26:01,898] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:26:01,898] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:26:01,898] [INFO] [mosaic_app.adapters.DatabaseManager:25] - データベーススキーマの初期化開始
+[2025-03-02 08:26:01,899] [INFO] [mosaic_app.adapters.DatabaseManager:54] - データベース初期化完了
+[2025-03-02 08:26:08,779] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:26:08,909] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:26:08,909] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:26:08,909] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:26:09,130] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:26:09,264] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:26:09,264] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:26:09,264] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:26:14,065] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:26:14,067] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:26:14,068] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 08:26:14,068] [INFO] [mosaic_app.services.MosaicService:49] - MosaicServiceを初期化: セルサイズ=(50, 50), ベース画像=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 08:26:14,069] [INFO] [mosaic_app.services.MosaicService:109] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 08:26:14,082] [INFO] [mosaic_app.services.MosaicService:144] - グリッド初期化完了: 9セル作成
+[2025-03-02 08:26:14,083] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:26:14,083] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:26:14,084] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(50, 50), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:26:14,084] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:26:14,085] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:26:14,085] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:26:14,086] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:26:14,086] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:32:21,655] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:32:21,655] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:32:21,655] [INFO] [mosaic_app.adapters.DatabaseManager:25] - データベーススキーマの初期化開始
+[2025-03-02 08:32:21,658] [INFO] [mosaic_app.adapters.DatabaseManager:54] - データベース初期化完了
+[2025-03-02 08:32:31,268] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:32:31,269] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:32:31,270] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:32:31,270] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:32:31,270] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(50, 50), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:32:31,277] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:32:31,277] [INFO] [mosaic_app.api.admin_routes:123] - 設定を更新しました: MosaicSettings(id=1, cell_size=(50, 50), logo_path='/workspace/static/base/school_logo.png', title='校章モザイクアート', subtitle='みんなの思い出でつくる、私たちの学校', output_size=(1100, 1100), regenerate_existing=False)
+[2025-03-02 08:32:31,278] [INFO] [mosaic_app.services.MosaicService:75] - 設定更新: セルサイズ=(50, 50), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:32:31,278] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(50, 50), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:32:31,281] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:32:31,281] [INFO] [mosaic_app.services.MosaicService:98] - グリッドを再初期化します
+[2025-03-02 08:32:31,282] [INFO] [mosaic_app.services.MosaicService:109] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 08:32:31,287] [INFO] [mosaic_app.services.MosaicService:144] - グリッド初期化完了: 9セル作成
+[2025-03-02 08:32:31,292] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:32:31,292] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:32:31,293] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:32:31,293] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 08:32:41,775] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:32:41,777] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:32:41,778] [INFO] [mosaic_app.api.routes:67] - 画像アップロードリクエスト受信
+[2025-03-02 08:32:41,779] [INFO] [mosaic_app.api.routes:78] - ファイル受信: screenshot.png
+[2025-03-02 08:32:41,780] [INFO] [mosaic_app.api.routes:92] - ファイルサイズ: 216932 bytes
+[2025-03-02 08:32:41,780] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=624e6bde80764826b1ca8f69ea3f4378, filename=screenshot.png, サイズ=216932 bytes
+[2025-03-02 08:32:41,782] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /workspace/uploads/624e6bde80764826b1ca8f69ea3f4378_screenshot.png
+[2025-03-02 08:32:41,786] [INFO] [mosaic_app.infrastructure.ImageProcessor:32] - 画像処理開始: /workspace/uploads/624e6bde80764826b1ca8f69ea3f4378_screenshot.png, ターゲットサイズ: (50, 50)
+[2025-03-02 08:32:41,795] [INFO] [mosaic_app.infrastructure.ImageProcessor:59] - 処理済み画像を保存: /workspace/uploads/processed/624e6bde80764826b1ca8f69ea3f4378_screenshot.png
+[2025-03-02 08:32:41,795] [INFO] [mosaic_app.services.MosaicService:162] - 画像追加開始: /workspace/uploads/processed/624e6bde80764826b1ca8f69ea3f4378_screenshot.png, id=624e6bde80764826b1ca8f69ea3f4378
+[2025-03-02 08:32:41,796] [INFO] [mosaic_app.services.MosaicService:199] - セル更新: x=2, y=2, id=624e6bde80764826b1ca8f69ea3f4378
+[2025-03-02 08:32:41,796] [INFO] [mosaic_app.services.MosaicService:215] - モザイク画像生成開始
+[2025-03-02 08:32:41,797] [INFO] [mosaic_app.services.MosaicService:270] - モザイク画像をリサイズ: 150x150 -> 1100x1100
+[2025-03-02 08:32:41,804] [INFO] [mosaic_app.services.MosaicService:284] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 1, エラー: 0, サイズ: 1100x1100)
+[2025-03-02 08:32:41,804] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 08:32:41,805] [INFO] [mosaic_app.api.routes:108] - 画像処理完了: /workspace/uploads/processed/624e6bde80764826b1ca8f69ea3f4378_screenshot.png, セル位置: x=2, y=2
+[2025-03-02 08:32:45,015] [INFO] [mosaic_app.api.websockets:20] - WebSocket接続リクエスト: 192.168.65.1:35066
+[2025-03-02 08:32:45,016] [INFO] [mosaic_app.api.websockets:25] - WebSocket接続確立: 192.168.65.1:35066
+[2025-03-02 08:32:51,799] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:32:51,800] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:32:51,801] [INFO] [mosaic_app.api.routes:67] - 画像アップロードリクエスト受信
+[2025-03-02 08:32:51,802] [INFO] [mosaic_app.api.routes:78] - ファイル受信: avator.jpeg
+[2025-03-02 08:32:51,803] [INFO] [mosaic_app.api.routes:92] - ファイルサイズ: 353128 bytes
+[2025-03-02 08:32:51,803] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=f025b38f92f34bccb0f12fc55f608c54, filename=avator.jpeg, サイズ=353128 bytes
+[2025-03-02 08:32:51,806] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /workspace/uploads/f025b38f92f34bccb0f12fc55f608c54_avator.jpeg
+[2025-03-02 08:32:51,812] [INFO] [mosaic_app.infrastructure.ImageProcessor:32] - 画像処理開始: /workspace/uploads/f025b38f92f34bccb0f12fc55f608c54_avator.jpeg, ターゲットサイズ: (50, 50)
+[2025-03-02 08:32:51,825] [INFO] [mosaic_app.infrastructure.ImageProcessor:59] - 処理済み画像を保存: /workspace/uploads/processed/f025b38f92f34bccb0f12fc55f608c54_avator.jpeg
+[2025-03-02 08:32:51,825] [INFO] [mosaic_app.services.MosaicService:162] - 画像追加開始: /workspace/uploads/processed/f025b38f92f34bccb0f12fc55f608c54_avator.jpeg, id=f025b38f92f34bccb0f12fc55f608c54
+[2025-03-02 08:32:51,826] [INFO] [mosaic_app.services.MosaicService:199] - セル更新: x=1, y=2, id=f025b38f92f34bccb0f12fc55f608c54
+[2025-03-02 08:32:51,826] [INFO] [mosaic_app.services.MosaicService:215] - モザイク画像生成開始
+[2025-03-02 08:32:51,827] [INFO] [mosaic_app.services.MosaicService:270] - モザイク画像をリサイズ: 150x150 -> 1100x1100
+[2025-03-02 08:32:51,835] [INFO] [mosaic_app.services.MosaicService:284] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 2, エラー: 0, サイズ: 1100x1100)
+[2025-03-02 08:32:51,835] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 08:32:51,835] [INFO] [mosaic_app.api.routes:108] - 画像処理完了: /workspace/uploads/processed/f025b38f92f34bccb0f12fc55f608c54_avator.jpeg, セル位置: x=1, y=2
+[2025-03-02 08:32:57,359] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:32:57,359] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:32:57,360] [INFO] [mosaic_app.api.routes:67] - 画像アップロードリクエスト受信
+[2025-03-02 08:32:57,361] [INFO] [mosaic_app.api.routes:78] - ファイル受信: wizard.png
+[2025-03-02 08:32:57,362] [INFO] [mosaic_app.api.routes:92] - ファイルサイズ: 22780 bytes
+[2025-03-02 08:32:57,362] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=0ef96aee467245e2b5facebce133a2fe, filename=wizard.png, サイズ=22780 bytes
+[2025-03-02 08:32:57,364] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /workspace/uploads/0ef96aee467245e2b5facebce133a2fe_wizard.png
+[2025-03-02 08:32:57,369] [INFO] [mosaic_app.infrastructure.ImageProcessor:32] - 画像処理開始: /workspace/uploads/0ef96aee467245e2b5facebce133a2fe_wizard.png, ターゲットサイズ: (50, 50)
+[2025-03-02 08:32:57,376] [INFO] [mosaic_app.infrastructure.ImageProcessor:59] - 処理済み画像を保存: /workspace/uploads/processed/0ef96aee467245e2b5facebce133a2fe_wizard.png
+[2025-03-02 08:32:57,376] [INFO] [mosaic_app.services.MosaicService:162] - 画像追加開始: /workspace/uploads/processed/0ef96aee467245e2b5facebce133a2fe_wizard.png, id=0ef96aee467245e2b5facebce133a2fe
+[2025-03-02 08:32:57,377] [INFO] [mosaic_app.services.MosaicService:199] - セル更新: x=0, y=2, id=0ef96aee467245e2b5facebce133a2fe
+[2025-03-02 08:32:57,377] [INFO] [mosaic_app.services.MosaicService:215] - モザイク画像生成開始
+[2025-03-02 08:32:57,379] [INFO] [mosaic_app.services.MosaicService:270] - モザイク画像をリサイズ: 150x150 -> 1100x1100
+[2025-03-02 08:32:57,386] [INFO] [mosaic_app.services.MosaicService:284] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 3, エラー: 0, サイズ: 1100x1100)
+[2025-03-02 08:32:57,386] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 08:32:57,387] [INFO] [mosaic_app.api.routes:108] - 画像処理完了: /workspace/uploads/processed/0ef96aee467245e2b5facebce133a2fe_wizard.png, セル位置: x=0, y=2
+[2025-03-02 08:33:13,656] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:33:13,656] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:33:13,657] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:33:13,657] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:33:13,658] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:33:13,661] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:33:13,661] [INFO] [mosaic_app.api.admin_routes:123] - 設定を更新しました: MosaicSettings(id=1, cell_size=(10, 10), logo_path='/workspace/static/base/school_logo.png', title='校章モザイクアート', subtitle='みんなの思い出でつくる、私たちの学校', output_size=(1100, 1100), regenerate_existing=False)
+[2025-03-02 08:33:13,662] [INFO] [mosaic_app.services.MosaicService:75] - 設定更新: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:33:13,662] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:33:13,664] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:33:13,664] [INFO] [mosaic_app.services.MosaicService:98] - グリッドを再初期化します
+[2025-03-02 08:33:13,664] [INFO] [mosaic_app.services.MosaicService:109] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 08:33:13,674] [INFO] [mosaic_app.services.MosaicService:144] - グリッド初期化完了: 288セル作成
+[2025-03-02 08:33:13,676] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:33:13,677] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:33:13,677] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:33:13,677] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 08:33:22,684] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:33:22,685] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:33:22,685] [INFO] [mosaic_app.api.routes:67] - 画像アップロードリクエスト受信
+[2025-03-02 08:33:22,697] [INFO] [mosaic_app.api.routes:78] - ファイル受信: Desktop - 1.png
+[2025-03-02 08:33:22,698] [INFO] [mosaic_app.api.routes:92] - ファイルサイズ: 1926940 bytes
+[2025-03-02 08:33:22,698] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=f6cadb9446954db78c9d6e593960fb65, filename=Desktop - 1.png, サイズ=1926940 bytes
+[2025-03-02 08:33:22,700] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /workspace/uploads/f6cadb9446954db78c9d6e593960fb65_Desktop - 1.png
+[2025-03-02 08:33:22,701] [INFO] [mosaic_app.infrastructure.ImageProcessor:32] - 画像処理開始: /workspace/uploads/f6cadb9446954db78c9d6e593960fb65_Desktop - 1.png, ターゲットサイズ: (10, 10)
+[2025-03-02 08:33:22,734] [INFO] [mosaic_app.infrastructure.ImageProcessor:59] - 処理済み画像を保存: /workspace/uploads/processed/f6cadb9446954db78c9d6e593960fb65_Desktop - 1.png
+[2025-03-02 08:33:22,734] [INFO] [mosaic_app.services.MosaicService:162] - 画像追加開始: /workspace/uploads/processed/f6cadb9446954db78c9d6e593960fb65_Desktop - 1.png, id=f6cadb9446954db78c9d6e593960fb65
+[2025-03-02 08:33:22,734] [INFO] [mosaic_app.services.MosaicService:199] - セル更新: x=2, y=14, id=f6cadb9446954db78c9d6e593960fb65
+[2025-03-02 08:33:22,734] [INFO] [mosaic_app.services.MosaicService:215] - モザイク画像生成開始
+[2025-03-02 08:33:22,736] [INFO] [mosaic_app.services.MosaicService:270] - モザイク画像をリサイズ: 160x180 -> 1100x1100
+[2025-03-02 08:33:22,743] [INFO] [mosaic_app.services.MosaicService:284] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 1, エラー: 0, サイズ: 1100x1100)
+[2025-03-02 08:33:22,743] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 08:33:22,744] [INFO] [mosaic_app.api.routes:108] - 画像処理完了: /workspace/uploads/processed/f6cadb9446954db78c9d6e593960fb65_Desktop - 1.png, セル位置: x=2, y=14
+[2025-03-02 08:33:33,104] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:33:33,105] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:33:33,105] [INFO] [mosaic_app.api.routes:67] - 画像アップロードリクエスト受信
+[2025-03-02 08:33:33,106] [INFO] [mosaic_app.api.routes:78] - ファイル受信: wizard.png
+[2025-03-02 08:33:33,106] [INFO] [mosaic_app.api.routes:92] - ファイルサイズ: 22780 bytes
+[2025-03-02 08:33:33,106] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=3ee5544c78c348aebbdd18d8ae6c463e, filename=wizard.png, サイズ=22780 bytes
+[2025-03-02 08:33:33,107] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /workspace/uploads/3ee5544c78c348aebbdd18d8ae6c463e_wizard.png
+[2025-03-02 08:33:33,110] [INFO] [mosaic_app.infrastructure.ImageProcessor:32] - 画像処理開始: /workspace/uploads/3ee5544c78c348aebbdd18d8ae6c463e_wizard.png, ターゲットサイズ: (10, 10)
+[2025-03-02 08:33:33,119] [INFO] [mosaic_app.infrastructure.ImageProcessor:59] - 処理済み画像を保存: /workspace/uploads/processed/3ee5544c78c348aebbdd18d8ae6c463e_wizard.png
+[2025-03-02 08:33:33,120] [INFO] [mosaic_app.services.MosaicService:162] - 画像追加開始: /workspace/uploads/processed/3ee5544c78c348aebbdd18d8ae6c463e_wizard.png, id=3ee5544c78c348aebbdd18d8ae6c463e
+[2025-03-02 08:33:33,121] [INFO] [mosaic_app.services.MosaicService:199] - セル更新: x=4, y=15, id=3ee5544c78c348aebbdd18d8ae6c463e
+[2025-03-02 08:33:33,121] [INFO] [mosaic_app.services.MosaicService:215] - モザイク画像生成開始
+[2025-03-02 08:33:33,123] [INFO] [mosaic_app.services.MosaicService:270] - モザイク画像をリサイズ: 160x180 -> 1100x1100
+[2025-03-02 08:33:33,131] [INFO] [mosaic_app.services.MosaicService:284] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 2, エラー: 0, サイズ: 1100x1100)
+[2025-03-02 08:33:33,131] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 08:33:33,131] [INFO] [mosaic_app.api.routes:108] - 画像処理完了: /workspace/uploads/processed/3ee5544c78c348aebbdd18d8ae6c463e_wizard.png, セル位置: x=4, y=15
+[2025-03-02 08:36:05,184] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 08:36:05,191] [WARNING] [mosaic_app.api.websockets:58] - WebSocket接続クローズ失敗: connection is disconnected
+[2025-03-02 08:40:32,444] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:40:32,445] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:40:32,445] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:40:32,446] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:40:32,446] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:40:32,451] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:40:32,451] [INFO] [mosaic_app.api.admin_routes:123] - 設定を更新しました: MosaicSettings(id=1, cell_size=(10, 10), logo_path='/workspace/static/base/school_logo.png', title='校章モザイクアート', subtitle='みんなの思い出でつくる、私たちの学校', output_size=(1100, 1100), regenerate_existing=False)
+[2025-03-02 08:40:32,451] [INFO] [mosaic_app.services.MosaicService:75] - 設定更新: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:40:32,452] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:40:32,454] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:40:32,458] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:40:32,458] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:40:32,459] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:40:32,459] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 08:40:37,661] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:40:43,061] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:40:43,061] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:40:43,062] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:40:43,062] [WARNING] [mosaic_app.api.admin_routes:156] - モザイクリセットリクエスト受信
+[2025-03-02 08:40:43,063] [WARNING] [mosaic_app.services.MosaicService:365] - システム全体リセット開始
+[2025-03-02 08:40:43,063] [WARNING] [mosaic_app.adapters.ImageRepository:164] - すべての画像メタデータの削除を開始
+[2025-03-02 08:40:43,067] [WARNING] [mosaic_app.adapters.ImageRepository:170] - すべての画像メタデータを削除しました
+[2025-03-02 08:40:43,067] [WARNING] [mosaic_app.adapters.FileStorage:91] - すべてのファイルの削除を開始します
+[2025-03-02 08:40:43,075] [INFO] [mosaic_app.adapters.FileStorage:105] - すべてのファイルの削除が完了しました
+[2025-03-02 08:40:43,077] [INFO] [mosaic_app.services.MosaicService:376] - モザイク画像を削除: /workspace/static/output/current_mosaic.jpg
+[2025-03-02 08:40:43,077] [INFO] [mosaic_app.services.MosaicService:109] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 08:40:43,084] [INFO] [mosaic_app.services.MosaicService:144] - グリッド初期化完了: 288セル作成
+[2025-03-02 08:40:43,084] [INFO] [mosaic_app.services.MosaicService:215] - モザイク画像生成開始
+[2025-03-02 08:40:43,085] [INFO] [mosaic_app.services.MosaicService:270] - モザイク画像をリサイズ: 160x180 -> 1100x1100
+[2025-03-02 08:40:43,093] [INFO] [mosaic_app.services.MosaicService:284] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 0, エラー: 0, サイズ: 1100x1100)
+[2025-03-02 08:40:43,093] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 08:40:43,094] [WARNING] [mosaic_app.services.MosaicService:384] - システム全体リセット完了
+[2025-03-02 08:40:43,094] [WARNING] [mosaic_app.api.admin_routes:163] - モザイクの完全リセットを実行しました
+[2025-03-02 08:40:43,096] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:40:43,096] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:40:43,096] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:40:43,096] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 08:40:50,052] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:40:50,052] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:40:50,053] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:40:50,053] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:40:50,054] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:40:50,058] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:40:50,059] [INFO] [mosaic_app.api.admin_routes:123] - 設定を更新しました: MosaicSettings(id=1, cell_size=(10, 10), logo_path='/workspace/static/base/school_logo.png', title='校章モザイクアート', subtitle='みんなの思い出でつくる、私たちの学校', output_size=(1100, 1100), regenerate_existing=True)
+[2025-03-02 08:40:50,059] [INFO] [mosaic_app.services.MosaicService:75] - 設定更新: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:40:50,060] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:40:50,062] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:40:50,063] [INFO] [mosaic_app.api.admin_routes:130] - モザイク再生成を開始します
+[2025-03-02 08:40:50,063] [INFO] [mosaic_app.services.MosaicService:321] - モザイク再生成開始
+[2025-03-02 08:40:50,063] [INFO] [mosaic_app.services.MosaicService:109] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 08:40:50,070] [INFO] [mosaic_app.services.MosaicService:144] - グリッド初期化完了: 288セル作成
+[2025-03-02 08:40:50,071] [INFO] [mosaic_app.services.MosaicService:328] - 再生成対象画像数: 0
+[2025-03-02 08:40:50,071] [INFO] [mosaic_app.services.MosaicService:215] - モザイク画像生成開始
+[2025-03-02 08:40:50,072] [INFO] [mosaic_app.services.MosaicService:270] - モザイク画像をリサイズ: 160x180 -> 1100x1100
+[2025-03-02 08:40:50,080] [INFO] [mosaic_app.services.MosaicService:284] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 0, エラー: 0, サイズ: 1100x1100)
+[2025-03-02 08:40:50,080] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 08:40:50,080] [INFO] [mosaic_app.services.MosaicService:356] - モザイク再生成完了
+[2025-03-02 08:40:50,082] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:40:50,083] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:40:50,083] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:40:50,083] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 08:40:55,495] [INFO] [mosaic_app.api.websockets:20] - WebSocket接続リクエスト: 192.168.65.1:42962
+[2025-03-02 08:40:55,496] [INFO] [mosaic_app.api.websockets:25] - WebSocket接続確立: 192.168.65.1:42962
+[2025-03-02 08:42:47,294] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:42:47,295] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:42:47,296] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:42:47,296] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:42:47,297] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:42:47,300] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:42:47,301] [INFO] [mosaic_app.api.admin_routes:123] - 設定を更新しました: MosaicSettings(id=1, cell_size=(10, 10), logo_path='/workspace/static/base/school_logo.png', title='校章モザイクアート', subtitle='みんなの思い出でつくる、私たちの学校', output_size=(1100, 1100), regenerate_existing=False)
+[2025-03-02 08:42:47,301] [INFO] [mosaic_app.services.MosaicService:75] - 設定更新: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:42:47,302] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:42:47,304] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:42:47,308] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:42:47,308] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:42:47,309] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:42:47,309] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 08:42:54,588] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 08:42:54,590] [WARNING] [mosaic_app.api.websockets:58] - WebSocket接続クローズ失敗: connection is disconnected
+[2025-03-02 08:42:54,598] [INFO] [mosaic_app.api.websockets:20] - WebSocket接続リクエスト: 192.168.65.1:61242
+[2025-03-02 08:42:54,598] [INFO] [mosaic_app.api.websockets:25] - WebSocket接続確立: 192.168.65.1:61242
+[2025-03-02 08:42:59,408] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:42:59,409] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:42:59,409] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:42:59,410] [INFO] [mosaic_app.api.admin_routes:94] - 設定更新リクエスト受信
+[2025-03-02 08:42:59,410] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:42:59,415] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:42:59,415] [INFO] [mosaic_app.api.admin_routes:123] - 設定を更新しました: MosaicSettings(id=1, cell_size=(10, 10), logo_path='/workspace/static/base/school_logo.png', title='校章モザイクアート', subtitle='みんなの思い出でつくる、私たちの学校', output_size=(1100, 1100), regenerate_existing=True)
+[2025-03-02 08:42:59,416] [INFO] [mosaic_app.services.MosaicService:75] - 設定更新: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:42:59,416] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: セルサイズ=(10, 10), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1100, 1100)
+[2025-03-02 08:42:59,418] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 08:42:59,418] [INFO] [mosaic_app.api.admin_routes:130] - モザイク再生成を開始します
+[2025-03-02 08:42:59,418] [INFO] [mosaic_app.services.MosaicService:321] - モザイク再生成開始
+[2025-03-02 08:42:59,419] [INFO] [mosaic_app.services.MosaicService:109] - グリッド初期化開始: /workspace/static/base/school_logo.png
+[2025-03-02 08:42:59,426] [INFO] [mosaic_app.services.MosaicService:144] - グリッド初期化完了: 288セル作成
+[2025-03-02 08:42:59,427] [INFO] [mosaic_app.services.MosaicService:328] - 再生成対象画像数: 0
+[2025-03-02 08:42:59,427] [INFO] [mosaic_app.services.MosaicService:215] - モザイク画像生成開始
+[2025-03-02 08:42:59,428] [INFO] [mosaic_app.services.MosaicService:270] - モザイク画像をリサイズ: 160x180 -> 1100x1100
+[2025-03-02 08:42:59,436] [INFO] [mosaic_app.services.MosaicService:284] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 0, エラー: 0, サイズ: 1100x1100)
+[2025-03-02 08:42:59,436] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 08:42:59,436] [INFO] [mosaic_app.services.MosaicService:356] - モザイク再生成完了
+[2025-03-02 08:42:59,439] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:42:59,439] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:42:59,439] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 08:42:59,439] [INFO] [mosaic_app.api.admin_routes:27] - アドミンパネル表示リクエスト
+[2025-03-02 08:43:07,982] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 08:43:07,983] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 08:43:07,983] [INFO] [mosaic_app.api.routes:67] - 画像アップロードリクエスト受信
+[2025-03-02 08:43:07,985] [INFO] [mosaic_app.api.routes:78] - ファイル受信: ibaraneko.jpeg
+[2025-03-02 08:43:07,985] [INFO] [mosaic_app.api.routes:92] - ファイルサイズ: 26362 bytes
+[2025-03-02 08:43:07,986] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=b9fba3c18d7b4c9b8e586fa205d9dbab, filename=ibaraneko.jpeg, サイズ=26362 bytes
+[2025-03-02 08:43:07,987] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /workspace/uploads/b9fba3c18d7b4c9b8e586fa205d9dbab_ibaraneko.jpeg
+[2025-03-02 08:43:07,993] [INFO] [mosaic_app.infrastructure.ImageProcessor:32] - 画像処理開始: /workspace/uploads/b9fba3c18d7b4c9b8e586fa205d9dbab_ibaraneko.jpeg, ターゲットサイズ: (10, 10)
+[2025-03-02 08:43:08,009] [INFO] [mosaic_app.infrastructure.ImageProcessor:59] - 処理済み画像を保存: /workspace/uploads/processed/b9fba3c18d7b4c9b8e586fa205d9dbab_ibaraneko.jpeg
+[2025-03-02 08:43:08,009] [INFO] [mosaic_app.services.MosaicService:162] - 画像追加開始: /workspace/uploads/processed/b9fba3c18d7b4c9b8e586fa205d9dbab_ibaraneko.jpeg, id=b9fba3c18d7b4c9b8e586fa205d9dbab
+[2025-03-02 08:43:08,010] [INFO] [mosaic_app.services.MosaicService:199] - セル更新: x=2, y=11, id=b9fba3c18d7b4c9b8e586fa205d9dbab
+[2025-03-02 08:43:08,010] [INFO] [mosaic_app.services.MosaicService:215] - モザイク画像生成開始
+[2025-03-02 08:43:08,012] [INFO] [mosaic_app.services.MosaicService:270] - モザイク画像をリサイズ: 160x180 -> 1100x1100
+[2025-03-02 08:43:08,019] [INFO] [mosaic_app.services.MosaicService:284] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 1, エラー: 0, サイズ: 1100x1100)
+[2025-03-02 08:43:08,019] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 08:43:08,020] [INFO] [mosaic_app.api.routes:108] - 画像処理完了: /workspace/uploads/processed/b9fba3c18d7b4c9b8e586fa205d9dbab_ibaraneko.jpeg, セル位置: x=2, y=11
+[2025-03-02 08:48:14,837] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 08:48:14,841] [WARNING] [mosaic_app.api.websockets:58] - WebSocket接続クローズ失敗: connection is disconnected
+[2025-03-02 08:59:24,512] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:59:24,657] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:59:24,657] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:59:24,657] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:59:31,035] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:59:31,169] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:59:31,169] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:59:31,169] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:59:34,040] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:59:34,194] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:59:34,194] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:59:34,194] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 08:59:53,566] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 08:59:53,694] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 08:59:53,694] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 08:59:53,694] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:00:02,098] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:00:02,241] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:00:02,241] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:00:02,241] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:01:36,830] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:01:36,953] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:01:36,953] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:01:36,953] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:01:44,795] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:01:44,928] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:01:44,928] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:01:44,928] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:01:48,897] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:01:49,022] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:01:49,022] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:01:49,022] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:02:57,003] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:02:57,135] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:02:57,135] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:02:57,135] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:03:06,090] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:03:06,213] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:03:06,213] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:03:06,213] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:05:08,591] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:05:08,742] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:05:08,742] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:05:08,742] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:05:50,440] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:05:50,576] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:05:50,577] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:05:50,577] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:06:07,615] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:06:07,762] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:06:07,762] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:06:07,762] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:06:26,373] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:06:26,496] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:06:26,496] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:06:26,496] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:06:49,441] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:06:49,583] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:06:49,584] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:06:49,584] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:07:22,783] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:07:22,934] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:07:22,934] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:07:22,934] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:07:55,678] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:07:55,812] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:07:55,813] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:07:55,813] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:08:12,858] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:08:12,993] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:08:12,994] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:08:12,994] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:08:26,006] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:08:26,144] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:08:26,144] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:08:26,144] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:09:06,286] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:09:06,419] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:09:06,419] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:09:06,419] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:09:23,145] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:09:23,276] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:09:23,276] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:09:23,277] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:09:45,614] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:09:45,766] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:09:45,766] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:09:45,766] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:09:48,553] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:09:48,722] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:09:48,722] [INFO] [mosaic_app.infrastructure.channels:56] - チャンネルプラグイン初期化: チャンネル名=mosaic
+[2025-03-02 09:09:48,722] [INFO] [mosaic_app.infrastructure.channels:62] - チャンネルプラグイン初期化完了
+[2025-03-02 09:10:04,057] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:10:04,059] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:10:04,061] [INFO] [mosaic_app.app:65] - Creating new MosaicService instance
+[2025-03-02 09:10:04,061] [INFO] [mosaic_app.services.MosaicService:52] - MosaicServiceを初期化: グリッドサイズ=(20, 20), ベース画像=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:10:04,061] [INFO] [mosaic_app.services.MosaicService:128] - グリッド初期化開始: グリッドサイズ=(20, 20)
+[2025-03-02 09:10:04,080] [INFO] [mosaic_app.services.MosaicService:172] - グリッド初期化完了: 400セル作成
+[2025-03-02 09:10:04,081] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:10:04,081] [INFO] [mosaic_app.api.admin_routes:28] - アドミンパネル表示リクエスト
+[2025-03-02 09:10:04,082] [ERROR] [mosaic_app.adapters.SettingsRepository:345] - 設定取得エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:10:04,083] [ERROR] [mosaic_app.adapters.SettingsRepository:347] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+
+[2025-03-02 09:10:11,713] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:10:11,714] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:10:11,715] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:10:11,715] [INFO] [mosaic_app.api.admin_routes:95] - 設定更新リクエスト受信
+[2025-03-02 09:10:11,716] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: グリッドサイズ=(20, 20), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:10:11,717] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named grid_size
+[2025-03-02 09:10:11,718] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: grid_size
+[2025-03-02 09:10:11,719] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:10:11,720] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+
+[2025-03-02 09:10:11,720] [ERROR] [mosaic_app.api.admin_routes:140] - 設定更新エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 127, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:10:15,887] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:10:15,888] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:10:15,888] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:10:15,889] [INFO] [mosaic_app.api.admin_routes:28] - アドミンパネル表示リクエスト
+[2025-03-02 09:10:15,891] [ERROR] [mosaic_app.adapters.SettingsRepository:345] - 設定取得エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:10:15,891] [ERROR] [mosaic_app.adapters.SettingsRepository:347] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+
+[2025-03-02 09:10:17,256] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:10:17,257] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:10:17,258] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:10:17,258] [INFO] [mosaic_app.api.admin_routes:95] - 設定更新リクエスト受信
+[2025-03-02 09:10:17,259] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: グリッドサイズ=(20, 20), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:10:17,260] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named grid_size
+[2025-03-02 09:10:17,261] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: grid_size
+[2025-03-02 09:10:17,261] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:10:17,263] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+
+[2025-03-02 09:10:17,264] [ERROR] [mosaic_app.api.admin_routes:140] - 設定更新エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 127, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:11:22,100] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:11:22,100] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:11:22,100] [INFO] [mosaic_app.adapters.DatabaseManager:25] - データベーススキーマの初期化開始
+[2025-03-02 09:11:22,101] [INFO] [mosaic_app.adapters.DatabaseManager:54] - データベース初期化完了
+[2025-03-02 09:11:25,536] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:11:25,538] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:11:25,538] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:11:25,539] [INFO] [mosaic_app.api.admin_routes:95] - 設定更新リクエスト受信
+[2025-03-02 09:11:25,539] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: グリッドサイズ=(20, 20), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:11:25,541] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named grid_size
+[2025-03-02 09:11:25,543] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: grid_size
+[2025-03-02 09:11:25,544] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:11:25,545] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+
+[2025-03-02 09:11:25,546] [ERROR] [mosaic_app.api.admin_routes:140] - 設定更新エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 127, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:11:34,504] [INFO] [mosaic_app:67] - ロガーを初期化しました: mosaic_app
+[2025-03-02 09:11:34,505] [INFO] [mosaic_app.adapters.DatabaseManager:20] - データベース初期化: /workspace/mosaic_app.db
+[2025-03-02 09:11:34,505] [INFO] [mosaic_app.adapters.DatabaseManager:25] - データベーススキーマの初期化開始
+[2025-03-02 09:11:34,508] [INFO] [mosaic_app.adapters.DatabaseManager:54] - データベース初期化完了
+[2025-03-02 09:11:36,479] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:11:36,480] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:11:36,481] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:11:36,481] [INFO] [mosaic_app.api.admin_routes:95] - 設定更新リクエスト受信
+[2025-03-02 09:11:36,482] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: グリッドサイズ=(20, 20), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:11:36,486] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 09:11:36,487] [INFO] [mosaic_app.api.admin_routes:128] - 設定を更新しました: MosaicSettings(id=1, grid_size=(20, 20), logo_path='/workspace/static/base/school_logo.png', title='校章モザイクアート', subtitle='みんなの思い出でつくる、私たちの学校', output_size=(1000, 1000), regenerate_existing=False)
+[2025-03-02 09:11:36,487] [INFO] [mosaic_app.services.MosaicService:90] - 設定更新: グリッドサイズ=(20, 20), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:11:36,488] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: グリッドサイズ=(20, 20), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:11:36,490] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 09:11:36,490] [INFO] [mosaic_app.services.MosaicService:109] - 新しいセルサイズ: (50, 50) (自動計算)
+[2025-03-02 09:11:36,492] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:11:36,493] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:11:36,493] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:11:36,493] [INFO] [mosaic_app.api.admin_routes:28] - アドミンパネル表示リクエスト
+[2025-03-02 09:11:40,465] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:11:40,466] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:11:40,466] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:11:40,467] [INFO] [mosaic_app.api.admin_routes:95] - 設定更新リクエスト受信
+[2025-03-02 09:11:40,467] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: グリッドサイズ=(20, 20), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:11:40,472] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 09:11:40,473] [INFO] [mosaic_app.api.admin_routes:128] - 設定を更新しました: MosaicSettings(id=1, grid_size=(20, 20), logo_path='/workspace/static/base/school_logo.png', title='校章モザイクアート', subtitle='みんなの思い出でつくる、私たちの学校', output_size=(1000, 1000), regenerate_existing=True)
+[2025-03-02 09:11:40,474] [INFO] [mosaic_app.services.MosaicService:90] - 設定更新: グリッドサイズ=(20, 20), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:11:40,474] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: グリッドサイズ=(20, 20), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:11:40,476] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 09:11:40,476] [INFO] [mosaic_app.services.MosaicService:109] - 新しいセルサイズ: (50, 50) (自動計算)
+[2025-03-02 09:11:40,477] [INFO] [mosaic_app.api.admin_routes:135] - モザイク再生成を開始します
+[2025-03-02 09:11:40,477] [INFO] [mosaic_app.services.MosaicService:354] - モザイク再生成開始
+[2025-03-02 09:11:40,477] [INFO] [mosaic_app.services.MosaicService:128] - グリッド初期化開始: グリッドサイズ=(20, 20)
+[2025-03-02 09:11:40,484] [INFO] [mosaic_app.services.MosaicService:172] - グリッド初期化完了: 400セル作成
+[2025-03-02 09:11:40,485] [INFO] [mosaic_app.services.MosaicService:361] - 再生成対象画像数: 0
+[2025-03-02 09:11:40,485] [INFO] [mosaic_app.services.MosaicService:243] - モザイク画像生成開始
+[2025-03-02 09:11:40,490] [INFO] [mosaic_app.services.MosaicService:317] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 0, エラー: 0, サイズ: 1000x1000)
+[2025-03-02 09:11:40,490] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 09:11:40,490] [INFO] [mosaic_app.services.MosaicService:389] - モザイク再生成完了
+[2025-03-02 09:11:40,492] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:11:40,492] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:11:40,493] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:11:40,493] [INFO] [mosaic_app.api.admin_routes:28] - アドミンパネル表示リクエスト
+[2025-03-02 09:11:44,324] [INFO] [mosaic_app.api.websockets:20] - WebSocket接続リクエスト: 192.168.65.1:16279
+[2025-03-02 09:11:44,324] [INFO] [mosaic_app.api.websockets:25] - WebSocket接続確立: 192.168.65.1:16279
+[2025-03-02 09:11:54,398] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:11:54,400] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:11:54,401] [INFO] [mosaic_app.api.routes:67] - 画像アップロードリクエスト受信
+[2025-03-02 09:11:54,402] [INFO] [mosaic_app.api.routes:78] - ファイル受信: ibara.jpeg
+[2025-03-02 09:11:54,402] [INFO] [mosaic_app.api.routes:92] - ファイルサイズ: 138747 bytes
+[2025-03-02 09:11:54,402] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=48578f63b9a641129cd277438ffb8649, filename=ibara.jpeg, サイズ=138747 bytes
+[2025-03-02 09:11:54,404] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /workspace/uploads/48578f63b9a641129cd277438ffb8649_ibara.jpeg
+[2025-03-02 09:11:54,408] [INFO] [mosaic_app.infrastructure.ImageProcessor:31] - 画像処理開始: /workspace/uploads/48578f63b9a641129cd277438ffb8649_ibara.jpeg
+[2025-03-02 09:11:54,421] [INFO] [mosaic_app.infrastructure.ImageProcessor:52] - 処理済み画像を保存: /workspace/uploads/processed/48578f63b9a641129cd277438ffb8649_ibara.jpeg
+[2025-03-02 09:11:54,421] [INFO] [mosaic_app.services.MosaicService:190] - 画像追加開始: /workspace/uploads/processed/48578f63b9a641129cd277438ffb8649_ibara.jpeg, id=48578f63b9a641129cd277438ffb8649
+[2025-03-02 09:11:54,424] [INFO] [mosaic_app.services.MosaicService:227] - セル更新: x=18, y=10, id=48578f63b9a641129cd277438ffb8649
+[2025-03-02 09:11:54,425] [INFO] [mosaic_app.services.MosaicService:243] - モザイク画像生成開始
+[2025-03-02 09:11:54,431] [INFO] [mosaic_app.services.MosaicService:317] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 1, エラー: 0, サイズ: 1000x1000)
+[2025-03-02 09:11:54,431] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 09:11:54,431] [INFO] [mosaic_app.api.routes:108] - 画像処理完了: /workspace/uploads/processed/48578f63b9a641129cd277438ffb8649_ibara.jpeg, セル位置: x=18, y=10
+[2025-03-02 09:12:30,578] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:12:30,580] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:12:30,581] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:12:30,581] [INFO] [mosaic_app.api.admin_routes:95] - 設定更新リクエスト受信
+[2025-03-02 09:12:30,582] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: グリッドサイズ=(40, 40), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:12:30,588] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 09:12:30,589] [INFO] [mosaic_app.api.admin_routes:128] - 設定を更新しました: MosaicSettings(id=1, grid_size=(40, 40), logo_path='/workspace/static/base/school_logo.png', title='校章モザイクアート', subtitle='みんなの思い出でつくる、私たちの学校', output_size=(1000, 1000), regenerate_existing=False)
+[2025-03-02 09:12:30,589] [INFO] [mosaic_app.services.MosaicService:90] - 設定更新: グリッドサイズ=(40, 40), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:12:30,590] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: グリッドサイズ=(40, 40), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:12:30,592] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 09:12:30,592] [INFO] [mosaic_app.services.MosaicService:109] - 新しいセルサイズ: (25, 25) (自動計算)
+[2025-03-02 09:12:30,592] [INFO] [mosaic_app.services.MosaicService:117] - グリッドを再初期化します
+[2025-03-02 09:12:30,592] [INFO] [mosaic_app.services.MosaicService:128] - グリッド初期化開始: グリッドサイズ=(40, 40)
+[2025-03-02 09:12:30,608] [INFO] [mosaic_app.services.MosaicService:172] - グリッド初期化完了: 1600セル作成
+[2025-03-02 09:12:30,610] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:12:30,610] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:12:30,611] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:12:30,611] [INFO] [mosaic_app.api.admin_routes:28] - アドミンパネル表示リクエスト
+[2025-03-02 09:12:42,091] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 09:12:42,094] [WARNING] [mosaic_app.api.websockets:58] - WebSocket接続クローズ失敗: connection is disconnected
+[2025-03-02 09:12:42,099] [INFO] [mosaic_app.api.websockets:20] - WebSocket接続リクエスト: 192.168.65.1:41548
+[2025-03-02 09:12:42,100] [INFO] [mosaic_app.api.websockets:25] - WebSocket接続確立: 192.168.65.1:41548
+[2025-03-02 09:13:00,671] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:13:00,672] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:13:00,673] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:13:00,673] [INFO] [mosaic_app.api.admin_routes:95] - 設定更新リクエスト受信
+[2025-03-02 09:13:00,674] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: グリッドサイズ=(100, 100), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:13:00,679] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 09:13:00,679] [INFO] [mosaic_app.api.admin_routes:128] - 設定を更新しました: MosaicSettings(id=1, grid_size=(100, 100), logo_path='/workspace/static/base/school_logo.png', title='校章モザイクアート', subtitle='みんなの思い出でつくる、私たちの学校', output_size=(1000, 1000), regenerate_existing=True)
+[2025-03-02 09:13:00,680] [INFO] [mosaic_app.services.MosaicService:90] - 設定更新: グリッドサイズ=(100, 100), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:13:00,680] [INFO] [mosaic_app.adapters.SettingsRepository:187] - 設定保存: グリッドサイズ=(100, 100), ロゴパス=/workspace/static/base/school_logo.png, 出力サイズ=(1000, 1000)
+[2025-03-02 09:13:00,682] [INFO] [mosaic_app.adapters.SettingsRepository:278] - 設定保存完了
+[2025-03-02 09:13:00,682] [INFO] [mosaic_app.services.MosaicService:109] - 新しいセルサイズ: (10, 10) (自動計算)
+[2025-03-02 09:13:00,682] [INFO] [mosaic_app.services.MosaicService:117] - グリッドを再初期化します
+[2025-03-02 09:13:00,683] [INFO] [mosaic_app.services.MosaicService:128] - グリッド初期化開始: グリッドサイズ=(100, 100)
+[2025-03-02 09:13:00,768] [INFO] [mosaic_app.services.MosaicService:172] - グリッド初期化完了: 10000セル作成
+[2025-03-02 09:13:00,768] [INFO] [mosaic_app.api.admin_routes:135] - モザイク再生成を開始します
+[2025-03-02 09:13:00,769] [INFO] [mosaic_app.services.MosaicService:354] - モザイク再生成開始
+[2025-03-02 09:13:00,769] [INFO] [mosaic_app.services.MosaicService:128] - グリッド初期化開始: グリッドサイズ=(100, 100)
+[2025-03-02 09:13:00,847] [INFO] [mosaic_app.services.MosaicService:172] - グリッド初期化完了: 10000セル作成
+[2025-03-02 09:13:00,848] [INFO] [mosaic_app.services.MosaicService:361] - 再生成対象画像数: 1
+[2025-03-02 09:13:00,848] [INFO] [mosaic_app.infrastructure.ImageProcessor:31] - 画像処理開始: /workspace/uploads/48578f63b9a641129cd277438ffb8649_ibara.jpeg
+[2025-03-02 09:13:00,855] [INFO] [mosaic_app.infrastructure.ImageProcessor:52] - 処理済み画像を保存: /workspace/uploads/processed/48578f63b9a641129cd277438ffb8649_ibara.jpeg
+[2025-03-02 09:13:00,855] [INFO] [mosaic_app.services.MosaicService:190] - 画像追加開始: /workspace/uploads/processed/48578f63b9a641129cd277438ffb8649_ibara.jpeg, id=48578f63b9a641129cd277438ffb8649
+[2025-03-02 09:13:00,860] [INFO] [mosaic_app.services.MosaicService:227] - セル更新: x=44, y=49, id=48578f63b9a641129cd277438ffb8649
+[2025-03-02 09:13:00,860] [INFO] [mosaic_app.services.MosaicService:243] - モザイク画像生成開始
+[2025-03-02 09:13:00,879] [INFO] [mosaic_app.services.MosaicService:317] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 1, エラー: 0, サイズ: 1000x1000)
+[2025-03-02 09:13:00,879] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 09:13:00,879] [INFO] [mosaic_app.services.MosaicService:243] - モザイク画像生成開始
+[2025-03-02 09:13:00,898] [INFO] [mosaic_app.services.MosaicService:317] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 1, エラー: 0, サイズ: 1000x1000)
+[2025-03-02 09:13:00,898] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 09:13:00,899] [INFO] [mosaic_app.services.MosaicService:389] - モザイク再生成完了
+[2025-03-02 09:13:00,901] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:13:00,901] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:13:00,901] [INFO] [mosaic_app.infrastructure.auth:56] - 認証成功: admin
+[2025-03-02 09:13:00,902] [INFO] [mosaic_app.api.admin_routes:28] - アドミンパネル表示リクエスト
+[2025-03-02 09:13:19,166] [INFO] [mosaic_app.infrastructure.ChannelPublisher:22] - ChannelPublisher初期化: チャンネル名=mosaic
+[2025-03-02 09:13:19,167] [INFO] [mosaic_app.adapters.FileStorage:29] - ストレージディレクトリ初期化: upload=/workspace/uploads, processed=/workspace/uploads/processed
+[2025-03-02 09:13:19,168] [INFO] [mosaic_app.api.routes:67] - 画像アップロードリクエスト受信
+[2025-03-02 09:13:19,169] [INFO] [mosaic_app.api.routes:78] - ファイル受信: ibara.jpeg
+[2025-03-02 09:13:19,169] [INFO] [mosaic_app.api.routes:92] - ファイルサイズ: 138747 bytes
+[2025-03-02 09:13:19,170] [INFO] [mosaic_app.adapters.FileStorage:41] - ファイル保存開始: id=04f6313cee6a4674b11bcb8967677572, filename=ibara.jpeg, サイズ=138747 bytes
+[2025-03-02 09:13:19,172] [INFO] [mosaic_app.adapters.FileStorage:47] - ファイル保存完了: /workspace/uploads/04f6313cee6a4674b11bcb8967677572_ibara.jpeg
+[2025-03-02 09:13:19,177] [INFO] [mosaic_app.infrastructure.ImageProcessor:31] - 画像処理開始: /workspace/uploads/04f6313cee6a4674b11bcb8967677572_ibara.jpeg
+[2025-03-02 09:13:19,185] [INFO] [mosaic_app.infrastructure.ImageProcessor:52] - 処理済み画像を保存: /workspace/uploads/processed/04f6313cee6a4674b11bcb8967677572_ibara.jpeg
+[2025-03-02 09:13:19,186] [INFO] [mosaic_app.services.MosaicService:190] - 画像追加開始: /workspace/uploads/processed/04f6313cee6a4674b11bcb8967677572_ibara.jpeg, id=04f6313cee6a4674b11bcb8967677572
+[2025-03-02 09:13:19,190] [INFO] [mosaic_app.services.MosaicService:227] - セル更新: x=95, y=85, id=04f6313cee6a4674b11bcb8967677572
+[2025-03-02 09:13:19,190] [INFO] [mosaic_app.services.MosaicService:243] - モザイク画像生成開始
+[2025-03-02 09:13:19,211] [INFO] [mosaic_app.services.MosaicService:317] - モザイク画像を保存: /workspace/static/output/current_mosaic.jpg (配置画像: 2, エラー: 0, サイズ: 1000x1000)
+[2025-03-02 09:13:19,211] [INFO] [mosaic_app.infrastructure.ChannelPublisher:31] - モザイク更新通知: /static/output/current_mosaic.jpg
+[2025-03-02 09:13:19,212] [INFO] [mosaic_app.api.routes:108] - 画像処理完了: /workspace/uploads/processed/04f6313cee6a4674b11bcb8967677572_ibara.jpeg, セル位置: x=95, y=85

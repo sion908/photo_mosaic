@@ -1,0 +1,584 @@
+[2025-03-02 09:39:46,690] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 09:39:52,087] [ERROR] [mosaic_app.api.routes:115] - アップロード処理エラー: 'UploadFile' object has no attribute 'size'
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/routes.py", line 76, in upload_image
+    logger.info(f"ファイル受信: {uploaded_file.filename}, サイズ: {uploaded_file.size} bytes")
+AttributeError: 'UploadFile' object has no attribute 'size'
+[2025-03-02 09:41:30,593] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 09:43:40,317] [ERROR] [mosaic_app.api.routes:115] - アップロード処理エラー: 'UploadFile' object has no attribute 'size'
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/routes.py", line 76, in upload_image
+    logger.info(f"ファイル受信: {uploaded_file.filename}, サイズ: {uploaded_file.size} bytes")
+AttributeError: 'UploadFile' object has no attribute 'size'
+[2025-03-02 09:46:39,996] [ERROR] [mosaic_app.api.routes:109] - 画像処理エラー: name 'time' is not defined
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/routes.py", line 104, in upload_image
+    processed_path, update_result = await mosaic_service.process_uploaded_image(
+  File "/Users/user/Documents/myself/photo_mosaic/core/services.py", line 196, in process_uploaded_image
+    update_result = await self.add_image(processed_path, image_id)
+  File "/Users/user/Documents/myself/photo_mosaic/core/services.py", line 108, in add_image
+    cell_to_update.last_updated = time.time()  # 置き換え時間を記録
+NameError: name 'time' is not defined
+[2025-03-02 10:30:39,886] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/Users/user/Documents/myself/photo_mosaic/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+  File "/Users/user/Documents/myself/photo_mosaic/.venv/lib/python3.9/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 02:05:15,049] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/.cache/virtualenvs/photo-mosaic-xS3fZVNL-py3.11/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/.cache/virtualenvs/photo-mosaic-xS3fZVNL-py3.11/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 02:08:01,358] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/.cache/virtualenvs/photo-mosaic-xS3fZVNL-py3.11/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/.cache/virtualenvs/photo-mosaic-xS3fZVNL-py3.11/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 02:39:28,032] [ERROR] [mosaic_app.adapters.ImageRepository:88] - 画像保存エラー: no such table: images
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 80, in save
+    cursor.execute(
+sqlite3.OperationalError: no such table: images
+[2025-03-02 02:39:28,033] [ERROR] [mosaic_app.api.routes:120] - アップロード処理エラー: no such table: images
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/routes.py", line 101, in upload_image
+    await image_repo.save(image)
+  File "/workspace/adapters/database.py", line 80, in save
+    cursor.execute(
+sqlite3.OperationalError: no such table: images
+[2025-03-02 02:54:48,437] [ERROR] [mosaic_app.adapters.ImageRepository:88] - 画像保存エラー: no such table: images
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 80, in save
+    cursor.execute(
+sqlite3.OperationalError: no such table: images
+[2025-03-02 02:54:48,438] [ERROR] [mosaic_app.api.routes:120] - アップロード処理エラー: no such table: images
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/routes.py", line 101, in upload_image
+    await image_repo.save(image)
+  File "/workspace/adapters/database.py", line 80, in save
+    cursor.execute(
+sqlite3.OperationalError: no such table: images
+[2025-03-02 08:14:52,454] [ERROR] [mosaic_app.adapters.SettingsRepository:343] - 設定取得エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:14:52,455] [ERROR] [mosaic_app.adapters.SettingsRepository:345] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:14:52,455] [ERROR] [mosaic_app.api.admin_routes:37] - 設定取得中にエラーが発生しました: MosaicSettings.__init__() missing 1 required positional argument: 'output_size'
+[2025-03-02 08:14:52,456] [ERROR] [mosaic_app.api.admin_routes:38] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 34, in admin_panel
+    current_settings = await settings_repo.get_settings()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/adapters/database.py", line 347, in get_settings
+    return MosaicSettings.create_default()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/core/models.py", line 71, in create_default
+    return cls(
+           ^^^^
+TypeError: MosaicSettings.__init__() missing 1 required positional argument: 'output_size'
+
+[2025-03-02 08:14:52,456] [ERROR] [mosaic_app.api.admin_routes:80] - アドミンパネル表示エラー: MosaicSettings.__init__() missing 1 required positional argument: 'output_size'
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 44, in admin_panel
+    current_settings = MosaicSettings.create_default()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/core/models.py", line 71, in create_default
+    return cls(
+           ^^^^
+TypeError: MosaicSettings.__init__() missing 1 required positional argument: 'output_size'
+[2025-03-02 08:14:52,457] [ERROR] [mosaic_app.api.admin_routes:81] - Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 44, in admin_panel
+    current_settings = MosaicSettings.create_default()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/core/models.py", line 71, in create_default
+    return cls(
+           ^^^^
+TypeError: MosaicSettings.__init__() missing 1 required positional argument: 'output_size'
+
+[2025-03-02 08:20:34,217] [ERROR] [mosaic_app.adapters.SettingsRepository:343] - 設定取得エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:20:34,218] [ERROR] [mosaic_app.adapters.SettingsRepository:345] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:20:41,130] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:20:41,131] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:20:41,131] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:20:41,133] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:20:41,133] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:10,161] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:24:10,162] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:24:10,162] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:10,163] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:24:10,163] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:18,913] [ERROR] [mosaic_app.adapters.SettingsRepository:345] - 設定取得エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:18,913] [ERROR] [mosaic_app.adapters.SettingsRepository:347] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:24:21,223] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:24:21,224] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:24:21,224] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:21,225] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:24:21,226] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:34,355] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:24:34,355] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:24:34,355] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:24:34,356] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:24:34,356] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:25:25,504] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:25:25,504] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:25:25,504] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:25:25,505] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:25:25,506] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:26:14,084] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named output_size
+[2025-03-02 08:26:14,085] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: output_size
+[2025-03-02 08:26:14,085] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:26:14,086] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+
+[2025-03-02 08:26:14,086] [ERROR] [mosaic_app.api.admin_routes:135] - 設定更新エラー: no such column: output_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named output_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 122, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: output_size
+[2025-03-02 08:36:05,184] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 08:42:54,588] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 08:48:14,837] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event
+[2025-03-02 09:10:04,082] [ERROR] [mosaic_app.adapters.SettingsRepository:345] - 設定取得エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:10:04,083] [ERROR] [mosaic_app.adapters.SettingsRepository:347] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+
+[2025-03-02 09:10:11,717] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named grid_size
+[2025-03-02 09:10:11,718] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: grid_size
+[2025-03-02 09:10:11,719] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:10:11,720] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+
+[2025-03-02 09:10:11,720] [ERROR] [mosaic_app.api.admin_routes:140] - 設定更新エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 127, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:10:15,891] [ERROR] [mosaic_app.adapters.SettingsRepository:345] - 設定取得エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:10:15,891] [ERROR] [mosaic_app.adapters.SettingsRepository:347] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 303, in get_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+
+[2025-03-02 09:10:17,260] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named grid_size
+[2025-03-02 09:10:17,261] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: grid_size
+[2025-03-02 09:10:17,261] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:10:17,263] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+
+[2025-03-02 09:10:17,264] [ERROR] [mosaic_app.api.admin_routes:140] - 設定更新エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 127, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:11:25,541] [ERROR] [mosaic_app.adapters.SettingsRepository:229] - SQLエラー: table settings has no column named grid_size
+[2025-03-02 09:11:25,543] [ERROR] [mosaic_app.adapters.SettingsRepository:274] - 代替方法でもSQL実行失敗: no such column: grid_size
+[2025-03-02 09:11:25,544] [ERROR] [mosaic_app.adapters.SettingsRepository:280] - 設定保存エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:11:25,545] [ERROR] [mosaic_app.adapters.SettingsRepository:282] - Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+
+[2025-03-02 09:11:25,546] [ERROR] [mosaic_app.api.admin_routes:140] - 設定更新エラー: no such column: grid_size
+Traceback (most recent call last):
+  File "/workspace/adapters/database.py", line 207, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: table settings has no column named grid_size
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/admin_routes.py", line 127, in update_settings
+    await settings_repo.save_settings(settings)
+  File "/workspace/adapters/database.py", line 240, in save_settings
+    cursor.execute('''
+sqlite3.OperationalError: no such column: grid_size
+[2025-03-02 09:12:42,091] [ERROR] [mosaic_app.api.websockets:52] - WebSocketエラー: disconnect event
+Traceback (most recent call last):
+  File "/workspace/interfaces/api/websockets.py", line 48, in mosaic_ws_handler
+    data = await socket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 194, in receive_text
+    return await self.receive_data(mode="text")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.11/site-packages/litestar/connection/websocket.py", line 167, in receive_data
+    raise WebSocketDisconnect(detail="disconnect event", code=event["code"])
+litestar.exceptions.websocket_exceptions.WebSocketDisconnect: disconnect event

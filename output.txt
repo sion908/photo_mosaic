@@ -1,0 +1,3322 @@
+# プロジェクト構造解析
+## 基本情報
+- 解析日時: 2025-03-02T09:14:15.062Z
+- ファイル数: 25
+
+## ディレクトリ構造
+
+├── adapters\
+│   ├── __init__.py
+│   ├── database.py
+│   └── storage.py
+├── app.py
+├── candlemosaic.py
+├── config.py
+├── core\
+│   ├── __init__.py
+│   ├── models.py
+│   └── services.py
+├── db.py
+├── infrastructure\
+│   ├── __init__.py
+│   ├── auth.py
+│   ├── channels.py
+│   ├── image_processor.py
+│   └── logger.py
+└── interfaces\
+    ├── __init__.py
+    ├── api\
+    │   ├── __init__.py
+    │   ├── admin_routes.py
+    │   ├── routes.py
+    │   └── websockets.py
+    └── web\
+        ├── __init__.py
+        └── templates\
+            ├── admin.html.jinja
+            ├── display.html.jinja
+            ├── reset_confirm.html.jinja
+            └── upload.html.jinja
+
+## ファイル内容
+
+### adapters/__init__.py
+```
+"""アダプターモジュール"""
+
+```
+
+### adapters/database.py
+```
+"""
+データベースアダプター - SQLiteへのインターフェース
+"""
+import json
+import sqlite3
+from datetime import datetime
+from typing import Any, Dict, List, Optional, Tuple
+
+import config
+from core.models import Image, MosaicSettings
+from infrastructure.logger import get_logger
+
+
+class DatabaseManager:
+    """SQLiteデータベース管理クラス"""
+
+    def __init__(self, db_path: str = str(config.DB_PATH)):
+        self.logger = get_logger("adapters.DatabaseManager")
+        self.db_path = db_path
+        self.logger.info(f"データベース初期化: {db_path}")
+
+    def initialize(self):
+        """データベーススキーマの初期化"""
+        try:
+            self.logger.info("データベーススキーマの初期化開始")
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+
+            # 画像テーブル
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS images (
+                id TEXT PRIMARY KEY,
+                filename TEXT,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                used INTEGER DEFAULT 0
+            )
+            ''')
+
+            # 設定テーブル
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS settings (
+                id INTEGER PRIMARY KEY,
+                grid_size TEXT,
+                logo_path TEXT,
+                title TEXT,
+                subtitle TEXT,
+                output_size TEXT,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+            ''')
+
+            conn.commit()
+            conn.close()
+            self.logger.info("データベース初期化完了")
+        except Exception as e:
+            self.logger.error(f"データベース初期化エラー: {str(e)}", exc_info=True)
+            raise
+
+    def get_connection(self):
+        """データベース接続を取得"""
+        try:
+            return sqlite3.connect(self.db_path)
+        except Exception as e:
+            self.logger.error(f"データベース接続エラー: {str(e)}", exc_info=True)
+            raise
+
+
+class ImageRepository:
+    """画像データのリポジトリ"""
+
+    def __init__(self, db_manager: DatabaseManager):
+        self.logger = get_logger("adapters.ImageRepository")
+        self.db_manager = db_manager
+
+    async def save(self, image: Image) -> None:
+        """画像メタデータを保存"""
+        try:
+            self.logger.debug(f"画像保存: id={image.id}, filename={image.filename}")
+            conn = self.db_manager.get_connection()
+            cursor = conn.cursor()
+            cursor.execute(
+                "INSERT INTO images (id, filename, timestamp, used) VALUES (?, ?, ?, ?)",
+                (image.id, image.filename, image.timestamp, int(image.used))
+            )
+            conn.commit()
+            conn.close()
+            self.logger.debug("画像メタデータ保存完了")
+        except Exception as e:
+            self.logger.error(f"画像保存エラー: {str(e)}", exc_info=True)
+            raise
+
+    async def get_by_id(self, image_id: str) -> Optional[Image]:
+        """IDで画像を検索"""
+        try:
+            conn = self.db_manager.get_connection()
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, filename, timestamp, used FROM images WHERE id = ?", (image_id,))
+            result = cursor.fetchone()
+            conn.close()
+
+            if result:
+                return Image(
+                    id=result[0],
+                    filename=result[1],
+                    timestamp=datetime.fromisoformat(result[2]),
+                    used=bool(result[3])
+                )
+            self.logger.warning(f"画像ID '{image_id}' が見つかりません")
+            return None
+        except Exception as e:
+            self.logger.error(f"画像検索エラー: {str(e)}", exc_info=True)
+            raise
+
+    async def get_filename(self, image_id: str) -> Optional[str]:
+        """画像IDからファイル名を取得"""
+        conn = self.db_manager.get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT filename FROM images WHERE id = ?", (image_id,))
+        result = cursor.fetchone()
+        conn.close()
+
+        if result:
+            return result[0]
+        return None
+
+    async def get_all(self) -> List[Image]:
+        """すべての画像を取得"""
+        conn = self.db_manager.get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, filename, timestamp, used FROM images")
+        results = cursor.fetchall()
+        conn.close()
+
+        return [
+            Image(
+                id=row[0],
+                filename=row[1],
+                timestamp=datetime.fromisoformat(row[2]),
+                used=bool(row[3])
+            )
+            for row in results
+        ]
+
+    async def count(self) -> int:
+        """画像の総数を取得"""
+        conn = self.db_manager.get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM images")
+        count = cursor.fetchone()[0]
+        conn.close()
+        return count
+
+    async def mark_as_used(self, image_id: str) -> None:
+        """画像を使用済みとしてマーク"""
+        conn = self.db_manager.get_connection()
+        cursor = conn.cursor()
+        cursor.execute("UPDATE images SET used = 1 WHERE id = ?", (image_id,))
+        conn.commit()
+        conn.close()
+
+    async def delete_all(self) -> None:
+        """すべての画像を削除（リセット用）"""
+        try:
+            self.logger.warning("すべての画像メタデータの削除を開始")
+            conn = self.db_manager.get_connection()
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM images")
+            conn.commit()
+            conn.close()
+            self.logger.warning("すべての画像メタデータを削除しました")
+        except Exception as e:
+            self.logger.error(f"画像一括削除エラー: {str(e)}", exc_info=True)
+            raise
+
+
+class SettingsRepository:
+    """設定データのリポジトリ"""
+
+    def __init__(self, db_manager: DatabaseManager):
+        self.logger = get_logger("adapters.SettingsRepository")
+        self.db_manager = db_manager
+        self.logger.debug("SettingsRepository initialized with db_manager: %s", db_manager)
+
+    async def save_settings(self, settings: MosaicSettings) -> None:
+        """設定を保存"""
+        try:
+            self.logger.info(f"設定保存: グリッドサイズ={settings.grid_size}, ロゴパス={settings.logo_path}, 出力サイズ={settings.output_size}")
+
+            # グリッドサイズと出力サイズをJSON文字列に変換
+            grid_size_json = json.dumps(settings.grid_size)
+            output_size_json = json.dumps(settings.output_size)
+            self.logger.debug("Serialized grid_size: %s", grid_size_json)
+            self.logger.debug("Serialized output_size: %s", output_size_json)
+
+            conn = self.db_manager.get_connection()
+            cursor = conn.cursor()
+
+            self.logger.debug("SQL実行前: INSERT/UPDATE settings テーブル")
+
+            # SQLiteバージョンの互換性を確認
+            cursor.execute("SELECT sqlite_version()")
+            version = cursor.fetchone()[0]
+            self.logger.debug("SQLite version: %s", version)
+
+            # UPSERTパターン
+            try:
+                cursor.execute('''
+                    INSERT INTO settings (id, grid_size, logo_path, title, subtitle, output_size, timestamp)
+                    VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+                    ON CONFLICT(id) DO UPDATE SET
+                        grid_size = excluded.grid_size,
+                        logo_path = excluded.logo_path,
+                        title = excluded.title,
+                        subtitle = excluded.subtitle,
+                        output_size = excluded.output_size,
+                        timestamp = CURRENT_TIMESTAMP
+                ''', (
+                    settings.id,
+                    grid_size_json,
+                    settings.logo_path,
+                    settings.title,
+                    settings.subtitle,
+                    output_size_json
+                ))
+
+                conn.commit()
+                self.logger.debug("SQL実行成功: 設定が保存されました")
+            except Exception as sql_error:
+                self.logger.error(f"SQLエラー: {str(sql_error)}")
+
+                # 代替方法を試す（古いSQLite版での互換性対応）
+                self.logger.debug("代替方法で設定保存を試みます")
+                try:
+                    # 既存のレコードを確認
+                    cursor.execute("SELECT COUNT(*) FROM settings WHERE id = ?", (settings.id,))
+                    exists = cursor.fetchone()[0] > 0
+
+                    if exists:
+                        # 更新
+                        cursor.execute('''
+                            UPDATE settings SET
+                                grid_size = ?,
+                                logo_path = ?,
+                                title = ?,
+                                subtitle = ?,
+                                output_size = ?,
+                                timestamp = CURRENT_TIMESTAMP
+                            WHERE id = ?
+                        ''', (
+                            grid_size_json,
+                            settings.logo_path,
+                            settings.title,
+                            settings.subtitle,
+                            output_size_json,
+                            settings.id
+                        ))
+                    else:
+                        # 挿入
+                        cursor.execute('''
+                            INSERT INTO settings (id, grid_size, logo_path, title, subtitle, output_size, timestamp)
+                            VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+                        ''', (
+                            settings.id,
+                            grid_size_json,
+                            settings.logo_path,
+                            settings.title,
+                            settings.subtitle,
+                            output_size_json
+                        ))
+
+                    conn.commit()
+                    self.logger.debug("代替方法でSQL実行成功")
+                except Exception as alt_error:
+                    self.logger.error(f"代替方法でもSQL実行失敗: {str(alt_error)}")
+                    raise
+
+            conn.close()
+            self.logger.info("設定保存完了")
+        except Exception as e:
+            self.logger.error(f"設定保存エラー: {str(e)}", exc_info=True)
+            import traceback
+            self.logger.error(traceback.format_exc())
+            raise
+
+    async def get_settings(self) -> Optional[MosaicSettings]:
+        """現在の設定を取得"""
+        try:
+            self.logger.debug("設定取得開始")
+            conn = self.db_manager.get_connection()
+            cursor = conn.cursor()
+
+            # テーブル存在確認
+            cursor.execute('''
+                SELECT name FROM sqlite_master
+                WHERE type='table' AND name='settings'
+            ''')
+            if not cursor.fetchone():
+                self.logger.warning("settings テーブルが存在しません")
+                conn.close()
+                return None
+
+            self.logger.debug("settings テーブルからデータを取得します")
+            cursor.execute('''
+                SELECT id, grid_size, logo_path, title, subtitle, output_size
+                FROM settings
+                ORDER BY timestamp DESC LIMIT 1
+            ''')
+            result = cursor.fetchone()
+            conn.close()
+
+            if result:
+                self.logger.debug("設定が見つかりました: %s", result)
+                try:
+                    # グリッドサイズをJSONからタプルに変換
+                    grid_size = tuple(json.loads(result[1]))
+                    self.logger.debug("Parsed grid_size: %s", grid_size)
+                    
+                    # output_sizeはNULLの可能性があるので、デフォルト値を設定
+                    output_size = config.DEFAULT_OUTPUT_SIZE  # デフォルト値
+                    if result[5]:  # output_size カラムが存在し、NULLでなければ
+                        try:
+                            output_size = tuple(json.loads(result[5]))
+                            self.logger.debug("Parsed output_size: %s", output_size)
+                        except Exception as json_error:
+                            self.logger.warning(f"output_size の解析に失敗しました: {str(json_error)}")
+                            self.logger.debug(f"解析に失敗したJSON: {result[5]}")
+
+                    return MosaicSettings(
+                        id=result[0],
+                        grid_size=grid_size,
+                        logo_path=result[2],
+                        title=result[3],
+                        subtitle=result[4],
+                        output_size=output_size,
+                        regenerate_existing=False  # DBには保存しないフラグ
+                    )
+                except json.JSONDecodeError as json_error:
+                    self.logger.error(f"JSON解析エラー: {str(json_error)}")
+                    self.logger.debug(f"解析に失敗したJSON: {result[1]}")
+                    raise
+
+                self.logger.info("設定が見つかりません。デフォルト設定を使用します。")
+                return None
+        except Exception as e:
+            self.logger.error(f"設定取得エラー: {str(e)}", exc_info=True)
+            import traceback
+            self.logger.error(traceback.format_exc())
+            # エラー時はデフォルト設定を返す
+            return MosaicSettings.create_default()
+
+```
+
+### adapters/storage.py
+```
+"""
+ファイルストレージアダプター - ファイルシステムへのインターフェース
+"""
+import os
+import shutil
+from pathlib import Path
+from typing import BinaryIO, Optional
+
+import config
+from infrastructure.logger import get_logger
+
+
+class FileStorage:
+    """ファイル保存・管理クラス"""
+
+    def __init__(
+        self,
+        upload_dir: str = str(config.UPLOAD_DIR),
+        processed_dir: str = str(config.PROCESSED_DIR)
+    ):
+        self.logger = get_logger("adapters.FileStorage")
+        self.upload_dir = Path(upload_dir)
+        self.processed_dir = Path(processed_dir)
+
+        # ディレクトリが存在することを確認
+        try:
+            self.upload_dir.mkdir(parents=True, exist_ok=True)
+            self.processed_dir.mkdir(parents=True, exist_ok=True)
+            self.logger.info(f"ストレージディレクトリ初期化: upload={upload_dir}, processed={processed_dir}")
+        except Exception as e:
+            self.logger.error(f"ストレージディレクトリ作成エラー: {str(e)}", exc_info=True)
+            raise
+
+    async def save_uploaded_file(self, file_id: str, filename: str, content: bytes) -> str:
+        """アップロードされたファイルを保存"""
+        try:
+            # 保存するファイル名を生成
+            safe_filename = f"{file_id}_{filename}"
+            file_path = self.upload_dir / safe_filename
+
+            self.logger.info(f"ファイル保存開始: id={file_id}, filename={filename}, サイズ={len(content)} bytes")
+
+            # ファイルを保存
+            with open(file_path, "wb") as f:
+                f.write(content)
+
+            self.logger.info(f"ファイル保存完了: {file_path}")
+            return str(file_path)
+        except Exception as e:
+            self.logger.error(f"ファイル保存エラー: {str(e)}", exc_info=True)
+            raise
+
+    def get_upload_path(self, filename: str) -> str:
+        """アップロードディレクトリ内のファイルパスを取得"""
+        return str(self.upload_dir / filename)
+
+    def get_processed_path(self, filename: str) -> str:
+        """処理済みディレクトリ内のファイルパスを取得"""
+        return str(self.processed_dir / filename)
+
+    async def delete_file(self, filename: str) -> bool:
+        """ファイルを削除"""
+        try:
+            self.logger.info(f"ファイル削除開始: {filename}")
+            original_path = self.upload_dir / filename
+            processed_path = self.processed_dir / filename
+
+            deleted = False
+            # 両方のパスを確認して削除
+            if original_path.exists():
+                original_path.unlink()
+                self.logger.debug(f"オリジナルファイル削除: {original_path}")
+                deleted = True
+
+            if processed_path.exists():
+                processed_path.unlink()
+                self.logger.debug(f"処理済みファイル削除: {processed_path}")
+                deleted = True
+
+            if not deleted:
+                self.logger.warning(f"削除対象ファイルが見つかりません: {filename}")
+
+            return deleted
+        except Exception as e:
+            self.logger.error(f"ファイル削除エラー {filename}: {str(e)}", exc_info=True)
+            return False
+
+    async def clear_all_files(self) -> bool:
+        """すべてのファイルを削除（テスト用）"""
+        try:
+            self.logger.warning("すべてのファイルの削除を開始します")
+
+            # アップロードディレクトリのファイルを削除
+            for file in self.upload_dir.glob("*"):
+                if file.is_file():
+                    file.unlink()
+                    self.logger.debug(f"ファイル削除: {file}")
+
+            # 処理済みディレクトリのファイルを削除
+            for file in self.processed_dir.glob("*"):
+                if file.is_file():
+                    file.unlink()
+                    self.logger.debug(f"ファイル削除: {file}")
+
+            self.logger.info("すべてのファイルの削除が完了しました")
+            return True
+        except Exception as e:
+            self.logger.error(f"ファイル一括削除エラー: {str(e)}", exc_info=True)
+            return False
+
+```
+
+### app.py
+```
+import logging
+from pathlib import Path
+
+from litestar import Litestar
+from litestar.contrib.jinja import JinjaTemplateEngine
+from litestar.datastructures import State
+from litestar.di import Provide
+from litestar.events import listener
+from litestar.static_files import create_static_files_router
+from litestar.template.config import TemplateConfig
+
+import config
+from adapters.database import DatabaseManager, ImageRepository, SettingsRepository
+from adapters.storage import FileStorage
+from core.services import MosaicService
+from infrastructure.auth import create_auth_middleware
+from infrastructure.channels import ChannelPublisher, create_channels_plugin
+from infrastructure.logger import get_logger, setup_logger
+from interfaces.api.admin_routes import (
+    admin_panel,
+    reset_confirmation,
+    reset_mosaic,
+    update_settings,
+)
+from interfaces.api.routes import display, get_stats, index, upload_image
+from interfaces.api.websockets import mosaic_ws_handler
+
+# データベース関連の依存性注入
+db_manager = DatabaseManager()
+
+def provide_image_repository() -> ImageRepository:
+    """ImageRepositoryを提供"""
+    return ImageRepository(db_manager)
+
+def provide_settings_repository() -> SettingsRepository:
+    """SettingsRepositoryを提供"""
+    return SettingsRepository(db_manager)
+
+# ファイルストレージの依存性注入
+def provide_file_storage() -> FileStorage:
+    """FileStorageを提供"""
+    return FileStorage()
+
+# チャンネル関連の依存性注入
+channels_plugin = create_channels_plugin()
+
+def provide_channel_publisher() -> ChannelPublisher:
+    """ChannelPublisherを提供"""
+    return ChannelPublisher(channels_plugin)
+
+# モザイクサービスのシングルトンインスタンス
+mosaic_service_instance = None
+
+# モザイクサービスの依存性注入 (グローバル変数利用)
+def provide_mosaic_service(
+    image_repo: ImageRepository,
+    file_storage: FileStorage,
+    channel_publisher: ChannelPublisher,
+    settings_repo: SettingsRepository
+) -> MosaicService:
+    """MosaicServiceを提供"""
+    global mosaic_service_instance
+    if mosaic_service_instance is None:
+        logger = get_logger("app")
+        logger.info("Creating new MosaicService instance")
+        mosaic_service_instance = MosaicService(
+            image_repo=image_repo,
+            file_storage=file_storage,
+            channel_publisher=channel_publisher,
+            settings_repo=settings_repo
+        )
+    return mosaic_service_instance
+
+
+# アプリケーション起動時の初期化処理
+@listener("startup")
+async def on_app_startup(app: Litestar) -> None:
+    """アプリケーション起動時に実行される初期化コード"""
+    # ロガーを初期化
+
+    logger = setup_logger(
+        log_level=config.get_log_level(),
+        log_dir=str(config.LOG_DIR)
+    )
+    logger.info("アプリケーション起動中...")
+
+    # 必要なディレクトリを作成
+    try:
+        config.ensure_directories()
+        logger.info("必要なディレクトリを作成しました")
+    except Exception as e:
+        logger.error(f"ディレクトリ作成エラー: {str(e)}", exc_info=True)
+
+    # データベースを初期化
+    try:
+        logger.debug("データベース初期化を開始: %s", config.DB_PATH)
+        db_manager.initialize()
+        logger.info("データベース初期化完了")
+
+        # テスト的にデータベースアクセス
+        conn = db_manager.get_connection()
+        cursor = conn.cursor()
+
+        # テーブル一覧を確認
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        tables = cursor.fetchall()
+        logger.debug("DB内のテーブル: %s", [t[0] for t in tables])
+
+        # settings テーブルがあれば内容を確認
+        if ('settings',) in tables:
+            cursor.execute("SELECT * FROM settings LIMIT 1")
+            settings_row = cursor.fetchone()
+            logger.debug("既存の設定: %s", settings_row)
+
+        conn.close()
+        logger.debug("DB接続テスト完了")
+    except Exception as e:
+        logger.error(f"データベース初期化エラー: {str(e)}", exc_info=True)
+        import traceback
+        logger.error(traceback.format_exc())
+
+    # アプリケーション状態の初期化
+    app.state.initialized = True
+
+    # モザイクサービスの初期化を確認
+    try:
+        if mosaic_service_instance is not None:
+            # 設定をロード
+            logger.debug("MosaicServiceインスタンス: %s", mosaic_service_instance)
+            settings_repo = provide_settings_repository()
+            logger.debug("SettingsRepository作成: %s", settings_repo)
+
+            await mosaic_service_instance.load_settings()
+            logger.info("MosaicService initialized and settings loaded")
+        else:
+            logger.warning("MosaicServiceインスタンスがNoneです")
+    except Exception as e:
+        logger.error(f"MosaicService初期化エラー: {str(e)}", exc_info=True)
+        import traceback
+        logger.error(traceback.format_exc())
+
+    logger.info(f"初期化完了！ app.state.initialized = {app.state.initialized}")
+
+
+# Basic認証ミドルウェア
+auth_middleware = create_auth_middleware()
+
+# アプリケーション設定
+# メインアプリケーション
+app = Litestar(
+    route_handlers=[
+        # APIルート
+        index, display, upload_image, get_stats,
+        # 管理者ルート
+        admin_panel, update_settings, reset_confirmation, reset_mosaic,
+        # WebSocketハンドラ
+        mosaic_ws_handler,
+        # 静的ファイルルーター
+        create_static_files_router(path="/static", directories=["static"]),
+        create_static_files_router(path="/uploads", directories=["uploads"])
+    ],
+    # テンプレート設定
+    template_config=TemplateConfig(
+        directory=Path("interfaces/web/templates"),
+        engine=JinjaTemplateEngine,
+    ),
+    # プラグイン
+    plugins=[channels_plugin],
+    # イベントリスナー
+    listeners=[on_app_startup],
+    # 依存性注入 (同期関数の警告を抑制)
+    dependencies={
+        "image_repo": Provide(provide_image_repository, sync_to_thread=False),
+        "settings_repo": Provide(provide_settings_repository, sync_to_thread=False),
+        "file_storage": Provide(provide_file_storage, sync_to_thread=False),
+        "channel_publisher": Provide(provide_channel_publisher, sync_to_thread=False),
+        "mosaic_service": Provide(provide_mosaic_service, sync_to_thread=False),
+    },
+    # ミドルウェア
+    middleware=[auth_middleware],
+    # 初期状態を設定
+    state={"initialized": False}
+)
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    # UvicornでLitestarアプリを起動
+    uvicorn.run(
+        "app:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True
+    )
+
+```
+
+### candlemosaic.py
+```
+import os
+import sqlite3
+import threading
+import time
+import tkinter as tk
+from datetime import datetime
+from tkinter import filedialog, messagebox
+
+import cv2
+import numpy as np
+from PIL import Image, ImageTk
+
+
+class CandleMosaicApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("キャンドルナイトモザイクアート")
+        self.root.geometry("1200x800")
+
+        # データベースの初期化
+        self.init_database()
+
+        # 校章画像の読み込み（仮のパス - 実際には実在する校章画像のパスを設定）
+        self.logo_path = "school_logo.png"
+        self.check_logo_exists()
+
+        # モザイク用のパラメータ
+        self.tile_size = 50  # モザイクの各タイルのサイズ
+        self.photos = []  # 取り込んだ写真のリスト
+
+        # GUI要素の作成
+        self.create_widgets()
+
+        # モザイクアートの更新スレッド
+        self.running = True
+        self.update_thread = threading.Thread(target=self.auto_update_mosaic)
+        self.update_thread.daemon = True
+        self.update_thread.start()
+
+    def check_logo_exists(self):
+        """校章画像の存在確認と作成"""
+        if not os.path.exists(self.logo_path):
+            # 校章が存在しない場合、サンプル用の画像を作成
+            sample_logo = Image.new('RGB', (500, 500), color='white')
+            # 簡単な円形を描画（実際には校章を用意）
+            import PIL.ImageDraw as ImageDraw
+            draw = ImageDraw.Draw(sample_logo)
+            draw.ellipse((100, 100, 400, 400), fill='blue', outline='blue')
+            draw.ellipse((150, 150, 350, 350), fill='white', outline='white')
+            sample_logo.save(self.logo_path)
+            messagebox.showinfo("情報", f"サンプル校章画像を作成しました。実際の校章画像を '{self.logo_path}' として保存してください。")
+
+    def init_database(self):
+        """SQLiteデータベースの初期化"""
+        self.conn = sqlite3.connect('candle_mosaic.db')
+        self.cursor = self.conn.cursor()
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS photos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                path TEXT NOT NULL,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        self.conn.commit()
+
+    def create_widgets(self):
+        """GUI要素の作成"""
+        # メインフレーム
+        main_frame = tk.Frame(self.root)
+        main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        # 左側：操作パネル
+        control_frame = tk.Frame(main_frame, width=300)
+        control_frame.pack(side=tk.LEFT, fill=tk.Y, padx=10, pady=10)
+
+        # 写真取込ボタン
+        upload_btn = tk.Button(control_frame, text="写真を取り込む", command=self.upload_photo, height=2)
+        upload_btn.pack(fill=tk.X, pady=5)
+
+        # カメラ撮影ボタン
+        camera_btn = tk.Button(control_frame, text="カメラで撮影", command=self.take_photo, height=2)
+        camera_btn.pack(fill=tk.X, pady=5)
+
+        # モザイク更新ボタン
+        update_btn = tk.Button(control_frame, text="モザイクを更新", command=self.update_mosaic, height=2)
+        update_btn.pack(fill=tk.X, pady=5)
+
+        # タイルサイズ設定
+        size_frame = tk.Frame(control_frame)
+        size_frame.pack(fill=tk.X, pady=10)
+
+        tk.Label(size_frame, text="タイルサイズ:").pack(side=tk.LEFT)
+        self.tile_slider = tk.Scale(size_frame, from_=20, to=100, orient=tk.HORIZONTAL, command=self.update_tile_size)
+        self.tile_slider.set(self.tile_size)
+        self.tile_slider.pack(side=tk.LEFT, fill=tk.X, expand=True)
+
+        # 写真リスト表示
+        tk.Label(control_frame, text="取り込んだ写真:").pack(anchor=tk.W, pady=(15, 5))
+        self.photo_listbox = tk.Listbox(control_frame, height=15)
+        self.photo_listbox.pack(fill=tk.BOTH, expand=True)
+
+        # 写真削除ボタン
+        delete_btn = tk.Button(control_frame, text="選択した写真を削除", command=self.delete_selected_photo)
+        delete_btn.pack(fill=tk.X, pady=5)
+
+        # 右側：モザイク表示エリア
+        display_frame = tk.Frame(main_frame, bg="black")
+        display_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        self.canvas = tk.Canvas(display_frame, bg="black")
+        self.canvas.pack(fill=tk.BOTH, expand=True)
+
+        # 撮影履歴の読み込み
+        self.load_photos_from_db()
+
+        # 初期モザイク生成
+        self.update_mosaic()
+
+    def load_photos_from_db(self):
+        """DBから写真を読み込む"""
+        self.cursor.execute("SELECT path FROM photos ORDER BY timestamp DESC")
+        rows = self.cursor.fetchall()
+        self.photos = [row[0] for row in rows if os.path.exists(row[0])]
+
+        # リストボックスの更新
+        self.update_photo_listbox()
+
+    def update_photo_listbox(self):
+        """写真リストボックスの更新"""
+        self.photo_listbox.delete(0, tk.END)
+        for idx, path in enumerate(self.photos, 1):
+            filename = os.path.basename(path)
+            self.photo_listbox.insert(tk.END, f"{idx}: {filename}")
+
+    def upload_photo(self):
+        """写真ファイルを選択して取り込む"""
+        filetypes = [("画像ファイル", "*.jpg *.jpeg *.png")]
+        filepaths = filedialog.askopenfilenames(title="写真を選択", filetypes=filetypes)
+
+        if filepaths:
+            for filepath in filepaths:
+                # 同じファイルが既に存在するか確認
+                if filepath not in self.photos:
+                    # DBに追加
+                    self.cursor.execute("INSERT INTO photos (path) VALUES (?)", (filepath,))
+                    self.conn.commit()
+
+                    # リストに追加
+                    self.photos.append(filepath)
+
+            self.update_photo_listbox()
+            messagebox.showinfo("写真取込", f"{len(filepaths)}枚の写真を取り込みました。")
+
+            # モザイク更新
+            self.update_mosaic()
+
+    def take_photo(self):
+        """カメラで撮影する"""
+        # カメラキャプチャの初期化
+        cap = cv2.VideoCapture(0)
+
+        if not cap.isOpened():
+            messagebox.showerror("エラー", "カメラを開けませんでした。")
+            return
+
+        # カメラプレビューウィンドウ
+        preview_window = tk.Toplevel(self.root)
+        preview_window.title("カメラプレビュー")
+        preview_window.geometry("800x600")
+
+        # プレビュー用キャンバス
+        preview_canvas = tk.Canvas(preview_window, width=640, height=480)
+        preview_canvas.pack(pady=10)
+
+        # 撮影ボタン
+        capture_btn = tk.Button(preview_window, text="撮影する", font=("", 12), height=2)
+        capture_btn.pack(fill=tk.X, padx=20, pady=10)
+
+        # カメラプレビュー表示用フラグ
+        preview_active = True
+
+        def update_preview():
+            if preview_active:
+                ret, frame = cap.read()
+                if ret:
+                    # OpenCVの画像をPIL形式に変換
+                    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                    img = Image.fromarray(frame_rgb)
+                    img = ImageTk.PhotoImage(image=img)
+
+                    # キャンバスに表示
+                    preview_canvas.create_image(0, 0, anchor=tk.NW, image=img)
+                    preview_canvas.image = img
+
+                    # 次のフレーム更新をスケジュール
+                    preview_window.after(30, update_preview)
+
+        def capture_image():
+            nonlocal preview_active
+            ret, frame = cap.read()
+            if ret:
+                # タイムスタンプを使用して一意のファイル名を作成
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                if not os.path.exists("captures"):
+                    os.makedirs("captures")
+                filepath = os.path.join("captures", f"candle_{timestamp}.jpg")
+
+                # 画像を保存
+                cv2.imwrite(filepath, frame)
+
+                # DBに追加
+                self.cursor.execute("INSERT INTO photos (path) VALUES (?)", (filepath,))
+                self.conn.commit()
+
+                # リストに追加
+                self.photos.append(filepath)
+                self.update_photo_listbox()
+
+                # プレビュー終了
+                preview_active = False
+                cap.release()
+                preview_window.destroy()
+
+                messagebox.showinfo("撮影完了", "写真を撮影し保存しました。")
+
+                # モザイク更新
+                self.update_mosaic()
+
+        # 撮影ボタンのコマンドを設定
+        capture_btn.config(command=capture_image)
+
+        # プレビュー開始
+        update_preview()
+
+        # ウィンドウが閉じられたときのクリーンアップ
+        def on_closing():
+            nonlocal preview_active
+            preview_active = False
+            cap.release()
+            preview_window.destroy()
+
+        preview_window.protocol("WM_DELETE_WINDOW", on_closing)
+
+    def delete_selected_photo(self):
+        """選択した写真を削除"""
+        selected_index = self.photo_listbox.curselection()
+        if not selected_index:
+            messagebox.showinfo("選択エラー", "削除する写真を選択してください。")
+            return
+
+        selected_index = selected_index[0]
+        if 0 <= selected_index < len(self.photos):
+            path = self.photos[selected_index]
+
+            # DBから削除
+            self.cursor.execute("DELETE FROM photos WHERE path = ?", (path,))
+            self.conn.commit()
+
+            # リストから削除
+            self.photos.pop(selected_index)
+            self.update_photo_listbox()
+
+            messagebox.showinfo("削除完了", "選択した写真を削除しました。")
+
+            # モザイク更新
+            self.update_mosaic()
+
+    def update_tile_size(self, val):
+        """タイルサイズの更新"""
+        self.tile_size = int(val)
+        self.update_mosaic()
+
+    def auto_update_mosaic(self):
+        """定期的なモザイク更新（バックグラウンドスレッド）"""
+        while self.running:
+            # DBから新しい写真があるか確認
+            self.cursor.execute("SELECT path FROM photos ORDER BY timestamp DESC")
+            rows = self.cursor.fetchall()
+            current_photos = [row[0] for row in rows if os.path.exists(row[0])]
+
+            # 新しい写真がある場合は更新
+            if len(current_photos) != len(self.photos):
+                self.photos = current_photos
+                # GUIスレッドで実行
+                self.root.after(0, self.update_photo_listbox)
+                self.root.after(0, self.update_mosaic)
+
+            time.sleep(5)  # 5秒ごとに確認
+
+    def update_mosaic(self):
+        """モザイクアートの更新"""
+        if not os.path.exists(self.logo_path):
+            messagebox.showerror("エラー", "校章画像が見つかりません。")
+            return
+
+        if not self.photos:
+            # 写真がない場合は校章をそのまま表示
+            logo_img = Image.open(self.logo_path)
+            logo_img = ImageTk.PhotoImage(logo_img)
+            self.canvas.delete("all")
+            self.canvas.create_image(0, 0, anchor=tk.NW, image=logo_img)
+            self.canvas.image = logo_img
+            return
+
+        # 校章画像の読み込み
+        logo = cv2.imread(self.logo_path)
+        if logo is None:
+            messagebox.showerror("エラー", "校章画像を読み込めませんでした。")
+            return
+
+        # キャンバスサイズに合わせてリサイズ
+        canvas_width = self.canvas.winfo_width()
+        canvas_height = self.canvas.winfo_height()
+
+        # キャンバスがまだサイズ設定されていない場合
+        if canvas_width <= 1 or canvas_height <= 1:
+            canvas_width = 800
+            canvas_height = 600
+
+        # アスペクト比を維持してリサイズ
+        logo_height, logo_width = logo.shape[:2]
+        aspect_ratio = logo_width / logo_height
+
+        if canvas_width / canvas_height > aspect_ratio:
+            new_height = canvas_height
+            new_width = int(new_height * aspect_ratio)
+        else:
+            new_width = canvas_width
+            new_height = int(new_width / aspect_ratio)
+
+        logo = cv2.resize(logo, (new_width, new_height))
+
+        # グレースケールに変換してエッジを強調（モザイクのベースとして使用）
+        logo_gray = cv2.cvtColor(logo, cv2.COLOR_BGR2GRAY)
+        logo_edges = cv2.Canny(logo_gray, 50, 150)
+
+        # モザイクグリッドの計算
+        grid_h = new_height // self.tile_size
+        grid_w = new_width // self.tile_size
+
+        # 調整されたタイルサイズ
+        tile_h = new_height // grid_h
+        tile_w = new_width // grid_w
+
+        # 最終的なモザイクサイズ
+        mosaic_width = tile_w * grid_w
+        mosaic_height = tile_h * grid_h
+
+        # 結果画像の初期化
+        mosaic = np.zeros((mosaic_height, mosaic_width, 3), dtype=np.uint8)
+
+        # 写真のプリロード
+        photo_images = []
+        for path in self.photos:
+            try:
+                img = cv2.imread(path)
+                if img is not None:
+                    # タイルサイズにリサイズ
+                    img = cv2.resize(img, (tile_w, tile_h))
+                    photo_images.append(img)
+            except Exception as e:
+                print(f"画像読み込みエラー {path}: {e}")
+
+        if not photo_images:
+            messagebox.showerror("エラー", "有効な写真がありません。")
+            return
+
+        # モザイク作成
+        photo_idx = 0
+        for y in range(grid_h):
+            for x in range(grid_w):
+                # 現在のタイル位置
+                start_y = y * tile_h
+                start_x = x * tile_w
+
+                # 校章のエッジ部分かどうかをチェック
+                roi = logo_edges[start_y:start_y+tile_h, start_x:start_x+tile_w]
+                edge_density = np.sum(roi) / 255 / (tile_h * tile_w)
+
+                if edge_density > 0.01:  # エッジが多い部分には写真を配置
+                    # 写真を循環使用
+                    img = photo_images[photo_idx % len(photo_images)]
+                    photo_idx += 1
+
+                    # ブレンド比率（エッジ密度に基づく）
+                    alpha = min(1.0, edge_density * 3)
+                    beta = 1.0 - alpha
+
+                    # 校章の対応部分
+                    logo_roi = logo[start_y:start_y+tile_h, start_x:start_x+tile_w]
+
+                    # 写真と校章をブレンド
+                    blended = cv2.addWeighted(img, alpha, logo_roi, beta, 0)
+                    mosaic[start_y:start_y+tile_h, start_x:start_x+tile_w] = blended
+                else:
+                    # エッジが少ない部分には校章をそのまま使用
+                    mosaic[start_y:start_y+tile_h, start_x:start_x+tile_w] = logo[start_y:start_y+tile_h, start_x:start_x+tile_w]
+
+        # OpenCV画像をPIL形式に変換して表示
+        mosaic_rgb = cv2.cvtColor(mosaic, cv2.COLOR_BGR2RGB)
+        mosaic_img = Image.fromarray(mosaic_rgb)
+        mosaic_img = ImageTk.PhotoImage(mosaic_img)
+
+        # キャンバスに表示
+        self.canvas.delete("all")
+        self.canvas.create_image(0, 0, anchor=tk.NW, image=mosaic_img)
+        self.canvas.image = mosaic_img  # 参照を保持
+
+    def on_closing(self):
+        """アプリケーション終了時の処理"""
+        self.running = False
+        if self.conn:
+            self.conn.close()
+        self.root.destroy()
+
+def main():
+    root = tk.Tk()
+    app = CandleMosaicApp(root)
+    root.protocol("WM_DELETE_WINDOW", app.on_closing)
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
+
+```
+
+### config.py
+```
+"""
+アプリケーション設定モジュール
+"""
+import logging
+import os
+from pathlib import Path
+
+# プロジェクトのベースディレクトリ
+BASE_DIR = Path(__file__).parent
+
+# データ保存関連
+UPLOAD_DIR = BASE_DIR / "uploads"
+PROCESSED_DIR = UPLOAD_DIR / "processed"
+DB_PATH = BASE_DIR / "mosaic_app.db"
+
+# 画像関連
+MOSAIC_OUTPUT_PATH = BASE_DIR / "static" / "output" / "current_mosaic.jpg"
+SCHOOL_LOGO_PATH = BASE_DIR / "static" / "base" / "school_logo.png"
+
+# 画像処理設定
+CELL_SIZE = (50, 50)
+DEFAULT_GRID_SIZE = (20, 20)
+DEFAULT_OUTPUT_SIZE = (1000, 1000)
+
+# テンプレート設定
+TEMPLATE_DIR = BASE_DIR / "interfaces" / "web" / "templates"
+
+# 静的ファイル設定
+STATIC_DIR = BASE_DIR / "static"
+
+# WebSocketチャンネル設定
+WS_CHANNEL_NAME = "mosaic"
+WS_HISTORY_SIZE = 10
+WS_SEND_HISTORY = 5
+
+# 管理者認証設定
+ADMIN_USERNAME = "admin"  # デフォルト値（環境変数でオーバーライド推奨）
+ADMIN_PASSWORD = "candle2025"  # デフォルト値（環境変数でオーバーライド推奨）
+
+# ロギング設定
+LOG_DIR = BASE_DIR / "logs"
+LOG_LEVEL = "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+
+# ロギングレベルの辞書（文字列からロギングレベルへの変換用）
+LOG_LEVELS = {
+    "DEBUG": logging.DEBUG,
+    "INFO": logging.INFO,
+    "WARNING": logging.WARNING,
+    "ERROR": logging.ERROR,
+    "CRITICAL": logging.CRITICAL,
+}
+
+# 環境変数からログレベルを設定できるようにする
+def get_log_level() -> int:
+    """環境変数からログレベルを取得"""
+    level_name = os.environ.get("LOG_LEVEL", LOG_LEVEL)
+    return LOG_LEVELS.get(level_name, logging.INFO)
+
+# ディレクトリ初期化
+def ensure_directories():
+    """必要なディレクトリが存在することを確認"""
+    for directory in [
+        UPLOAD_DIR,
+        PROCESSED_DIR,
+        MOSAIC_OUTPUT_PATH.parent,
+        SCHOOL_LOGO_PATH.parent,
+        LOG_DIR,
+    ]:
+        directory.mkdir(parents=True, exist_ok=True)
+```
+
+### core/__init__.py
+```
+"""コアモジュール"""
+
+```
+
+### core/models.py
+```
+"""
+ドメインモデル - アプリケーションの中心的なビジネスオブジェクト
+"""
+import uuid
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Any, Dict, List, Optional, Tuple
+
+
+@dataclass
+class Cell:
+    """モザイクのグリッドセル"""
+    x: int
+    y: int
+    brightness: float
+    image_id: Optional[str] = None
+    contrast: float = 0.0  # コントラスト情報を追加
+    last_updated: float = 0.0  # 最終更新時間
+
+
+@dataclass
+class MosaicGrid:
+    """モザイクのグリッド全体"""
+    width: int
+    height: int
+    cells: List[Cell]
+    cell_size: tuple = (100, 100)
+
+
+@dataclass
+class Image:
+    """アップロードされた画像"""
+    id: str
+    filename: str
+    timestamp: datetime
+    used: bool = False
+
+    @classmethod
+    def create(cls, filename: str) -> 'Image':
+        """新しい画像インスタンスを作成"""
+        return cls(
+            id=uuid.uuid4().hex,
+            filename=filename,
+            timestamp=datetime.now(),
+            used=False
+        )
+
+
+@dataclass
+class MosaicUpdate:
+    """モザイク更新情報"""
+    updated_cell: Dict[str, int]
+    file_id: str
+
+
+@dataclass
+class MosaicSettings:
+    """モザイク生成の設定"""
+    id: int
+    grid_size: Tuple[int, int]
+    logo_path: str
+    title: str
+    subtitle: str
+    output_size: Tuple[int, int]
+    regenerate_existing: bool = False
+
+    @classmethod
+    def create_default(cls) -> 'MosaicSettings':
+        """デフォルト設定を作成"""
+        import config
+        return cls(
+            id=1,  # 常に同じIDを使用
+            grid_size=config.DEFAULT_GRID_SIZE,
+            logo_path=str(config.SCHOOL_LOGO_PATH),
+            title="校章モザイクアート",
+            subtitle="みんなの思い出でつくる、私たちの学校",
+            output_size=config.DEFAULT_OUTPUT_SIZE,
+            regenerate_existing=False
+        )
+
+```
+
+### core/services.py
+```
+"""
+サービス層 - コアビジネスロジック
+"""
+import os
+import random
+import time
+import uuid
+from typing import List, Optional, Tuple
+
+import numpy as np
+from PIL import Image as PILImage
+
+import config
+from adapters.database import ImageRepository, SettingsRepository
+from adapters.storage import FileStorage
+from core.models import Cell, Image, MosaicGrid, MosaicSettings, MosaicUpdate
+from infrastructure.channels import ChannelPublisher
+from infrastructure.image_processor import ImageProcessor
+from infrastructure.logger import get_logger
+
+
+class MosaicService:
+    """モザイクアート生成サービス"""
+
+    def __init__(
+        self,
+        image_repo: ImageRepository,
+        file_storage: FileStorage,
+        channel_publisher: ChannelPublisher,
+        settings_repo: Optional[SettingsRepository] = None,
+        base_image_path: str = str(config.SCHOOL_LOGO_PATH),
+        grid_size: Tuple[int, int] = config.DEFAULT_GRID_SIZE,
+        output_size: Tuple[int, int] = config.DEFAULT_OUTPUT_SIZE
+    ):
+        self.logger = get_logger("services.MosaicService")
+
+        self.image_repo = image_repo
+        self.file_storage = file_storage
+        self.channel_publisher = channel_publisher
+        self.settings_repo = settings_repo
+
+        # 初期設定
+        self.base_image_path = base_image_path
+        self.grid_size = grid_size  # グリッドサイズ（横セル数, 縦セル数）
+        self.output_size = output_size
+        self.title = "校章モザイクアート"
+        self.subtitle = "みんなの思い出でつくる、私たちの学校"
+
+        # セルサイズは出力サイズとグリッドサイズから計算
+        self.cell_size = self._calculate_cell_size()
+
+        self.logger.info(f"MosaicServiceを初期化: グリッドサイズ={grid_size}, ベース画像={base_image_path}, 出力サイズ={output_size}")
+        self.grid = self._initialize_grid()
+
+    def _calculate_cell_size(self) -> Tuple[int, int]:
+        """出力サイズとグリッドサイズからセルサイズを計算"""
+        cell_width = self.output_size[0] // self.grid_size[0]
+        cell_height = self.output_size[1] // self.grid_size[1]
+        return (cell_width, cell_height)
+
+    async def load_settings(self) -> None:
+        """設定をロード"""
+        if self.settings_repo:
+            try:
+                settings = await self.settings_repo.get_settings()
+                if settings:
+                    self.logger.info(f"設定をロードしました: グリッドサイズ={settings.grid_size}, ロゴパス={settings.logo_path}, 出力サイズ={settings.output_size}")
+                    await self.update_settings(settings)
+                else:
+                    self.logger.info("設定が見つかりませんでした。デフォルト設定を使用します。")
+                    # デフォルト値を設定
+                    self.grid_size = config.DEFAULT_GRID_SIZE
+                    self.output_size = config.DEFAULT_OUTPUT_SIZE
+                    self.cell_size = self._calculate_cell_size()
+            except Exception as e:
+                self.logger.error(f"設定ロードエラー: {str(e)}", exc_info=True)
+                # エラーが発生してもサービスは継続
+                self.grid_size = config.DEFAULT_GRID_SIZE
+                self.output_size = config.DEFAULT_OUTPUT_SIZE
+                self.cell_size = self._calculate_cell_size()
+        else:
+            # 設定リポジトリがない場合はデフォルト値を使用
+            self.grid_size = config.DEFAULT_GRID_SIZE
+            self.output_size = config.DEFAULT_OUTPUT_SIZE
+            self.cell_size = self._calculate_cell_size()
+
+    async def update_settings(self, settings: MosaicSettings) -> bool:
+        """設定を更新"""
+        try:
+            self.logger.info(f"設定更新: グリッドサイズ={settings.grid_size}, ロゴパス={settings.logo_path}, 出力サイズ={settings.output_size}")
+
+            # 設定を保存
+            if self.settings_repo:
+                await self.settings_repo.save_settings(settings)
+
+            # 設定を反映
+            old_grid_size = self.grid_size
+            old_base_image = self.base_image_path
+            old_output_size = self.output_size
+
+            self.grid_size = settings.grid_size
+            self.base_image_path = settings.logo_path
+            self.output_size = settings.output_size
+            self.title = settings.title
+            self.subtitle = settings.subtitle
+            
+            # セルサイズを再計算
+            self.cell_size = self._calculate_cell_size()
+            self.logger.info(f"新しいセルサイズ: {self.cell_size} (自動計算)")
+
+            # グリッドの再初期化が必要かを判断
+            need_grid_reinit = (old_grid_size != self.grid_size or 
+                                old_base_image != self.base_image_path or
+                                old_output_size != self.output_size)
+
+            if need_grid_reinit:
+                self.logger.info("グリッドを再初期化します")
+                self.grid = self._initialize_grid()
+
+            return need_grid_reinit
+        except Exception as e:
+            self.logger.error(f"設定更新エラー: {str(e)}", exc_info=True)
+            return False
+
+    def _initialize_grid(self) -> MosaicGrid:
+        """グリッドを生成"""
+        try:
+            self.logger.info(f"グリッド初期化開始: グリッドサイズ={self.grid_size}")
+
+            # ベース画像をロード（明るさの分析用）
+            base_image = PILImage.open(self.base_image_path)
+            
+            # ベース画像をグリッドサイズに合わせてリサイズ
+            analysis_size = (self.grid_size[0], self.grid_size[1])
+            
+            # 小さくリサイズして明るさ分析用に使用
+            base_resized = base_image.resize(analysis_size)
+            base_gray = base_resized.convert("L")
+            
+            # グリッドセルを作成
+            cells = []
+            grid_width, grid_height = self.grid_size
+            
+            # 各セルの明るさを分析
+            for y in range(grid_height):
+                for x in range(grid_width):
+                    # 対応するピクセルの明るさを取得
+                    brightness = base_gray.getpixel((x, y))
+                    
+                    # コントラスト計算のための周辺ピクセル取得（範囲外アクセス防止）
+                    neighbors = []
+                    for dy in [-1, 0, 1]:
+                        for dx in [-1, 0, 1]:
+                            nx, ny = x + dx, y + dy
+                            if 0 <= nx < grid_width and 0 <= ny < grid_height:
+                                neighbors.append(base_gray.getpixel((nx, ny)))
+                    
+                    # 周辺ピクセルとの差の標準偏差でコントラストを計算
+                    if len(neighbors) > 1:
+                        contrast = np.std(neighbors)
+                    else:
+                        contrast = 0
+                        
+                    cells.append(Cell(
+                        x=x,
+                        y=y,
+                        brightness=float(brightness),
+                        contrast=float(contrast),
+                        last_updated=0.0
+                    ))
+
+            self.logger.info(f"グリッド初期化完了: {len(cells)}セル作成")
+
+            return MosaicGrid(
+                width=grid_width,
+                height=grid_height,
+                cells=cells,
+                cell_size=self.cell_size
+            )
+        except FileNotFoundError:
+            self.logger.error(f"ベース画像が見つかりません: {self.base_image_path}", exc_info=True)
+            raise
+        except Exception as e:
+            self.logger.error(f"グリッド初期化エラー: {str(e)}", exc_info=True)
+            raise
+
+    async def add_image(self, image_path: str, image_id: str) -> MosaicUpdate:
+        """新しい画像を追加してモザイクを更新"""
+        try:
+            self.logger.info(f"画像追加開始: {image_path}, id={image_id}")
+            img = PILImage.open(image_path)
+
+            # 画像の色調解析をより詳細に
+            img_gray = img.convert("L")
+            img_array = np.array(img_gray)
+            img_brightness = img_array.mean()
+            img_contrast = img_array.std()  # コントラストも考慮
+
+            self.logger.debug(f"画像特性: 明るさ={img_brightness:.2f}, コントラスト={img_contrast:.2f}")
+
+            # より適切なセル選択アルゴリズム
+            empty_cells = [cell for cell in self.grid.cells if cell.image_id is None]
+
+            if not empty_cells:
+                # すべてのセルが埋まっている場合、最も古い画像を置き換え
+                self.logger.info("空のセルがありません。最も古いセルを置き換えます。")
+                cell_to_update = min(self.grid.cells, key=lambda c: c.last_updated)
+                self.logger.debug(f"置き換えるセル: x={cell_to_update.x}, y={cell_to_update.y}, 最終更新={cell_to_update.last_updated}")
+            else:
+                # 明るさの差とコントラストを加味した重み付けスコア
+                self.logger.debug(f"空のセル数: {len(empty_cells)}")
+
+                # 明るさとコントラストの類似度でスコア計算
+                def calculate_score(cell):
+                    brightness_diff = abs(cell.brightness - img_brightness)
+                    contrast_diff = abs(cell.contrast - img_contrast)
+                    # 0.7と0.3の重みで明るさとコントラストを考慮
+                    return brightness_diff * 0.7 + contrast_diff * 0.3
+
+                cell_to_update = min(empty_cells, key=calculate_score)
+                self.logger.debug(f"選択したセル: x={cell_to_update.x}, y={cell_to_update.y}, 明るさ={cell_to_update.brightness:.2f}, コントラスト={cell_to_update.contrast:.2f}")
+
+            # セルを更新
+            cell_to_update.image_id = image_id
+            cell_to_update.last_updated = time.time()  # 置き換え時間を記録
+
+            self.logger.info(f"セル更新: x={cell_to_update.x}, y={cell_to_update.y}, id={image_id}")
+
+            # モザイク全体を再構築して保存
+            await self.render_mosaic()
+
+            return MosaicUpdate(
+                updated_cell={"x": cell_to_update.x, "y": cell_to_update.y},
+                file_id=image_id
+            )
+        except Exception as e:
+            self.logger.error(f"画像追加エラー: {str(e)}", exc_info=True)
+            raise
+
+    async def render_mosaic(self) -> str:
+        """現在のグリッド情報を使ってモザイク画像を生成"""
+        try:
+            self.logger.info("モザイク画像生成開始")
+
+            # 出力ディレクトリを確保
+            output_dir = os.path.dirname(config.MOSAIC_OUTPUT_PATH)
+            os.makedirs(output_dir, exist_ok=True)
+
+            # 最終出力サイズとセルサイズを取得
+            final_width, final_height = self.output_size
+            cell_width, cell_height = self.cell_size
+            
+            # グリッドサイズの確認
+            grid_width, grid_height = self.grid.width, self.grid.height
+            
+            self.logger.debug(f"モザイク生成パラメータ: 出力サイズ={self.output_size}, セルサイズ={self.cell_size}, グリッド={grid_width}x{grid_height}")
+            
+            # 計算されるキャンバスサイズ
+            canvas_width = grid_width * cell_width
+            canvas_height = grid_height * cell_height
+            
+            # もし計算されたサイズが出力サイズと異なる場合は調整（通常はわずかな差）
+            if canvas_width != final_width or canvas_height != final_height:
+                self.logger.warning(f"キャンバスサイズ調整: {canvas_width}x{canvas_height} -> {final_width}x{final_height}")
+                # セルサイズを微調整（小数点以下の差を考慮）
+                cell_width = final_width / grid_width
+                cell_height = final_height / grid_height
+
+            # 新しいキャンバスを作成（出力サイズで直接作成）
+            mosaic = PILImage.new("RGB", (final_width, final_height))
+
+            images_placed = 0
+            errors = 0
+
+            # 各セルに画像を配置
+            for cell in self.grid.cells:
+                # セルの位置を計算（小数点以下の位置にも対応）
+                x1 = int(cell.x * cell_width)
+                y1 = int(cell.y * cell_height)
+                x2 = int((cell.x + 1) * cell_width)
+                y2 = int((cell.y + 1) * cell_height)
+                
+                # 実際のセルサイズ（小数点以下の位置調整後）
+                actual_cell_width = x2 - x1
+                actual_cell_height = y2 - y1
+
+                if cell.image_id:
+                    # セルに画像がある場合はそれを取得して配置
+                    try:
+                        image_filename = await self.image_repo.get_filename(cell.image_id)
+                        if not image_filename:
+                            self.logger.warning(f"画像ID {cell.image_id} のファイル名が見つかりません")
+                            continue
+
+                        img_path = self.file_storage.get_processed_path(f"{cell.image_id}_{image_filename}")
+                        try:
+                            cell_img = PILImage.open(img_path)
+                            # セルのサイズにリサイズ
+                            cell_img = cell_img.resize((actual_cell_width, actual_cell_height))
+                            mosaic.paste(cell_img, (x1, y1))
+                            images_placed += 1
+                        except Exception as e:
+                            self.logger.error(f"画像配置エラー {img_path}: {str(e)}")
+                            errors += 1
+                    except Exception as e:
+                        self.logger.error(f"セル処理エラー x={cell.x}, y={cell.y}: {str(e)}")
+                        errors += 1
+                else:
+                    # 画像がない場合は明るさに応じたグレーで埋める
+                    brightness = int(cell.brightness)
+                    cell_img = PILImage.new("RGB", (actual_cell_width, actual_cell_height), (brightness, brightness, brightness))
+                    mosaic.paste(cell_img, (x1, y1))
+
+            # 保存
+            output_path = str(config.MOSAIC_OUTPUT_PATH)
+            mosaic.save(output_path, quality=95)  # JPEG品質を最高に設定
+            self.logger.info(f"モザイク画像を保存: {output_path} (配置画像: {images_placed}, エラー: {errors}, サイズ: {final_width}x{final_height})")
+
+            # WebSocket経由で更新通知 (URLパスを生成)
+            url_path = "/static/output/current_mosaic.jpg"
+            self.channel_publisher.publish_update(url_path)
+
+            # デバッグ出力
+            self.logger.debug(f"モザイク画像の最終サイズ: {final_width}x{final_height}")
+            self.logger.debug(f"セルサイズ: {self.cell_size}")
+            self.logger.debug(f"グリッドのサイズ: {self.grid.width}x{self.grid.height}")
+            self.logger.debug(f"セルの数: {len(self.grid.cells)}")
+            self.logger.debug(f"画像がセットされたセルの数: {sum(1 for cell in self.grid.cells if cell.image_id is not None)}")
+
+            return url_path
+        except Exception as e:
+            self.logger.error(f"モザイク生成エラー: {str(e)}", exc_info=True)
+            raise
+
+    async def process_uploaded_image(self, original_path: str, image_id: str) -> Tuple[str, MosaicUpdate]:
+        """アップロードされた画像を処理してモザイクに追加"""
+        # 画像処理
+        processed_path = await ImageProcessor.process_image(
+            original_path, self.cell_size
+        )
+
+        # モザイク更新
+        update_result = await self.add_image(processed_path, image_id)
+
+        return processed_path, update_result
+
+    async def get_participant_count(self) -> int:
+        """参加者数（画像総数）を取得"""
+        return await self.image_repo.count()
+
+    async def regenerate_mosaic(self) -> bool:
+        """既存の画像でモザイクを再生成"""
+        try:
+            self.logger.info("モザイク再生成開始")
+
+            # グリッドを再初期化
+            self.grid = self._initialize_grid()
+
+            # すべての画像を取得
+            images = await self.image_repo.get_all()
+            self.logger.info(f"再生成対象画像数: {len(images)}")
+
+            # 各画像を処理して追加
+            for image in images:
+                try:
+                    # 処理済み画像のパスを取得
+                    processed_path = self.file_storage.get_processed_path(f"{image.id}_{image.filename}")
+
+                    # 画像処理が必要な場合（セルサイズが変わった場合など）
+                    original_path = self.file_storage.get_upload_path(f"{image.id}_{image.filename}")
+                    if os.path.exists(original_path):
+                        # オリジナル画像が存在する場合、セルサイズに合わせて再処理
+                        processed_path = await ImageProcessor.process_image(
+                            original_path, self.cell_size
+                        )
+
+                    # モザイクに追加
+                    if os.path.exists(processed_path):
+                        await self.add_image(processed_path, image.id)
+                    else:
+                        self.logger.warning(f"処理済み画像が見つかりません: {processed_path}")
+                except Exception as e:
+                    self.logger.error(f"画像 {image.id} の再生成エラー: {str(e)}")
+                    # 個別のエラーで全体の処理は停止しない
+
+            # 最終的なモザイクを保存・通知
+            await self.render_mosaic()
+
+            self.logger.info("モザイク再生成完了")
+            return True
+        except Exception as e:
+            self.logger.error(f"モザイク再生成エラー: {str(e)}", exc_info=True)
+            return False
+
+    async def reset_all(self) -> bool:
+        """すべてのデータをリセット"""
+        try:
+            self.logger.warning("システム全体リセット開始")
+
+            # 1. データベースからすべての画像メタデータを削除
+            await self.image_repo.delete_all()
+
+            # 2. ファイルシステムから画像ファイルを削除
+            await self.file_storage.clear_all_files()
+
+            # 3. モザイク画像を削除
+            if os.path.exists(config.MOSAIC_OUTPUT_PATH):
+                os.remove(config.MOSAIC_OUTPUT_PATH)
+                self.logger.info(f"モザイク画像を削除: {config.MOSAIC_OUTPUT_PATH}")
+
+            # 4. グリッドを再初期化
+            self.grid = self._initialize_grid()
+
+            # 5. 空のモザイク画像を生成
+            await self.render_mosaic()
+
+            self.logger.warning("システム全体リセット完了")
+            return True
+        except Exception as e:
+            self.logger.error(f"リセットエラー: {str(e)}", exc_info=True)
+            return False
+
+```
+
+### db.py
+```
+import config
+from adapters.database import DatabaseManager
+
+# データベースマネージャーを初期化
+db_manager = DatabaseManager()
+
+# テーブルを作成
+db_manager.initialize()
+print("テーブルを作成しました。")
+
+```
+
+### infrastructure/__init__.py
+```
+"""インフラストラクチャモジュール"""
+
+```
+
+### infrastructure/auth.py
+```
+"""
+認証関連のミドルウェアと機能
+"""
+import base64
+import functools
+import hmac
+import os
+from typing import Any, Callable, List, Optional, Sequence, Union
+
+from litestar import Request
+from litestar.connection import ASGIConnection
+from litestar.exceptions import NotAuthorizedException
+from litestar.middleware.authentication import (
+    AbstractAuthenticationMiddleware,
+    AuthenticationResult,
+)
+from litestar.middleware.base import DefineMiddleware
+
+import config
+from infrastructure.logger import get_logger
+
+logger = get_logger("infrastructure.auth")
+
+
+def requires_auth(handler: Callable) -> Callable:
+    """Basic認証を要求するデコレータ"""
+    @functools.wraps(handler)
+    async def wrapper(*args: Any, **kwargs: Any) -> Any:
+        """認証チェックを行うラッパー関数"""
+        request = None
+        for arg in args:
+            if isinstance(arg, Request):
+                request = arg
+                break
+
+        if not request and "request" in kwargs:
+            request = kwargs["request"]
+        if not request:
+            raise ValueError("Request object not found in arguments")
+
+        # 認証ヘッダーをチェック
+        auth_header = request.headers.get("Authorization")
+        if not auth_header or not auth_header.startswith("Basic "):
+            raise NotAuthorizedException("認証が必要です")
+
+        # Basic認証情報をデコード
+        try:
+            auth_decoded = base64.b64decode(auth_header[6:]).decode("utf-8")
+            username, password = auth_decoded.split(":", 1)
+
+            # 認証情報を検証
+            if not authenticate(username, password):
+                logger.warning(f"認証失敗: {username}")
+                raise NotAuthorizedException("認証情報が無効です")
+
+            logger.info(f"認証成功: {username}")
+        except Exception as e:
+            logger.error(f"認証エラー: {str(e)}", exc_info=True)
+            raise NotAuthorizedException("認証情報が無効です")
+
+        # 認証成功した場合、元のハンドラを実行
+        return await handler(*args, **kwargs)
+
+    return wrapper
+
+
+def authenticate(username: str, password: str) -> bool:
+    """ユーザー名とパスワードを検証"""
+    admin_username = os.environ.get("ADMIN_USERNAME", config.ADMIN_USERNAME)
+    admin_password = os.environ.get("ADMIN_PASSWORD", config.ADMIN_PASSWORD)
+
+    # 安全な比較（タイミング攻撃対策）
+    return hmac.compare_digest(username, admin_username) and \
+           hmac.compare_digest(password, admin_password)
+
+
+class BasicAuthMiddleware(AbstractAuthenticationMiddleware):
+    """Basic認証を実装するミドルウェア"""
+
+    def __init__(
+        self,
+        app: Any,
+        exclude: Union[str, List[str], None] = None,
+        exclude_from_auth_key: str = "exclude_from_auth",
+        exclude_http_methods: Optional[Sequence[str]] = None,
+        scopes: Optional[List[str]] = None,
+        realm: str = "Mosaic Admin Panel"
+    ) -> None:
+        """Basic認証ミドルウェアを初期化
+
+        Args:
+            app: ASGIアプリケーション
+            exclude: 認証から除外するパスやパターン
+            exclude_from_auth_key: 認証から除外するためのルートオプションキー
+            exclude_http_methods: 認証が不要なHTTPメソッド
+            scopes: ミドルウェアが処理するASGIスコープ
+            realm: Basic認証のレルム
+        """
+        super().__init__(
+            app=app,
+            exclude=exclude,
+            exclude_from_auth_key=exclude_from_auth_key,
+            exclude_http_methods=exclude_http_methods,
+            scopes=scopes
+        )
+        self.logger = get_logger("infrastructure.BasicAuthMiddleware")
+        self.realm = realm
+
+    async def authenticate_request(self, connection: ASGIConnection) -> AuthenticationResult:
+        """リクエストを認証して結果を返す
+
+        Args:
+            connection: ASGIコネクション
+
+        Returns:
+            認証結果
+
+        Raises:
+            NotAuthorizedException: 認証に失敗した場合
+        """
+        self.logger.debug(f"認証チェック: {connection.url.path}")
+
+        # Authorizationヘッダーを取得
+        auth_header = connection.headers.get("authorization")
+
+        if not auth_header or not auth_header.startswith("Basic "):
+            # 認証ヘッダーがない場合は401を返して認証を要求
+            self.logger.warning(f"認証ヘッダーなし: {connection.url.path}")
+            raise NotAuthorizedException(
+                "Authentication required",
+                headers={"WWW-Authenticate": f'Basic realm="{self.realm}"'}
+            )
+
+        # Basic認証情報をデコード
+        try:
+            auth_decoded = base64.b64decode(auth_header[6:]).decode("utf-8")
+            username, password = auth_decoded.split(":", 1)
+
+            # 認証情報を検証
+            if not authenticate(username, password):
+                self.logger.warning(f"認証失敗: {username}, path={connection.url.path}")
+                raise NotAuthorizedException(
+                    "Invalid credentials",
+                    headers={"WWW-Authenticate": f'Basic realm="{self.realm}"'}
+                )
+
+            self.logger.debug(f"認証成功: {username}, path={connection.url.path}")
+
+            # 成功時は認証結果を返す
+            return AuthenticationResult(user={"username": username}, auth=auth_header)
+
+        except Exception as e:
+            self.logger.error(f"認証デコードエラー: {str(e)}", exc_info=True)
+            raise NotAuthorizedException(
+                "Invalid credentials",
+                headers={"WWW-Authenticate": f'Basic realm="{self.realm}"'}
+            )
+
+
+def create_auth_middleware() -> DefineMiddleware:
+    """認証ミドルウェアを初期化"""
+    return DefineMiddleware(
+        BasicAuthMiddleware,
+        exclude=[
+            r"^/(?!admin).*$",  # /admin で始まるパス以外は除外
+        ],
+        realm="MosaicAdminPanel"
+    )
+
+```
+
+### infrastructure/channels.py
+```
+"""
+WebSocketチャンネル管理 - リアルタイム通信インフラ
+"""
+import json
+from typing import Any, Dict, Optional
+
+from litestar.channels import ChannelsPlugin
+from litestar.channels.backends.memory import MemoryChannelsBackend
+
+import config
+from infrastructure.logger import get_logger
+
+logger = get_logger("infrastructure.channels")
+
+class ChannelPublisher:
+    """WebSocketチャンネルへのメッセージ発行を管理"""
+
+    def __init__(self, channels_plugin: ChannelsPlugin):
+        self.logger = get_logger("infrastructure.ChannelPublisher")
+        self.channels_plugin = channels_plugin
+        self.channel_name = config.WS_CHANNEL_NAME
+        self.logger.info(f"ChannelPublisher初期化: チャンネル名={self.channel_name}")
+
+    def publish_update(self, image_path: str) -> None:
+        """モザイク更新通知をチャンネルに発行"""
+        try:
+            message = json.dumps({
+                "action": "mosaic_updated",
+                "path": image_path
+            })
+            self.logger.info(f"モザイク更新通知: {image_path}")
+            self.logger.debug(f"メッセージ内容: {message}")
+            self.channels_plugin.publish(message, self.channel_name)
+            self.logger.debug("メッセージ発行完了")
+        except Exception as e:
+            self.logger.error(f"メッセージ発行エラー: {str(e)}", exc_info=True)
+
+    def publish_message(self, message_type: str, data: Dict[str, Any]) -> None:
+        """汎用メッセージをチャンネルに発行"""
+        try:
+            message = json.dumps({
+                "type": message_type,
+                "data": data
+            })
+            self.logger.info(f"メッセージ発行: タイプ={message_type}")
+            self.logger.debug(f"メッセージ内容: {message}")
+            self.channels_plugin.publish(message, self.channel_name)
+            self.logger.debug("メッセージ発行完了")
+        except Exception as e:
+            self.logger.error(f"メッセージ発行エラー: {str(e)}", exc_info=True)
+
+
+def create_channels_plugin() -> ChannelsPlugin:
+    """チャンネルプラグインを初期化"""
+    try:
+        logger.info(f"チャンネルプラグイン初期化: チャンネル名={config.WS_CHANNEL_NAME}")
+        plugin = ChannelsPlugin(
+            backend=MemoryChannelsBackend(history=config.WS_HISTORY_SIZE),
+            channels=[config.WS_CHANNEL_NAME],
+            ws_handler_send_history=config.WS_SEND_HISTORY,
+        )
+        logger.info("チャンネルプラグイン初期化完了")
+        return plugin
+    except Exception as e:
+        logger.error(f"チャンネルプラグイン初期化エラー: {str(e)}", exc_info=True)
+        raise
+
+```
+
+### infrastructure/image_processor.py
+```
+"""
+画像処理モジュール - 写真を正方形にトリミングする処理
+"""
+from pathlib import Path
+from typing import Tuple
+
+from PIL import Image, ImageEnhance, ImageOps
+
+import config
+from infrastructure.logger import get_logger
+
+logger = get_logger("infrastructure.ImageProcessor")
+
+
+class ImageProcessor:
+    """画像処理ユーティリティクラス"""
+
+    @staticmethod
+    async def process_image(file_path: str, target_size: Tuple[int, int] = (100, 100)) -> str:
+        """
+        アップロードされた画像を処理して正方形にトリミング
+
+        Args:
+            file_path: 処理する画像ファイルのパス
+            target_size: 参考用のサイズ (実際にはアスペクト比1:1の正方形にトリミングのみ)
+
+        Returns:
+            処理済み画像のファイルパス
+        """
+        try:
+            logger.info(f"画像処理開始: {file_path}")
+
+            # 画像をロード
+            img = Image.open(file_path)
+            original_size = img.size
+            logger.debug(f"元画像サイズ: {original_size}")
+
+            # 正方形にトリミング（中央部分を使用）
+            img = ImageOps.fit(img, (min(original_size), min(original_size)), centering=(0.5, 0.5))
+            logger.debug(f"トリミング完了: 正方形 {img.size}")
+
+            # 出力パスを設定
+            input_path = Path(file_path)
+            processed_dir = config.PROCESSED_DIR
+            processed_dir.mkdir(exist_ok=True, parents=True)
+
+            output_filename = input_path.name
+            output_path = processed_dir / output_filename
+
+            # 画像を保存
+            img.save(output_path)
+            logger.info(f"処理済み画像を保存: {output_path}")
+
+            return str(output_path)
+        except Exception as e:
+            logger.error(f"画像処理エラー: {str(e)}", exc_info=True)
+            raise
+
+    @staticmethod
+    async def enhance_image(file_path: str, contrast: float = 1.2, sharpness: float = 1.1) -> str:
+        """
+        画像の品質を向上させる（コントラスト調整、シャープネス強化）
+
+        Args:
+            file_path: 処理する画像ファイルのパス
+            contrast: コントラスト倍率 (1.0が元の画像)
+            sharpness: シャープネス倍率 (1.0が元の画像)
+
+        Returns:
+            処理済み画像のファイルパス
+        """
+        try:
+            logger.info(f"画像品質向上処理開始: {file_path}, コントラスト: {contrast}, シャープネス: {sharpness}")
+
+            # 画像をロード
+            img = Image.open(file_path)
+
+            # コントラスト調整
+            enhancer = ImageEnhance.Contrast(img)
+            img = enhancer.enhance(contrast)
+            logger.debug(f"コントラスト調整完了: {contrast}倍")
+
+            # シャープネス強化
+            enhancer = ImageEnhance.Sharpness(img)
+            img = enhancer.enhance(sharpness)
+            logger.debug(f"シャープネス強化完了: {sharpness}倍")
+
+            # 出力パスを設定
+            output_path = f"{file_path.rsplit('.', 1)[0]}_enhanced.{file_path.rsplit('.', 1)[1]}"
+
+            # 画像を保存
+            img.save(output_path)
+            logger.info(f"品質向上済み画像を保存: {output_path}")
+
+            return output_path
+        except Exception as e:
+            logger.error(f"画像品質向上処理エラー: {str(e)}", exc_info=True)
+            raise
+
+```
+
+### infrastructure/logger.py
+```
+import logging
+import os
+import sys
+from datetime import datetime
+from pathlib import Path
+
+
+def setup_logger(
+    name: str = "mosaic_app",
+    log_level: int = logging.INFO,
+    log_dir: str = "logs",
+    console_output: bool = True
+) -> logging.Logger:
+    """
+    アプリケーションロガーの設定
+
+    Args:
+        name: ロガーの名前
+        log_level: ログレベル (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+        log_dir: ログファイルを保存するディレクトリ
+        console_output: コンソールにもログを出力するかどうか
+
+    Returns:
+        設定されたロガーインスタンス
+    """
+    # ロガーを取得
+    logger = logging.getLogger(name)
+    logger.setLevel(log_level)
+
+    # すでにハンドラが設定されている場合は追加しない
+    if logger.handlers:
+        return logger
+
+    # フォーマッタを作成
+    formatter = logging.Formatter(
+        "[%(asctime)s] [%(levelname)s] [%(name)s:%(lineno)d] - %(message)s"
+    )
+
+    # ファイルハンドラを設定
+    log_dir_path = Path(log_dir)
+    log_dir_path.mkdir(parents=True, exist_ok=True)
+
+    # 日付を含むログファイル名
+    today = datetime.now().strftime("%Y-%m-%d")
+    log_file = log_dir_path / f"{name}_{today}.log"
+
+    # ファイルハンドラ
+    file_handler = logging.FileHandler(log_file, encoding="utf-8")
+    file_handler.setLevel(log_level)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    # エラーログ専用ハンドラ (ERROR以上のみ)
+    error_log_file = log_dir_path / f"{name}_errors_{today}.log"
+    error_file_handler = logging.FileHandler(error_log_file, encoding="utf-8")
+    error_file_handler.setLevel(logging.ERROR)
+    error_file_handler.setFormatter(formatter)
+    logger.addHandler(error_file_handler)
+
+    # コンソール出力が必要な場合
+    if console_output:
+        console_handler = logging.StreamHandler(sys.stdout)
+        console_handler.setLevel(log_level)
+        console_handler.setFormatter(formatter)
+        logger.addHandler(console_handler)
+
+    logger.info(f"ロガーを初期化しました: {name}")
+    return logger
+
+
+# アプリケーション全体で使用するロガー
+app_logger = setup_logger()
+
+
+# 特定のモジュール用のロガーを取得する関数
+def get_logger(module_name: str) -> logging.Logger:
+    """モジュール固有のロガーを取得する"""
+    return logging.getLogger(f"mosaic_app.{module_name}")
+```
+
+### interfaces/__init__.py
+```
+"""インターフェースモジュール"""
+
+```
+
+### interfaces/api/__init__.py
+```
+"""APIインターフェースモジュール"""
+
+```
+
+### interfaces/api/admin_routes.py
+```
+"""
+アドミンルート - アドミン用のHTTPエンドポイント定義
+"""
+import traceback
+
+from litestar import Request, Response, get, post
+from litestar.response import Redirect, Template
+
+import config
+from adapters.database import SettingsRepository
+from core.models import MosaicSettings
+from core.services import MosaicService
+from infrastructure.auth import requires_auth
+from infrastructure.logger import get_logger
+
+logger = get_logger("api.admin_routes")
+
+
+@get("/admin", sync_to_thread=False)
+@requires_auth
+async def admin_panel(
+    request: Request,
+    settings_repo: SettingsRepository,
+    mosaic_service: MosaicService
+) -> Template:
+    """アドミンパネルを表示"""
+    try:
+        logger.info("アドミンパネル表示リクエスト")
+        logger.debug("SettingsRepository: %s", settings_repo)
+        logger.debug("MosaicService: %s", mosaic_service)
+
+        # 現在の設定を取得
+        try:
+            logger.debug("設定の取得を試みます")
+            current_settings = await settings_repo.get_settings()
+            logger.debug("取得した設定: %s", current_settings)
+        except Exception as e:
+            logger.error("設定取得中にエラーが発生しました: %s", str(e))
+            logger.error(traceback.format_exc())
+            current_settings = None
+
+        if not current_settings:
+            # デフォルト設定を使用
+            logger.info("デフォルト設定を作成します")
+            current_settings = MosaicSettings.create_default()
+            try:
+                # 保存
+                logger.debug("デフォルト設定を保存します")
+                await settings_repo.save_settings(current_settings)
+                logger.info("デフォルト設定を作成しました")
+            except Exception as e:
+                logger.error("デフォルト設定の保存中にエラーが発生しました: %s", str(e))
+                logger.error(traceback.format_exc())
+
+        try:
+            logger.debug("参加者数を取得します")
+            participant_count = await mosaic_service.get_participant_count()
+            logger.debug("参加者数: %d", participant_count)
+        except Exception as e:
+            logger.error("参加者数取得中にエラーが発生しました: %s", str(e))
+            logger.error(traceback.format_exc())
+            participant_count = 0
+
+        logger.debug("テンプレートをレンダリングします")
+        try:
+            return Template(
+                template_name="admin.html.jinja",
+                context={
+                    "settings": current_settings,
+                    "cell_sizes": [
+                        (10, 10), (20, 20), (30, 30), (50, 50), (100, 100)
+                    ],
+                    "current_participant_count": participant_count
+                }
+            )
+        except Exception as e:
+            logger.error("テンプレートレンダリング中にエラーが発生しました: %s", str(e))
+            logger.error(traceback.format_exc())
+            return Response(f"テンプレートレンダリングエラー: {str(e)}", status_code=500)
+    except Exception as e:
+        logger.error(f"アドミンパネル表示エラー: {str(e)}", exc_info=True)
+        logger.error(traceback.format_exc())
+        return Response(f"Error loading admin panel: {str(e)}", status_code=500)
+
+
+@post("/admin/settings", sync_to_thread=False)
+@requires_auth
+async def update_settings(
+    request: Request,
+    settings_repo: SettingsRepository,
+    mosaic_service: MosaicService
+) -> Redirect:
+    """アドミン設定を更新"""
+    try:
+        logger.info("設定更新リクエスト受信")
+
+        # フォームデータを取得
+        form_data = await request.form()
+
+        # グリッドサイズ設定を取得
+        grid_width = int(form_data.get("grid_width", "20"))
+        grid_height = int(form_data.get("grid_height", "20"))
+        
+        # グリッドサイズの制限（極端な値を防ぐ）
+        grid_width = max(5, min(100, grid_width))
+        grid_height = max(5, min(100, grid_height))
+        
+        # 出力サイズ設定を取得
+        output_width = int(form_data.get("output_width", "1000"))
+        output_height = int(form_data.get("output_height", "1000"))
+        
+        # サイズの制限（極端な値を防ぐ）
+        output_width = max(100, min(5000, output_width))
+        output_height = max(100, min(5000, output_height))
+
+        settings = MosaicSettings(
+            id=1,  # 常に同じIDを使用
+            grid_size=(grid_width, grid_height),
+            logo_path=form_data.get("logo_path", str(config.SCHOOL_LOGO_PATH)),
+            title=form_data.get("title", "校章モザイクアート"),
+            subtitle=form_data.get("subtitle", "みんなの思い出でつくる、私たちの学校"),
+            output_size=(output_width, output_height),
+            regenerate_existing=form_data.get("regenerate_existing") == "on"
+        )
+
+        # 設定を保存
+        await settings_repo.save_settings(settings)
+        logger.info(f"設定を更新しました: {settings}")
+
+        # モザイクサービスに設定を反映
+        await mosaic_service.update_settings(settings)
+
+        # 再生成フラグがオンの場合はモザイクを再生成
+        if settings.regenerate_existing:
+            logger.info("モザイク再生成を開始します")
+            await mosaic_service.regenerate_mosaic()
+
+        return Redirect("/admin")
+    except Exception as e:
+        logger.error(f"設定更新エラー: {str(e)}", exc_info=True)
+        return Response(f"Error updating settings: {str(e)}", status_code=500)
+
+
+@get("/admin/reset", sync_to_thread=False)
+@requires_auth
+async def reset_confirmation(
+    request: Request,
+) -> Template:
+    """リセット確認ページを表示"""
+    return Template(template_name="reset_confirm.html.jinja")
+
+
+@post("/admin/reset", sync_to_thread=False)
+@requires_auth
+async def reset_mosaic(
+    request: Request,
+    mosaic_service: MosaicService
+) -> Redirect:
+    """モザイクをリセット"""
+    try:
+        logger.warning("モザイクリセットリクエスト受信")
+        form_data = await request.form()
+        confirm = form_data.get("confirm", "").lower() == "reset"
+
+        if confirm:
+            # 完全リセット
+            await mosaic_service.reset_all()
+            logger.warning("モザイクの完全リセットを実行しました")
+            return Redirect("/admin?reset=success")
+        else:
+            logger.warning("リセット確認が一致しませんでした")
+            return Redirect("/admin/reset?error=confirmation")
+    except Exception as e:
+        logger.error(f"リセットエラー: {str(e)}", exc_info=True)
+        return Response(f"Error resetting mosaic: {str(e)}", status_code=500)
+
+```
+
+### interfaces/api/routes.py
+```
+"""
+APIルート - HTTPエンドポイント定義
+"""
+import os
+from typing import Any, Dict
+
+from litestar import Request, get, post
+from litestar.datastructures import UploadFile
+from litestar.response import Response, Template
+
+import config
+from adapters.database import ImageRepository
+from adapters.storage import FileStorage
+from core.models import Image
+from core.services import MosaicService
+from infrastructure.logger import get_logger
+
+logger = get_logger("api.routes")
+
+@get("/")
+async def index() -> Template:
+    """メインページ (アップロード用インターフェース)"""
+    try:
+        return Template(template_name="upload.html.jinja", context={})
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"Index error: {e}")
+        return Response(f"Error loading upload page: {str(e)}")
+
+
+@get("/display")
+async def display() -> Template:
+    """表示用ページ (大型スクリーン用)"""
+    try:
+        # 絶対パスからURLパスへの変換
+        if os.path.exists(config.MOSAIC_OUTPUT_PATH):
+            # モザイク画像が存在する場合
+            # 相対URLパスを使用（静的ファイルルートからの相対パス）- キャッシュバスティングなし
+            initial_mosaic = "/static/output/current_mosaic.jpg"
+        else:
+            # モザイク画像がまだ存在しない場合はロゴを使用
+            initial_mosaic = "/static/base/school_logo.png"
+
+        print(f"使用する画像パス (URL): {initial_mosaic}")
+
+        return Template(
+            template_name="display.html.jinja",
+            context={"initial_mosaic": initial_mosaic}
+        )
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"Display error: {e}")
+        return Response(f"Error loading display page: {str(e)}")
+
+
+@post("/upload")
+async def upload_image(
+    request: Request,
+    mosaic_service: MosaicService,
+    image_repo: ImageRepository,
+    file_storage: FileStorage
+) -> Dict[str, Any]:
+    """画像アップロードエンドポイント"""
+    try:
+        logger.info("画像アップロードリクエスト受信")
+
+        # フォームデータからファイルを取得
+        form_data = await request.form()
+        uploaded_file = form_data.get("image")
+
+        if not uploaded_file:
+            logger.warning("アップロードにファイルが含まれていません")
+            return {"error": "No image file provided"}
+
+        # UploadFileオブジェクトにはsize属性がないため、contentを読み込んでからサイズを取得する
+        logger.info(f"ファイル受信: {uploaded_file.filename}")
+
+        # 画像メタデータを作成
+        image = Image.create(uploaded_file.filename)
+
+        # ファイル内容を読み込み
+        try:
+            content = await uploaded_file.read()
+        except Exception as e:
+            logger.warning(f"非同期読み込みエラー: {e}, 同期的な読み込みを試みます")
+            # 同期的な読み込みを試す
+            content = uploaded_file.read()
+
+        # 読み込み後にファイルサイズをログに記録
+        logger.info(f"ファイルサイズ: {len(content)} bytes")
+
+        # ファイルを保存
+        file_path = await file_storage.save_uploaded_file(
+            image.id, image.filename, content
+        )
+        logger.debug(f"ファイル保存先: {file_path}")
+
+        # データベースに画像メタデータを保存
+        await image_repo.save(image)
+
+        # 画像処理とモザイク更新
+        try:
+            processed_path, update_result = await mosaic_service.process_uploaded_image(
+                file_path, image.id
+            )
+            logger.info(f"画像処理完了: {processed_path}, セル位置: x={update_result.updated_cell['x']}, y={update_result.updated_cell['y']}")
+        except Exception as e:
+            logger.error(f"画像処理エラー: {str(e)}", exc_info=True)
+            return {"error": f"Image processing failed: {str(e)}"}
+
+        return {
+            "success": True,
+            "file_id": image.id,
+            "updated_cell": update_result.updated_cell
+        }
+
+    except Exception as e:
+        logger.error(f"アップロード処理エラー: {str(e)}", exc_info=True)
+        return {"error": str(e)}
+
+
+@get("/api/stats")
+async def get_stats(image_repo: ImageRepository) -> Dict[str, Any]:
+    """統計情報API - 参加者数などの情報を取得"""
+    try:
+        # 画像の総数（参加者数）を取得
+        count = await image_repo.count()
+        return {"contributor_count": count}
+
+    except Exception as e:
+        print(f"Stats error: {e}")
+        return {"contributor_count": 0, "error": str(e)}
+
+```
+
+### interfaces/api/websockets.py
+```
+"""
+WebSocketハンドラ - リアルタイム通信のエンドポイント
+"""
+from litestar import WebSocket, websocket
+from litestar.channels import ChannelsPlugin
+from litestar.datastructures import State
+
+import config
+from infrastructure.logger import get_logger
+
+logger = get_logger("api.websockets")
+
+@websocket("/ws/mosaic")
+async def mosaic_ws_handler(socket: WebSocket, channels: ChannelsPlugin) -> None:
+    """
+    モザイク更新用WebSocketハンドラ
+    クライアントが接続するとモザイク更新通知を受け取る
+    """
+    client_id = f"{socket.client.host}:{socket.client.port}"
+    logger.info(f"WebSocket接続リクエスト: {client_id}")
+
+    # WebSocket接続を受け入れ
+    try:
+        await socket.accept()
+        logger.info(f"WebSocket接続確立: {client_id}")
+    except Exception as e:
+        logger.error(f"WebSocket接続確立エラー: {str(e)}", exc_info=True)
+        return
+
+    try:
+        # チャンネルを購読開始
+        async with channels.start_subscription([config.WS_CHANNEL_NAME]) as subscriber:
+            logger.debug(f"チャンネル購読開始: {config.WS_CHANNEL_NAME}")
+
+            # 接続直後に履歴を取得して送信
+            await channels.put_subscriber_history(
+                subscriber,
+                [config.WS_CHANNEL_NAME],
+                limit=config.WS_SEND_HISTORY
+            )
+
+            # バックグラウンドでメッセージ処理を開始
+            async with subscriber.run_in_background(socket.send_text):
+                logger.debug(f"バックグラウンドメッセージ処理開始: {client_id}")
+
+                # クライアントからのメッセージを待機
+                while True:
+                    data = await socket.receive_text()
+                    logger.debug(f"クライアントからのメッセージ受信: {data[:100]}...")
+
+    except Exception as e:
+        logger.error(f"WebSocketエラー: {str(e)}", exc_info=True)
+        # 接続が既に閉じられていない場合は閉じる
+        try:
+            await socket.close(code=1011, reason=str(e))
+            logger.info(f"WebSocket接続クローズ: {client_id}, 理由: {str(e)}")
+        except Exception as close_error:
+            logger.warning(f"WebSocket接続クローズ失敗: {str(close_error)}")
+
+```
+
+### interfaces/web/__init__.py
+```
+"""Webインターフェースモジュール"""
+
+```
+
+### interfaces/web/templates/admin.html.jinja
+```
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>モザイクアート管理パネル</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    h1,
+    h2 {
+      color: #333;
+    }
+
+    .admin-container {
+      background: white;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    .btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .btn-primary {
+      background-color: #4CAF50;
+    }
+
+    .btn-primary:hover {
+      background-color: #45a049;
+    }
+
+    .btn-danger {
+      background-color: #f44336;
+    }
+
+    .btn-danger:hover {
+      background-color: #d32f2f;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 5px;
+    }
+
+    .info {
+      background-color: #e3f2fd;
+      border-left: 4px solid #2196F3;
+    }
+
+    .warning {
+      background-color: #fff9c4;
+      border-left: 4px solid #ffeb3b;
+    }
+
+    hr {
+      margin: 30px 0;
+      border: 0;
+      border-top: 1px solid #eee;
+    }
+
+    .preview-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .preview-img {
+      max-width: 100%;
+      max-height: 300px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .settings-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .settings-left {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .settings-right {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .current-status {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #e8f5e9;
+      border-radius: 5px;
+      border-left: 4px solid #4caf50;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>モザイクアート管理パネル</h1>
+
+  <div class="current-status">
+    <h3>現在の状態</h3>
+    <p>参加者数: <strong>{{ current_participant_count }}</strong></p>
+    <p>グリッドサイズ: <strong>{{ settings.grid_size[0] }}x{{ settings.grid_size[1] }}</strong></p>
+    <p>出力サイズ: <strong>{{ settings.output_size[0] }}x{{ settings.output_size[1] }}</strong></p>
+    <p>ロゴパス: <strong>{{ settings.logo_path }}</strong></p>
+  </div>
+
+  <div class="admin-container">
+    <h2>設定</h2>
+
+    <form action="/admin/settings" method="post">
+      <div class="settings-container">
+        <div class="settings-left">
+          <div class="form-group">
+            <label for="title">タイトル</label>
+            <input type="text" id="title" name="title" value="{{ settings.title }}" required>
+          </div>
+
+          <div class="form-group">
+            <label for="subtitle">サブタイトル</label>
+            <input type="text" id="subtitle" name="subtitle" value="{{ settings.subtitle }}" required>
+          </div>
+
+          <div class="form-group">
+            <label for="grid_width">グリッドサイズ (横×縦)</label>
+            <div style="display: flex; gap: 10px;">
+              <input type="number" id="grid_width" name="grid_width" value="{{ settings.grid_size[0] }}" min="5"
+                max="100" step="1" style="width: 45%;" required>
+              <span style="line-height: 42px;">×</span>
+              <input type="number" id="grid_height" name="grid_height" value="{{ settings.grid_size[1] }}" min="5"
+                max="100" step="1" style="width: 45%;" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="output_width">出力サイズ (幅x高さ)</label>
+            <div style="display: flex; gap: 10px;">
+              <input type="number" id="output_width" name="output_width" value="{{ settings.output_size[0] }}" min="100"
+                max="5000" step="100" style="width: 45%;" required>
+              <span style="line-height: 42px;">x</span>
+              <input type="number" id="output_height" name="output_height" value="{{ settings.output_size[1] }}"
+                min="100" max="5000" step="100" style="width: 45%;" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-right">
+          <div class="form-group">
+            <label for="logo_path">校章画像パス</label>
+            <input type="text" id="logo_path" name="logo_path" value="{{ settings.logo_path }}" required>
+          </div>
+
+          <div class="preview-container">
+            <p><strong>校章プレビュー</strong></p>
+            <img id="logoPreview" src="/static/base/school_logo.png" alt="校章プレビュー" class="preview-img">
+          </div>
+
+          <div class="form-group" style="margin-top: 20px;">
+            <label style="display: inline-flex; align-items: center;">
+              <input type="checkbox" id="regenerate_existing" name="regenerate_existing">
+              <span>既存の写真でモザイクを再生成する</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary">設定を保存</button>
+        <a href="/admin/reset" class="btn btn-danger">モザイクをリセット</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="admin-container">
+    <h2>ヘルプ</h2>
+    <p><strong>グリッドサイズ</strong>: モザイクを構成するタイルの数です。例えば「20×20」なら合計400枚の写真が使われます。イベントの規模に合わせて設定してください。</p>
+    <p><strong>出力サイズ</strong>: 最終的に生成されるモザイク画像のサイズです。大きくするほど高解像度になりますが、処理に時間がかかる場合があります。</p>
+    <p><strong>校章画像パス</strong>: 校章画像ファイルへのパスです。「static/base/」内のファイルを指定してください。</p>
+    <p><strong>再生成</strong>: チェックすると、設定変更時に既存の写真を使って新しい設定でモザイクを再生成します。</p>
+    <hr>
+    <p><strong>モザイクリセット</strong>: すべての写真とモザイク情報を削除し、最初からやり直します。この操作は取り消せません！</p>
+  </div>
+
+  <script>
+    // 設定が変更されたらプレビューを更新
+    document.getElementById('logo_path').addEventListener('change', function () {
+      const logoPath = this.value;
+      // 相対パスをURLに変換
+      const logoUrl = logoPath.startsWith('/') ? logoPath : `/static/base/${logoPath}`;
+      document.getElementById('logoPreview').src = logoUrl;
+    });
+  </script>
+</body>
+
+</html>
+```
+
+### interfaces/web/templates/display.html.jinja
+```
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>閉校イベント - キャンドルモザイク表示</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: white;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .title {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      margin: 0;
+    }
+
+    p.subtitle {
+      font-size: 1.2em;
+      margin-top: 5px;
+      opacity: 0.8;
+    }
+
+    .mosaic-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      /* 画像がコンテナからはみ出さないように */
+    }
+
+    .mosaic-image {
+      max-width: 95vw;
+      /* 横幅は画面の95%まで */
+      max-height: 80vh;
+      /* 高さは画面の80%まで */
+      object-fit: contain;
+      /* アスペクト比を維持 */
+      transition: opacity 1s ease-in-out;
+    }
+
+    .update-notification {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 5px;
+      font-size: 1.2em;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .show-notification {
+      opacity: 1;
+    }
+
+    .counter {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      font-size: 1.2em;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="title">
+    <h1>校章モザイクアート</h1>
+    <p class="subtitle">みんなの思い出でつくる、私たちの学校</p>
+  </div>
+
+  <div class="mosaic-container">
+    <img id="mosaicImage" class="mosaic-image" src="{{ initial_mosaic }}" alt="校章モザイクアート">
+  </div>
+
+  <div id="updateNotification" class="update-notification">
+    新しい写真が追加されました！
+  </div>
+
+  <div class="counter">
+    参加者数: <span id="contributorCount">0</span>
+  </div>
+
+  <script>
+    let contributorCount = 0;
+    const mosaicImage = document.getElementById('mosaicImage');
+    const notification = document.getElementById('updateNotification');
+    const countDisplay = document.getElementById('contributorCount');
+
+    // WebSocket接続
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const ws = new WebSocket(`${protocol}//${window.location.host}/ws/mosaic`);
+
+    ws.onopen = function () {
+      console.log('WebSocket接続が確立されました');
+    };
+
+    ws.onmessage = function (event) {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.action === 'mosaic_updated') {
+          // 新しい画像へのフェード効果
+          mosaicImage.style.opacity = '0.3';
+
+          // 少し遅延させて新画像を読み込み、フェードイン
+          setTimeout(() => {
+            // キャッシュを強制的に無視するためのランダムパラメータを追加
+            const noCache = '?t=' + new Date().getTime();
+            mosaicImage.src = data.path + noCache;
+
+            mosaicImage.onload = function () {
+              mosaicImage.style.opacity = '1';
+
+              // 画像サイズをコンソールに出力（デバッグ用）
+              console.log(`画像サイズ: ${this.naturalWidth}x${this.naturalHeight}`);
+            };
+
+            // 参加者カウント更新
+            contributorCount++;
+            countDisplay.textContent = contributorCount;
+
+            // 通知表示
+            notification.classList.add('show-notification');
+            setTimeout(() => {
+              notification.classList.remove('show-notification');
+            }, 3000);
+          }, 500);
+        }
+      } catch (error) {
+        console.error('メッセージの解析エラー:', error);
+      }
+    };
+
+    ws.onerror = function (error) {
+      console.error('WebSocketエラー:', error);
+    };
+
+    ws.onclose = function () {
+      console.log('WebSocket接続が閉じられました');
+      // 自動再接続を試みるコードを追加することも可能
+    };
+
+    // 画像が読み込まれたときにサイズを確認（初期表示時）
+    mosaicImage.onload = function () {
+      console.log(`初期画像サイズ: ${this.naturalWidth}x${this.naturalHeight}`);
+    };
+
+    // 初期カウント設定（サーバーから取得）
+    fetch('/api/stats')
+      .then(response => response.json())
+      .then(data => {
+        if (data.contributor_count !== undefined) {
+          contributorCount = data.contributor_count;
+          countDisplay.textContent = contributorCount;
+        }
+      })
+      .catch(error => console.error('統計情報の取得に失敗:', error));
+  </script>
+</body>
+
+</html>
+```
+
+### interfaces/web/templates/reset_confirm.html.jinja
+```
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>モザイクリセット確認</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #d32f2f;
+            text-align: center;
+        }
+        .warning-container {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-left: 5px solid #d32f2f;
+        }
+        .warning-text {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn-danger {
+            background-color: #f44336;
+            color: white;
+        }
+        .btn-cancel {
+            background-color: #9e9e9e;
+            color: white;
+        }
+        .error-message {
+            color: #d32f2f;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>⚠️ 危険な操作 ⚠️</h1>
+
+    <div class="warning-container">
+        <p class="warning-text">モザイクデータのリセットを実行しようとしています。</p>
+
+        <p>この操作を行うと以下のデータが<strong>完全に削除</strong>されます：</p>
+        <ul>
+            <li>アップロードされたすべての写真</li>
+            <li>モザイク配置情報</li>
+            <li>生成されたモザイク画像</li>
+        </ul>
+
+        <p><strong>この操作は取り消せません。</strong></p>
+
+        {% if request.query_params.get('error') == 'confirmation' %}
+            <p class="error-message">確認用テキストが一致しませんでした。もう一度お試しください。</p>
+        {% endif %}
+
+        <form action="/admin/reset" method="post">
+            <div class="form-group">
+                <label for="confirm">確認のため、「reset」と入力してください：</label>
+                <input type="text" id="confirm" name="confirm" required>
+            </div>
+
+            <div class="actions">
+                <a href="/admin" class="btn btn-cancel">キャンセル</a>
+                <button type="submit" class="btn btn-danger">リセットを実行</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+```
+
+### interfaces/web/templates/upload.html.jinja
+```
+<!-- templates/upload.html.jinja - アップロード用インターフェース -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>閉校イベント - キャンドルモザイク作成</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .upload-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .file-input {
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .file-input:hover {
+            border-color: #999;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        #preview {
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+        #preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 5px;
+        }
+        .result-message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        .instructions {
+            margin-top: 30px;
+            background: #e9f7fe;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #0288d1;
+        }
+    </style>
+</head>
+<body>
+    <h1>閉校イベント - キャンドルモザイク作成</h1>
+
+    <div class="upload-container">
+        <div class="upload-form">
+            <h2>キャンドルの写真をアップロード</h2>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="file-input">
+                    <input type="file" id="imageInput" name="image" accept="image/*" required>
+                </div>
+                <div id="preview">
+                    <img id="imagePreview" src="" alt="画像プレビュー">
+                </div>
+                <button type="submit" class="submit-btn">送信</button>
+            </form>
+        </div>
+
+        <div id="resultMessage" class="result-message" style="display: none;"></div>
+    </div>
+
+    <div class="instructions">
+        <h3>使い方</h3>
+        <ol>
+            <li>キャンドルの写真を撮影してください</li>
+            <li>上の「ファイルを選択」ボタンをクリックし、写真を選んでください</li>
+            <li>プレビューを確認し、「送信」ボタンを押してください</li>
+            <li>あなたの写真が校章モザイクの一部になります！</li>
+        </ol>
+        <p>※大型スクリーンでは、すべての参加者の写真を使って校章が作られていきます。</p>
+    </div>
+
+    <script>
+        // 画像プレビュー表示
+        document.getElementById('imageInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const preview = document.getElementById('preview');
+                    const imagePreview = document.getElementById('imagePreview');
+                    imagePreview.src = event.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // フォーム送信
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const resultMessage = document.getElementById('resultMessage');
+            const submitBtn = document.querySelector('.submit-btn');
+
+            // 送信中は操作不可に
+            submitBtn.disabled = true;
+            submitBtn.textContent = '送信中...';
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    resultMessage.className = 'result-message success';
+                    resultMessage.textContent = 'アップロード成功！モザイクが更新されました。';
+                } else {
+                    resultMessage.className = 'result-message error';
+                    resultMessage.textContent = 'エラー: ' + (result.error || '不明なエラーが発生しました');
+                }
+            } catch (error) {
+                resultMessage.className = 'result-message error';
+                resultMessage.textContent = 'エラー: サーバーとの通信に失敗しました';
+                console.error(error);
+            } finally {
+                resultMessage.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = '送信';
+
+                // フォームをリセット
+                this.reset();
+                document.getElementById('preview').style.display = 'none';
+
+                // 3秒後にメッセージを消す
+                setTimeout(() => {
+                    resultMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
+
+```
+

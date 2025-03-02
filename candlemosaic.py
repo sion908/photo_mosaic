@@ -1,13 +1,14 @@
+import os
+import sqlite3
+import threading
+import time
 import tkinter as tk
+from datetime import datetime
 from tkinter import filedialog, messagebox
+
 import cv2
 import numpy as np
 from PIL import Image, ImageTk
-import sqlite3
-import os
-from datetime import datetime
-import threading
-import time
 
 
 class CandleMosaicApp:
